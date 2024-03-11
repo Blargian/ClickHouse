@@ -1,0 +1,9 @@
+DROP TABLE IF EXISTS 03008_test;
+
+CREATE TABLE 03008_test
+(
+    UInt8 age,
+)
+ENGINE = MergeTree ORDER BY age;
+INSERT INTO 03008_test VALUES (10, 20, 30, 40);
+SELECT clamp(age, 10, 29);

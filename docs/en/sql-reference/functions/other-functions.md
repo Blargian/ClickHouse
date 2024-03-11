@@ -767,11 +767,115 @@ SELECT parseTimeDelta('1yr2mo')
 
 ## least(a, b)
 
-Returns the smaller value of a and b.
+This function returns the smaller value of a and b.
+
+**Syntax**
+
+```sql
+least(a, b)
+```
+
+**Parameters**
+
+- `a` and `b` may be of any type, but should be of comparable types.
+
+**Returned value**
+
+The value which is the smaller of the two arguments. 
+
+**Example**
+
+Query:
+
+```sql
+SELECT least('Hello','World');
+```
+
+```response
+Hello
+```
+
+Query:
+
+```sql
+SELECT least(1,2);
+```
+
+```response
+1
+```
 
 ## greatest(a, b)
 
-Returns the larger value of a and b.
+This function returns the greater value of a and b.
+
+**Syntax**
+
+```sql
+greatest(a, b)
+```
+
+**Parameters**
+
+- `a` and `b` may be of any type, but should be of comparable types.
+
+**Returned value**
+
+The value which is the larger of the two arguments. 
+
+**Example**
+
+Query:
+
+```sql
+SELECT greatest('Hello','World');
+```
+
+```response
+World
+```
+
+Query:
+
+```sql
+SELECT greatest(1,2);
+```
+
+```response
+2
+```
+
+## clamp(a, b)
+
+Returns the value which is equivalent to `least(greatest(x, min), max)`
+
+*Syntax**
+
+```sql
+clamp(x, min, max)
+```
+
+**Parameters**
+
+- `x` - the value to clamp.
+- `min` - the minimum value or lower bound to clamp to.
+- `max` - the maximum value or upper bound to clamp to.
+
+**Returned value**
+
+A value of the same type as `x` in the range specified by `min` and `max`.
+
+**Example**
+
+Query:
+
+```sql
+
+```
+
+```response
+
+```
 
 ## uptime()
 
