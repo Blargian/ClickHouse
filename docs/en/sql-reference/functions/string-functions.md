@@ -110,7 +110,7 @@ Query:
 SELECT length('Hello, world!');
 ```
 
-Result: 
+Result:
 
 ```response
 ┌─length('Hello, world!')─┐
@@ -124,7 +124,7 @@ Query:
 SELECT length([1, 2, 3, 4]);
 ```
 
-Result: 
+Result:
 
 ```response
 ┌─length([1, 2, 3, 4])─┐
@@ -163,7 +163,7 @@ Query:
 SELECT lengthUTF8('Здравствуй, мир!');
 ```
 
-Result: 
+Result:
 
 ```response
 ┌─lengthUTF8('Здравствуй, мир!')─┐
@@ -1136,15 +1136,135 @@ SELECT tryBase58Decode('3dc8KtHrwM') as res, tryBase58Decode('invalid') as res_i
 
 ## base64Encode
 
-Encodes a String or FixedString as base64.
+Encodes a String or FixedString as base64, according to [RFC 4648](https://datatracker.ietf.org/doc/html/rfc4648#section-4).
 
 Alias: `TO_BASE64`.
 
+**Syntax**
+
+```sql
+base64Encode(plaintext)
+```
+
+**Arguments**
+
+- `plaintext` — [String](../data-types/string.md) column or constant.
+
+**Returned value**
+
+- A string containing the encoded value of the argument.
+
+**Example**
+
+``` sql
+SELECT base64Encode('clickhouse');
+```
+
+Result:
+
+```result
+┌─base64Encode('clickhouse')─┐
+│ Y2xpY2tob3VzZQ==           │
+└────────────────────────────┘
+```
+
+## base64URLEncode
+
+Encodes an URL (String or FixedString) as base64 with URL-specific modifications, according to [RFC 4648](https://datatracker.ietf.org/doc/html/rfc4648#section-5).
+
+**Syntax**
+
+```sql
+base64URLEncode(url)
+```
+
+**Arguments**
+
+- `url` — [String](../data-types/string.md) column or constant.
+
+**Returned value**
+
+- A string containing the encoded value of the argument.
+
+**Example**
+
+``` sql
+SELECT base64URLEncode('https://clickhouse.com');
+```
+
+Result:
+
+```result
+┌─base64URLEncode('https://clickhouse.com')─┐
+│ aHR0cDovL2NsaWNraG91c2UuY29t              │
+└───────────────────────────────────────────┘
+```
+
 ## base64Decode
 
-Decodes a base64-encoded String or FixedString. Throws an exception in case of error.
+Accepts a String and decodes it from base64, according to [RFC 4648](https://datatracker.ietf.org/doc/html/rfc4648#section-4). Throws an exception in case of an error.
 
 Alias: `FROM_BASE64`.
+
+**Syntax**
+
+```sql
+base64Decode(encoded)
+```
+
+**Arguments**
+
+- `encoded` — [String](../data-types/string.md) column or constant. If the string is not a valid Base64-encoded value, an exception is thrown.
+
+**Returned value**
+
+- A string containing the decoded value of the argument.
+
+**Example**
+
+``` sql
+SELECT base64Decode('Y2xpY2tob3VzZQ==');
+```
+
+Result:
+
+```result
+┌─base64Decode('Y2xpY2tob3VzZQ==')─┐
+│ clickhouse                       │
+└──────────────────────────────────┘
+```
+
+## base64URLDecode
+
+Accepts a base64-encoded URL and decodes it from base64 with URL-specific modifications, according to [RFC 4648](https://datatracker.ietf.org/doc/html/rfc4648#section-5). Throws an exception in case of an error.
+
+**Syntax**
+
+```sql
+base64URLDecode(encodedUrl)
+```
+
+**Arguments**
+
+- `encodedURL` — [String](../data-types/string.md) column or constant. If the string is not a valid Base64-encoded value with URL-specific modifications, an exception is thrown.
+
+**Returned value**
+
+- A string containing the decoded value of the argument.
+
+**Example**
+
+``` sql
+SELECT base64URLDecode('aHR0cDovL2NsaWNraG91c2UuY29t');
+```
+
+Result:
+
+```result
+┌─base64URLDecode('aHR0cDovL2NsaWNraG91c2UuY29t')─┐
+│ https://clickhouse.com                          │
+└─────────────────────────────────────────────────┘
+```
 
 ## tryBase64Decode
 
@@ -1156,9 +1276,13 @@ Like `base64Decode` but returns an empty string in case of error.
 tryBase64Decode(encoded)
 ```
 
-**Parameters**
+**Arguments**
 
-- `encoded`: [String](../data-types/string.md) column or constant. If the string is not a valid Base58-encoded value, returns an empty string in case of error.
+- `encoded`: [String](../data-types/string.md) column or constant. If the string is not a valid Base64-encoded value, returns an empty string.
+
+**Returned value**
+
+- A string containing the decoded value of the argument.
 
 **Examples**
 
@@ -1169,9 +1293,41 @@ SELECT tryBase64Decode('RW5jb2RlZA==') as res, tryBase64Decode('invalid') as res
 ```
 
 ```response
-┌─res─────┬─res_invalid─┐
-│ Encoded │             │
-└─────────┴─────────────┘
+┌─res────────┬─res_invalid─┐
+│ clickhouse │             │
+└────────────┴─────────────┘
+```
+
+## tryBase64URLDecode
+
+Like `base64URLDecode` but returns an empty string in case of error.
+
+**Syntax**
+
+```sql
+tryBase64URLDecode(encodedUrl)
+```
+
+**Parameters**
+
+- `encodedURL`: [String](../data-types/string.md) column or constant. If the string is not a valid Base64-encoded value with URL-specific modifications, returns an empty string.
+
+**Returned value**
+
+- A string containing the decoded value of the argument.
+
+**Examples**
+
+Query:
+
+```sql
+SELECT tryBase64URLDecode('aHR0cDovL2NsaWNraG91c2UuY29t') as res, tryBase64Decode('aHR0cHM6Ly9jbGlja') as res_invalid;
+```
+
+```response
+┌─res────────────────────┬─res_invalid─┐
+│ https://clickhouse.com │             │
+└────────────────────────┴─────────────┘
 ```
 
 ## endsWith {#endswith}
@@ -1400,7 +1556,8 @@ The result type is UInt64.
 
 ## normalizeQuery
 
-Replaces literals, sequences of literals and complex aliases with placeholders.
+Replaces literals, sequences of literals and complex aliases (containing whitespace, more than two digits
+or at least 36 bytes long such as UUIDs) with placeholder `?`.
 
 **Syntax**
 
@@ -1418,6 +1575,8 @@ normalizeQuery(x)
 
 **Example**
 
+Query:
+
 ``` sql
 SELECT normalizeQuery('[1, 2, 3, x]') AS query;
 ```
@@ -1430,9 +1589,44 @@ Result:
 └──────────┘
 ```
 
+## normalizeQueryKeepNames
+
+Replaces literals, sequences of literals with placeholder `?` but does not replace complex aliases (containing whitespace, more than two digits
+or at least 36 bytes long such as UUIDs). This helps better analyze complex query logs.
+
+**Syntax**
+
+``` sql
+normalizeQueryKeepNames(x)
+```
+
+**Arguments**
+
+- `x` — Sequence of characters. [String](../data-types/string.md).
+
+**Returned value**
+
+- Sequence of characters with placeholders. [String](../data-types/string.md).
+
+**Example**
+
+Query:
+
+``` sql
+SELECT normalizeQuery('SELECT 1 AS aComplexName123'), normalizeQueryKeepNames('SELECT 1 AS aComplexName123');
+```
+
+Result:
+
+```result
+┌─normalizeQuery('SELECT 1 AS aComplexName123')─┬─normalizeQueryKeepNames('SELECT 1 AS aComplexName123')─┐
+│ SELECT ? AS `?`                               │ SELECT ? AS aComplexName123                            │
+└───────────────────────────────────────────────┴────────────────────────────────────────────────────────┘
+```
+
 ## normalizedQueryHash
 
-Returns identical 64bit hash values without the values of literals for similar queries. Can be helpful to analyze query log.
+Returns identical 64bit hash values without the values of literals for similar queries. Can be helpful to analyze query logs.
 
 **Syntax**
 
@@ -1450,6 +1644,8 @@ normalizedQueryHash(x)
 
 **Example**
 
+Query:
+
 ``` sql
 SELECT normalizedQueryHash('SELECT 1 AS `xyz`') != normalizedQueryHash('SELECT 1 AS `abc`') AS res;
 ```
@@ -1460,6 +1656,43 @@ Result:
 ┌─res─┐
 │   1 │
 └─────┘
+```
+
+## normalizedQueryHashKeepNames
+
+Like [normalizedQueryHash](#normalizedqueryhash) it returns identical 64bit hash values without the values of literals for similar queries but it does not replace complex aliases (containing whitespace, more than two digits
+or at least 36 bytes long such as UUIDs) with a placeholder before hashing. Can be helpful to analyze query logs.
+
+**Syntax**
+
+``` sql
+normalizedQueryHashKeepNames(x)
+```
+
+**Arguments**
+
+- `x` — Sequence of characters. [String](../data-types/string.md).
+
+**Returned value**
+
+- Hash value. [UInt64](../data-types/int-uint.md#uint-ranges).
+
+**Example**
+
+``` sql
+SELECT normalizedQueryHash('SELECT 1 AS `xyz123`') != normalizedQueryHash('SELECT 1 AS `abc123`') AS normalizedQueryHash;
+SELECT normalizedQueryHashKeepNames('SELECT 1 AS `xyz123`') != normalizedQueryHashKeepNames('SELECT 1 AS `abc123`') AS normalizedQueryHashKeepNames;
+```
+
+Result:
+
+```result
+┌─normalizedQueryHash─┐
+│                   0 │
+└─────────────────────┘
+┌─normalizedQueryHashKeepNames─┐
+│                            1 │
+└──────────────────────────────┘
 ```
 
 ## normalizeUTF8NFC
@@ -1704,16 +1937,16 @@ This function extracts plain text from HTML or XHTML.
 It does not conform 100% to the HTML, XML or XHTML specification but the implementation is reasonably accurate and fast. The rules are the following:
 
 1. Comments are skipped. Example: `<!-- test -->`. Comment must end with `-->`. Nested comments are disallowed.
-Note: constructions like `<!-->` and `<!--->` are not valid comments in HTML but they are skipped by other rules.
+   Note: constructions like `<!-->` and `<!--->` are not valid comments in HTML but they are skipped by other rules.
 2. CDATA is pasted verbatim. Note: CDATA is XML/XHTML-specific  and processed on a "best-effort" basis.
 3. `script` and `style` elements are removed with all their content. Note: it is assumed that closing tag cannot appear inside content. For example, in JS string literal has to be escaped like `"<\/script>"`.
-Note: comments and CDATA are possible inside `script` or `style` - then closing tags are not searched inside CDATA. Example: `<script><![CDATA[</script>]]></script>`. But they are still searched inside comments. Sometimes it becomes complicated: `<script>var x = "<!--"; </script> var y = "-->"; alert(x + y);</script>`
-Note: `script` and `style` can be the names of XML namespaces - then they are not treated like usual `script` or `style` elements. Example: `<script:a>Hello</script:a>`.
-Note: whitespaces are possible after closing tag name: `</script >` but not before: `< / script>`.
+   Note: comments and CDATA are possible inside `script` or `style` - then closing tags are not searched inside CDATA. Example: `<script><![CDATA[</script>]]></script>`. But they are still searched inside comments. Sometimes it becomes complicated: `<script>var x = "<!--"; </script> var y = "-->"; alert(x + y);</script>`
+   Note: `script` and `style` can be the names of XML namespaces - then they are not treated like usual `script` or `style` elements. Example: `<script:a>Hello</script:a>`.
+   Note: whitespaces are possible after closing tag name: `</script >` but not before: `< / script>`.
 4. Other tags or tag-like elements are skipped without inner content. Example: `<a>.</a>`
-Note: it is expected that this HTML is illegal: `<a test=">"></a>`
-Note: it also skips something like tags: `<>`, `<!>`, etc.
-Note: tag without end is skipped to the end of input: `<hello   `
+   Note: it is expected that this HTML is illegal: `<a test=">"></a>`
+   Note: it also skips something like tags: `<>`, `<!>`, etc.
+   Note: tag without end is skipped to the end of input: `<hello   `
 5. HTML and XML entities are not decoded. They must be processed by separate function.
 6. Whitespaces in the text are collapsed or inserted by specific rules.
     - Whitespaces at the beginning and at the end are removed.
@@ -1994,7 +2227,7 @@ Result:
 
 ## stringJaccardIndexUTF8
 
-Like [stringJaccardIndex](#stringJaccardIndex) but for UTF8-encoded strings.
+Like [stringJaccardIndex](#stringjaccardindex) but for UTF8-encoded strings.
 
 ## editDistance
 
@@ -2021,6 +2254,32 @@ Result:
 ```
 
 Alias: levenshteinDistance
+
+## editDistanceUTF8
+
+Calculates the [edit distance](https://en.wikipedia.org/wiki/Edit_distance) between two UTF8 strings.
+
+**Syntax**
+
+```sql
+editDistanceUTF8(string1, string2)
+```
+
+**Examples**
+
+``` sql
+SELECT editDistanceUTF8('我是谁', '我是我');
+```
+
+Result:
+
+``` text
+┌─editDistanceUTF8('我是谁', '我是我')──┐
+│                                   1 │
+└─────────────────────────────────────┘
+```
+
+Alias: levenshteinDistanceUTF8
 
 ## damerauLevenshteinDistance
 
