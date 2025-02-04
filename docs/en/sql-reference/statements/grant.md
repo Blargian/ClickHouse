@@ -407,8 +407,12 @@ Allows executing [CREATE](../../sql-reference/statements/create/index.md) and [A
 
 Allows executing `ON CLUSTER` queries.
 
-By default `ON CLUSTER` queries require the `CLUSTER` grant, and you will get the following error
-if you to try to use `ON CLUSTER` without first granting the `CLUSTER` priviledge:
+```sql title="Syntax"
+GRANT CLUSTER ON *.* TO <username>
+```
+
+By default, queries with `ON CLUSTER` require the user to have the `CLUSTER` grant. 
+You will get the following error if you to try to use `ON CLUSTER` in a query without first granting the `CLUSTER` privilege:
 
 ```text
 Not enough privileges. To execute this query, it's necessary to have the grant CLUSTER ON *.*. 
