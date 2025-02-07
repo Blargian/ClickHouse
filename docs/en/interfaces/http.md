@@ -441,7 +441,7 @@ Example:
 
 <!-- -->
 
-``` xml
+```xml
 <http_handlers>
     <rule>
         <url>/predefined_query</url>
@@ -546,7 +546,7 @@ To keep the default `handlers` such as` query`, `play`,` ping`, add the `<defaul
 
 Example:
 
-``` xml
+```xml
 <http_handlers>
     <rule>
         <url><![CDATA[regex:/query_param_with_url/(?P<name_1>[^/]+)]]></url>
@@ -587,7 +587,7 @@ To experiment with this functionality, the example defines the values of [max_th
 
 Example:
 
-``` xml
+```xml
 <http_handlers>
     <rule>
     <headers>
@@ -615,7 +615,7 @@ Example:
 
 Return a message.
 
-``` xml
+```xml
 <http_handlers>
         <rule>
             <methods>GET</methods>
@@ -638,7 +638,7 @@ Return a message.
 
 `http_response_headers` could be used to set content type instead of `content_type`.
 
-``` xml
+```xml
 <http_handlers>
         <rule>
             <methods>GET</methods>
@@ -683,7 +683,7 @@ Say Hi!%
 
 Find the content from the configuration send to client.
 
-``` xml
+```xml
 <get_config_static_handler><![CDATA[<html ng-app="SMI2"><head><base href="http://ui.tabix.io/"></head><body><div ui-view="" class="content-ui"></div><script src="http://loader.tabix.io/master.js"></script></body></html>]]></get_config_static_handler>
 
 <http_handlers>
@@ -723,7 +723,7 @@ $ curl -v  -H 'XXX:xxx' 'http://localhost:8123/get_config_static_handler'
 
 Find the content from the file send to client.
 
-``` xml
+```xml
 <http_handlers>
         <rule>
             <methods>GET</methods>

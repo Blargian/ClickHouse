@@ -126,3 +126,30 @@ SYSTEM DROP FORMAT SCHEMA CACHE FOR Protobuf
 ```
 
 ## Format Settings
+
+## Format Schema {#formatschema}
+
+### format_schema
+
+The file name containing the format schema is set by the setting `format_schema`.
+
+The format schema is a combination of a file name and the name of a message type in this file, delimited by a colon. 
+For example: `schemafile.proto:MessageType`.
+
+If the file has the standard extension for the format (for example, `.proto` for `Protobuf`),
+it can be omitted. In this case, the format schema looks like `schemafile:MessageType`.
+
+- If you input or output data via the [client](/docs/en/interfaces/cli.md) in interactive mode, the file name specified in the format schema
+can contain an absolute path or a path relative to the current directory on the client.
+- If you use the client in the [batch mode](/docs/en/interfaces/cli.md/#batch-mode), the path to the schema must be relative due to security reasons.
+- If you input or output data via the [HTTP interface](/docs/en/interfaces/http.md) the file name specified in the format schema
+should be located in the directory specified in [format_schema_path](/docs/en/operations/server-configuration-parameters/settings.md/#format_schema_path) in the server configuration.
+
+### Skipping rows
+
+The `Protobuf` format can skip broken rows if a parsing error occurred, and continue parsing from the beginning of the next row.
+See [input_format_allow_errors_num](/docs/en/operations/settings/settings-formats.md/#input_format_allow_errors_num) and [input_format_allow_errors_ratio](/docs/en/operations/settings/settings-formats.md/#input_format_allow_errors_ratio) settings.
+
+Limitations:
+- In case of a parsing error, `JSONEachRow` skips all data until the new line (or EOF), so rows must be delimited by `\n` to count errors correctly.
+- `Template` and `CustomSeparated` use a delimiter after the last column and a delimiter between rows to find the beginning of the next row, so skipping errors works only if at least one of them is not empty.
