@@ -62,7 +62,7 @@ ls -1 flightlist_*.csv.gz | xargs -P100 -I{} bash -c 'gzip -c -d "{}" | clickhou
 - The script will decompress the file (`gzip -c -d "{}"`) to standard output (`-c` parameter) and the output is redirected to `clickhouse-client`.
 - We also asked to parse [DateTime](../../sql-reference/data-types/datetime.md) fields with extended parser ([--date_time_input_format best_effort](../../operations/settings/settings-formats.md#settings-date_time_input_format)) to recognize ISO-8601 format with timezone offsets.
 
-Finally, `clickhouse-client` will do insertion. It will read input data in [CSVWithNames](../../interfaces/formats.md#csvwithnames) format. 
+Finally, `clickhouse-client` will do insertion. It will read input data in [CSVWithNames](../../interfaces/formats/CSV/CSVWithNames.md) format. 
 
 Parallel upload takes 24 seconds.
 

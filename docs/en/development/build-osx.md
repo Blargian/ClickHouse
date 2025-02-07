@@ -77,7 +77,7 @@ You’ll need to use sudo.
 
 To do so, create the `/Library/LaunchDaemons/limit.maxfiles.plist` file with the following content:
 
-``` xml
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
         "http://www.apple.com/DTDs/PropertyList-1.0.dtd">

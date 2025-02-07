@@ -18,9 +18,9 @@ Main cache types:
 Additional cache types:
 
 - DNS cache.
-- [Regexp](../interfaces/formats.md#data-format-regexp) cache.
+- [Regexp](../interfaces/formats/Regexp.md) cache.
 - Compiled expressions cache.
-- [Avro format](../interfaces/formats.md#data-format-avro) schemas cache.
+- [Avro format](../interfaces/formats/Avro/Avro.md) schemas cache.
 - [Dictionaries](../sql-reference/dictionaries/index.md) data cache.
 - Schema inference cache.
 - [Filesystem cache](storing-data.md) over S3, Azure, Local and other disks.

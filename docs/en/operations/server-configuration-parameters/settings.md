@@ -1482,7 +1482,7 @@ The server will wait at startup until all the dictionaries finish their loading 
 
 ## format_schema_path
 
-The path to the directory with the schemes for the input data, such as schemas for the [CapnProto](../../interfaces/formats.md#capnproto) format.
+The path to the directory with the schemes for the input data, such as schemas for the [CapnProto](../../interfaces/formats/CapnProto.md) format.
 
 **Example**
 
