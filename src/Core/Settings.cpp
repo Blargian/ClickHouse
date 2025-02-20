@@ -62,7 +62,7 @@ namespace ErrorCodes
   */
 
 // clang-format off
-#if defined(__CLION_IDE__)ckout
+#if defined(__CLION_IDE__)
 /// CLion freezes for a minute every time it processes this
 #define COMMON_SETTINGS(DECLARE, ALIAS)
 #define OBSOLETE_SETTINGS(DECLARE, ALIAS)
