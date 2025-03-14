@@ -233,8 +233,8 @@ Example:
   <!-- Kerberos-aware Kafka -->
   <kafka>
     <security_protocol>SASL_PLAINTEXT</security_protocol>
-	<sasl_kerberos_keytab>/home/kafkauser/kafkauser.keytab</sasl_kerberos_keytab>
-	<sasl_kerberos_principal>kafkauser/kafkahost@EXAMPLE.COM</sasl_kerberos_principal>
+    <sasl_kerberos_keytab>/home/kafkauser/kafkauser.keytab</sasl_kerberos_keytab>
+    <sasl_kerberos_principal>kafkauser/kafkahost@EXAMPLE.COM</sasl_kerberos_principal>
   </kafka>
 ```
 

@@ -138,14 +138,14 @@ Similar to GraphiteMergeTree, the HDFS engine supports extended configuration us
 ``` xml
   <!-- Global configuration options for HDFS engine type -->
   <hdfs>
-	<hadoop_kerberos_keytab>/tmp/keytab/clickhouse.keytab</hadoop_kerberos_keytab>
-	<hadoop_kerberos_principal>clickuser@TEST.CLICKHOUSE.TECH</hadoop_kerberos_principal>
-	<hadoop_security_authentication>kerberos</hadoop_security_authentication>
+    <hadoop_kerberos_keytab>/tmp/keytab/clickhouse.keytab</hadoop_kerberos_keytab>
+    <hadoop_kerberos_principal>clickuser@TEST.CLICKHOUSE.TECH</hadoop_kerberos_principal>
+    <hadoop_security_authentication>kerberos</hadoop_security_authentication>
   </hdfs>
 
   <!-- Configuration specific for user "root" -->
   <hdfs_root>
-	<hadoop_kerberos_principal>root@TEST.CLICKHOUSE.TECH</hadoop_kerberos_principal>
+    <hadoop_kerberos_principal>root@TEST.CLICKHOUSE.TECH</hadoop_kerberos_principal>
   </hdfs_root>
 ```
 

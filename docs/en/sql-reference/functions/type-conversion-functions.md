@@ -7725,13 +7725,13 @@ Result:
 ```response
 ┌─formatRow('CustomSeparated', number, 'good')─┐
 │ <prefix>
-0	good
+0   good
 <suffix>                   │
 │ <prefix>
-1	good
+1   good
 <suffix>                   │
 │ <prefix>
-2	good
+2   good
 <suffix>                   │
 └──────────────────────────────────────────────┘
 ```
