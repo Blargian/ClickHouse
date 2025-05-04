@@ -12,6 +12,8 @@ import SystemTableCloud from '@site/docs/_snippets/_system_table_cloud.md';
 
 <SystemTableCloud/>
 
+## Overview {#overview}
+
 Contains information about executed queries, for example, start time, duration of processing, error messages.
 
 :::note
@@ -41,98 +43,347 @@ You can use the [log_queries_probability](/operations/settings/settings#log_quer
 
 You can use the [log_formatted_queries](/operations/settings/settings#log_formatted_queries)) setting to log formatted queries to the `formatted_query` column.
 
-Columns:
+## Columns {#columns}
 
-- `hostname` ([LowCardinality(String)](../../sql-reference/data-types/string.md)) — Hostname of the server executing the query.
-- `type` ([Enum8](../../sql-reference/data-types/enum.md)) — Type of an event that occurred when executing the query. Values:
-    - `'QueryStart' = 1` — Successful start of query execution.
-    - `'QueryFinish' = 2` — Successful end of query execution.
-    - `'ExceptionBeforeStart' = 3` — Exception before the start of query execution.
-    - `'ExceptionWhileProcessing' = 4` — Exception during the query execution.
-- `event_date` ([Date](../../sql-reference/data-types/date.md)) — Query starting date.
-- `event_time` ([DateTime](../../sql-reference/data-types/datetime.md)) — Query starting time.
-- `event_time_microseconds` ([DateTime64](../../sql-reference/data-types/datetime64.md)) — Query starting time with microseconds precision.
-- `query_start_time` ([DateTime](../../sql-reference/data-types/datetime.md)) — Start time of query execution.
-- `query_start_time_microseconds` ([DateTime64](../../sql-reference/data-types/datetime64.md)) — Start time of query execution with microsecond precision.
-- `query_duration_ms` ([UInt64](/sql-reference/data-types/int-uint#integer-ranges)) — Duration of query execution in milliseconds.
-- `read_rows` ([UInt64](/sql-reference/data-types/int-uint#integer-ranges)) — Total number of rows read from all tables and table functions participated in query. It includes usual subqueries, subqueries for `IN` and `JOIN`. For distributed queries `read_rows` includes the total number of rows read at all replicas. Each replica sends it's `read_rows` value, and the server-initiator of the query summarizes all received and local values. The cache volumes do not affect this value.
-- `read_bytes` ([UInt64](/sql-reference/data-types/int-uint#integer-ranges)) — Total number of bytes read from all tables and table functions participated in query. It includes usual subqueries, subqueries for `IN` and `JOIN`. For distributed queries `read_bytes` includes the total number of rows read at all replicas. Each replica sends it's `read_bytes` value, and the server-initiator of the query summarizes all received and local values. The cache volumes do not affect this value.
-- `written_rows` ([UInt64](/sql-reference/data-types/int-uint#integer-ranges)) — For `INSERT` queries, the number of written rows. For other queries, the column value is 0.
-- `written_bytes` ([UInt64](/sql-reference/data-types/int-uint#integer-ranges)) — For `INSERT` queries, the number of written bytes (uncompressed). For other queries, the column value is 0.
-- `result_rows` ([UInt64](/sql-reference/data-types/int-uint#integer-ranges)) — Number of rows in a result of the `SELECT` query, or a number of rows in the `INSERT` query.
-- `result_bytes` ([UInt64](/sql-reference/data-types/int-uint#integer-ranges)) — RAM volume in bytes used to store a query result.
-- `memory_usage` ([UInt64](/sql-reference/data-types/int-uint#integer-ranges)) — Memory consumption by the query.
-- `current_database` ([String](../../sql-reference/data-types/string.md)) — Name of the current database.
-- `query` ([String](../../sql-reference/data-types/string.md)) — Query string.
-- `formatted_query` ([String](../../sql-reference/data-types/string.md)) — Formatted query string.
-- `normalized_query_hash` ([UInt64](/sql-reference/data-types/int-uint#integer-ranges)) — A numeric hash value, such as it is identical for queries differ only by values of literals.
-- `query_kind` ([LowCardinality(String)](../../sql-reference/data-types/lowcardinality.md)) — Type of the query.
-- `databases` ([Array](../../sql-reference/data-types/array.md)([LowCardinality(String)](../../sql-reference/data-types/lowcardinality.md))) — Names of the databases present in the query.
-- `tables` ([Array](../../sql-reference/data-types/array.md)([LowCardinality(String)](../../sql-reference/data-types/lowcardinality.md))) — Names of the tables present in the query.
-- `columns` ([Array](../../sql-reference/data-types/array.md)([LowCardinality(String)](../../sql-reference/data-types/lowcardinality.md))) — Names of the columns present in the query.
-- `partitions` ([Array](../../sql-reference/data-types/array.md)([LowCardinality(String)](../../sql-reference/data-types/lowcardinality.md))) — Names of the partitions present in the query.
-- `projections` ([String](../../sql-reference/data-types/string.md)) — Names of the projections used during the query execution.
-- `views` ([Array](../../sql-reference/data-types/array.md)([LowCardinality(String)](../../sql-reference/data-types/lowcardinality.md))) — Names of the (materialized or live) views present in the query.
-- `exception_code` ([Int32](../../sql-reference/data-types/int-uint.md)) — Code of an exception.
-- `exception` ([String](../../sql-reference/data-types/string.md)) — Exception message.
-- `stack_trace` ([String](../../sql-reference/data-types/string.md)) — [Stack trace](https://en.wikipedia.org/wiki/Stack_trace). An empty string, if the query was completed successfully.
-- `is_initial_query` ([UInt8](../../sql-reference/data-types/int-uint.md)) — Query type. Possible values:
-    - 1 — Query was initiated by the client.
-    - 0 — Query was initiated by another query as part of distributed query execution.
-- `user` ([String](../../sql-reference/data-types/string.md)) — Name of the user who initiated the current query.
-- `query_id` ([String](../../sql-reference/data-types/string.md)) — ID of the query.
-- `address` ([IPv6](../../sql-reference/data-types/ipv6.md)) — IP address that was used to make the query.
-- `port` ([UInt16](../../sql-reference/data-types/int-uint.md)) — The client port that was used to make the query.
-- `initial_user` ([String](../../sql-reference/data-types/string.md)) — Name of the user who ran the initial query (for distributed query execution).
-- `initial_query_id` ([String](../../sql-reference/data-types/string.md)) — ID of the initial query (for distributed query execution).
-- `initial_address` ([IPv6](../../sql-reference/data-types/ipv6.md)) — IP address that the parent query was launched from.
-- `initial_port` ([UInt16](../../sql-reference/data-types/int-uint.md)) — The client port that was used to make the parent query.
-- `initial_query_start_time` ([DateTime](../../sql-reference/data-types/datetime.md)) — Initial query starting time (for distributed query execution).
-- `initial_query_start_time_microseconds` ([DateTime64](../../sql-reference/data-types/datetime64.md)) — Initial query starting time with microseconds precision (for distributed query execution).
-- `interface` ([UInt8](../../sql-reference/data-types/int-uint.md)) — Interface that the query was initiated from. Possible values:
-    - 1 — TCP.
-    - 2 — HTTP.
-- `os_user` ([String](../../sql-reference/data-types/string.md)) — Operating system username who runs [clickhouse-client](../../interfaces/cli.md).
-- `client_hostname` ([String](../../sql-reference/data-types/string.md)) — Hostname of the client machine where the [clickhouse-client](../../interfaces/cli.md) or another TCP client is run.
-- `client_name` ([String](../../sql-reference/data-types/string.md)) — The [clickhouse-client](../../interfaces/cli.md) or another TCP client name.
-- `client_revision` ([UInt32](../../sql-reference/data-types/int-uint.md)) — Revision of the [clickhouse-client](../../interfaces/cli.md) or another TCP client.
-- `client_version_major` ([UInt32](../../sql-reference/data-types/int-uint.md)) — Major version of the [clickhouse-client](../../interfaces/cli.md) or another TCP client.
-- `client_version_minor` ([UInt32](../../sql-reference/data-types/int-uint.md)) — Minor version of the [clickhouse-client](../../interfaces/cli.md) or another TCP client.
-- `client_version_patch` ([UInt32](../../sql-reference/data-types/int-uint.md)) — Patch component of the [clickhouse-client](../../interfaces/cli.md) or another TCP client version.
-- `script_query_number` ([UInt32](../../sql-reference/data-types/int-uint.md)) — The query number in a script with multiple queries for [clickhouse-client](../../interfaces/cli.md).
-- `script_line_number` ([UInt32](../../sql-reference/data-types/int-uint.md)) — The line number of the query start in a script with multiple queries for [clickhouse-client](../../interfaces/cli.md).
-- `http_method` (UInt8) — HTTP method that initiated the query. Possible values:
-    - 0 — The query was launched from the TCP interface.
-    - 1 — `GET` method was used.
-    - 2 — `POST` method was used.
-- `http_user_agent` ([String](../../sql-reference/data-types/string.md)) — HTTP header `UserAgent` passed in the HTTP query.
-- `http_referer` ([String](../../sql-reference/data-types/string.md)) — HTTP header `Referer` passed in the HTTP query (contains an absolute or partial address of the page making the query).
-- `forwarded_for` ([String](../../sql-reference/data-types/string.md)) — HTTP header `X-Forwarded-For` passed in the HTTP query.
-- `quota_key` ([String](../../sql-reference/data-types/string.md)) — The `quota key` specified in the [quotas](../../operations/quotas.md) setting (see `keyed`).
-- `revision` ([UInt32](../../sql-reference/data-types/int-uint.md)) — ClickHouse revision.
-- `ProfileEvents` ([Map(String, UInt64)](../../sql-reference/data-types/map.md)) — ProfileEvents that measure different metrics. The description of them could be found in the table [system.events](/operations/system-tables/events)
-- `Settings` ([Map(String, String)](../../sql-reference/data-types/map.md)) — Settings that were changed when the client ran the query. To enable logging changes to settings, set the `log_query_settings` parameter to 1.
-- `log_comment` ([String](../../sql-reference/data-types/string.md)) — Log comment. It can be set to arbitrary string no longer than [max_query_size](../../operations/settings/settings.md#max_query_size). An empty string if it is not defined.
-- `thread_ids` ([Array(UInt64)](../../sql-reference/data-types/array.md)) — Thread ids that are participating in query execution. These threads may not have run simultaneously.
-- `peak_threads_usage` ([UInt64)](../../sql-reference/data-types/int-uint.md)) — Maximum count of simultaneous threads executing the query.
-- `used_aggregate_functions` ([Array(String)](../../sql-reference/data-types/array.md)) — Canonical names of `aggregate functions`, which were used during query execution.
-- `used_aggregate_function_combinators` ([Array(String)](../../sql-reference/data-types/array.md)) — Canonical names of `aggregate functions combinators`, which were used during query execution.
-- `used_database_engines` ([Array(String)](../../sql-reference/data-types/array.md)) — Canonical names of `database engines`, which were used during query execution.
-- `used_data_type_families` ([Array(String)](../../sql-reference/data-types/array.md)) — Canonical names of `data type families`, which were used during query execution.
-- `used_dictionaries` ([Array(String)](../../sql-reference/data-types/array.md)) — Canonical names of `dictionaries`, which were used during query execution. For dictionaries configured using an XML file this is the name of the dictionary, and for dictionaries created by an SQL statement, the canonical name is the fully qualified object name.
-- `used_formats` ([Array(String)](../../sql-reference/data-types/array.md)) — Canonical names of `formats`, which were used during query execution.
-- `used_functions` ([Array(String)](../../sql-reference/data-types/array.md)) — Canonical names of `functions`, which were used during query execution.
-- `used_storages` ([Array(String)](../../sql-reference/data-types/array.md)) — Canonical names of `storages`, which were used during query execution.
-- `used_table_functions` ([Array(String)](../../sql-reference/data-types/array.md)) — Canonical names of `table functions`, which were used during query execution.
-- `used_privileges` ([Array(String)](../../sql-reference/data-types/array.md)) - Privileges which were successfully checked during query execution.
-- `missing_privileges` ([Array(String)](../../sql-reference/data-types/array.md)) - Privileges that are missing during query execution.
-- `query_cache_usage` ([Enum8](../../sql-reference/data-types/enum.md)) — Usage of the [query cache](../query-cache.md) during query execution. Values:
-    - `'Unknown'` = Status unknown.
-    - `'None'` = The query result was neither written into nor read from the query cache.
-    - `'Write'` = The query result was written into the query cache.
-    - `'Read'` = The query result was read from the query cache.
+<table>
+  <thead>
+    <tr>
+      <th>Column</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>hostname</code></td>
+      <td>Hostname of the server executing the query.</td>
+    </tr>
+    <tr>
+      <td><code>type</code></td>
+      <td>
+        Type of an event that occurred when executing the query. Values:
+        <ul>
+          <li><code>'QueryStart' = 1</code> — Successful start of query execution.</li>
+          <li><code>'QueryFinish' = 2</code> — Successful end of query execution.</li>
+          <li><code>'ExceptionBeforeStart' = 3</code> — Exception before the start of query execution.</li>
+          <li><code>'ExceptionWhileProcessing' = 4</code> — Exception during the query execution.</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td><code>event_date</code></td>
+      <td>Query starting date.</td>
+    </tr>
+    <tr>
+      <td><code>event_time</code></td>
+      <td>Query starting time.</td>
+    </tr>
+    <tr>
+      <td><code>event_time_microseconds</code></td>
+      <td>Query starting time with microseconds precision.</td>
+    </tr>
+    <tr>
+      <td><code>query_start_time</code></td>
+      <td>Start time of query execution.</td>
+    </tr>
+    <tr>
+      <td><code>query_start_time_microseconds</code></td>
+      <td>Start time of query execution with microsecond precision.</td>
+    </tr>
+    <tr>
+      <td><code>query_duration_ms</code></td>
+      <td>Duration of query execution in milliseconds.</td>
+    </tr>
+    <tr>
+      <td><code>read_rows</code></td>
+      <td>Total number of rows read from all tables and table functions participated in query. It includes usual subqueries, subqueries for <code>IN</code> and <code>JOIN</code>. For distributed queries <code>read_rows</code> includes the total number of rows read at all replicas. Each replica sends its <code>read_rows</code> value, and the server-initiator of the query summarizes all received and local values. The cache volumes do not affect this value.</td>
+    </tr>
+    <tr>
+      <td><code>read_bytes</code></td>
+      <td>Total number of bytes read from all tables and table functions participated in query. It includes usual subqueries, subqueries for <code>IN</code> and <code>JOIN</code>. For distributed queries <code>read_bytes</code> includes the total number of rows read at all replicas. Each replica sends its <code>read_bytes</code> value, and the server-initiator of the query summarizes all received and local values. The cache volumes do not affect this value.</td>
+    </tr>
+    <tr>
+      <td><code>written_rows</code></td>
+      <td>For <code>INSERT</code> queries, the number of written rows. For other queries, the column value is 0.</td>
+    </tr>
+    <tr>
+      <td><code>written_bytes</code></td>
+      <td>For <code>INSERT</code> queries, the number of written bytes (uncompressed). For other queries, the column value is 0.</td>
+    </tr>
+    <tr>
+      <td><code>result_rows</code></td>
+      <td>Number of rows in a result of the <code>SELECT</code> query, or a number of rows in the <code>INSERT</code> query.</td>
+    </tr>
+    <tr>
+      <td><code>result_bytes</code></td>
+      <td>RAM volume in bytes used to store a query result.</td>
+    </tr>
+    <tr>
+      <td><code>memory_usage</code></td>
+      <td>Memory consumption by the query.</td>
+    </tr>
+    <tr>
+      <td><code>current_database</code></td>
+      <td>Name of the current database.</td>
+    </tr>
+    <tr>
+      <td><code>query</code></td>
+      <td>Query string.</td>
+    </tr>
+    <tr>
+      <td><code>formatted_query</code></td>
+      <td>Formatted query string.</td>
+    </tr>
+    <tr>
+      <td><code>normalized_query_hash</code></td>
+      <td>A numeric hash value, such as it is identical for queries differ only by values of literals.</td>
+    </tr>
+    <tr>
+      <td><code>query_kind</code></td>
+      <td>Type of the query.</td>
+    </tr>
+    <tr>
+      <td><code>databases</code></td>
+      <td>Names of the databases present in the query.</td>
+    </tr>
+    <tr>
+      <td><code>tables</code></td>
+      <td>Names of the tables present in the query.</td>
+    </tr>
+    <tr>
+      <td><code>columns</code></td>
+      <td>Names of the columns present in the query.</td>
+    </tr>
+    <tr>
+      <td><code>partitions</code></td>
+      <td>Names of the partitions present in the query.</td>
+    </tr>
+    <tr>
+      <td><code>projections</code></td>
+      <td>Names of the projections used during the query execution.</td>
+    </tr>
+    <tr>
+      <td><code>views</code></td>
+      <td>Names of the (materialized or live) views present in the query.</td>
+    </tr>
+    <tr>
+      <td><code>exception_code</code></td>
+      <td>Code of an exception.</td>
+    </tr>
+    <tr>
+      <td><code>exception</code></td>
+      <td>Exception message.</td>
+    </tr>
+    <tr>
+      <td><code>stack_trace</code></td>
+      <td>Stack trace. An empty string, if the query was completed successfully.</td>
+    </tr>
+    <tr>
+      <td><code>is_initial_query</code></td>
+      <td>
+        Query type. Possible values:
+        <ul>
+          <li>1 — Query was initiated by the client.</li>
+          <li>0 — Query was initiated by another query as part of distributed query execution.</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td><code>user</code></td>
+      <td>Name of the user who initiated the current query.</td>
+    </tr>
+    <tr>
+      <td><code>query_id</code></td>
+      <td>ID of the query.</td>
+    </tr>
+    <tr>
+      <td><code>address</code></td>
+      <td>IP address that was used to make the query.</td>
+    </tr>
+    <tr>
+      <td><code>port</code></td>
+      <td>The client port that was used to make the query.</td>
+    </tr>
+    <tr>
+      <td><code>initial_user</code></td>
+      <td>Name of the user who ran the initial query (for distributed query execution).</td>
+    </tr>
+    <tr>
+      <td><code>initial_query_id</code></td>
+      <td>ID of the initial query (for distributed query execution).</td>
+    </tr>
+    <tr>
+      <td><code>initial_address</code></td>
+      <td>IP address that the parent query was launched from.</td>
+    </tr>
+    <tr>
+      <td><code>initial_port</code></td>
+      <td>The client port that was used to make the parent query.</td>
+    </tr>
+    <tr>
+      <td><code>initial_query_start_time</code></td>
+      <td>Initial query starting time (for distributed query execution).</td>
+    </tr>
+    <tr>
+      <td><code>initial_query_start_time_microseconds</code></td>
+      <td>Initial query starting time with microseconds precision (for distributed query execution).</td>
+    </tr>
+    <tr>
+      <td><code>interface</code></td>
+      <td>
+        Interface that the query was initiated from. Possible values:
+        <ul>
+          <li>1 — TCP.</li>
+          <li>2 — HTTP.</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td><code>os_user</code></td>
+      <td>Operating system username who runs clickhouse-client.</td>
+    </tr>
+    <tr>
+      <td><code>client_hostname</code></td>
+      <td>Hostname of the client machine where the clickhouse-client or another TCP client is run.</td>
+    </tr>
+    <tr>
+      <td><code>client_name</code></td>
+      <td>The clickhouse-client or another TCP client name.</td>
+    </tr>
+    <tr>
+      <td><code>client_revision</code></td>
+      <td>Revision of the clickhouse-client or another TCP client.</td>
+    </tr>
+    <tr>
+      <td><code>client_version_major</code></td>
+      <td>Major version of the clickhouse-client or another TCP client.</td>
+    </tr>
+    <tr>
+      <td><code>client_version_minor</code></td>
+      <td>Minor version of the clickhouse-client or another TCP client.</td>
+    </tr>
+    <tr>
+      <td><code>client_version_patch</code></td>
+      <td>Patch component of the clickhouse-client or another TCP client version.</td>
+    </tr>
+    <tr>
+      <td><code>script_query_number</code></td>
+      <td>The query number in a script with multiple queries for clickhouse-client.</td>
+    </tr>
+    <tr>
+      <td><code>script_line_number</code></td>
+      <td>The line number of the query start in a script with multiple queries for clickhouse-client.</td>
+    </tr>
+    <tr>
+      <td><code>http_method</code></td>
+      <td>
+        HTTP method that initiated the query. Possible values:
+        <ul>
+          <li>0 — The query was launched from the TCP interface.</li>
+          <li>1 — <code>GET</code> method was used.</li>
+          <li>2 — <code>POST</code> method was used.</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td><code>http_user_agent</code></td>
+      <td>HTTP header <code>UserAgent</code> passed in the HTTP query.</td>
+    </tr>
+    <tr>
+      <td><code>http_referer</code></td>
+      <td>HTTP header <code>Referer</code> passed in the HTTP query (contains an absolute or partial address of the page making the query).</td>
+    </tr>
+    <tr>
+      <td><code>forwarded_for</code></td>
+      <td>HTTP header <code>X-Forwarded-For</code> passed in the HTTP query.</td>
+    </tr>
+    <tr>
+      <td><code>quota_key</code></td>
+      <td>The <code>quota key</code> specified in the quotas setting (see <code>keyed</code>).</td>
+    </tr>
+    <tr>
+      <td><code>revision</code></td>
+      <td>ClickHouse revision.</td>
+    </tr>
+    <tr>
+      <td><code>ProfileEvents</code></td>
+      <td>ProfileEvents that measure different metrics. The description of them could be found in the table <code>system.events</code>.</td>
+    </tr>
+    <tr>
+      <td><code>Settings</code></td>
+      <td>Settings that were changed when the client ran the query. To enable logging changes to settings, set the <code>log_query_settings</code> parameter to 1.</td>
+    </tr>
+    <tr>
+      <td><code>log_comment</code></td>
+      <td>Log comment. It can be set to arbitrary string no longer than <code>max_query_size</code>. An empty string if it is not defined.</td>
+    </tr>
+    <tr>
+      <td><code>thread_ids</code></td>
+      <td>Thread ids that are participating in query execution. These threads may not have run simultaneously.</td>
+    </tr>
+    <tr>
+      <td><code>peak_threads_usage</code></td>
+      <td>Maximum count of simultaneous threads executing the query.</td>
+    </tr>
+    <tr>
+      <td><code>used_aggregate_functions</code></td>
+      <td>Canonical names of <code>aggregate functions</code>, which were used during query execution.</td>
+    </tr>
+    <tr>
+      <td><code>used_aggregate_function_combinators</code></td>
+      <td>Canonical names of <code>aggregate functions combinators</code>, which were used during query execution.</td>
+    </tr>
+    <tr>
+      <td><code>used_database_engines</code></td>
+      <td>Canonical names of <code>database engines</code>, which were used during query execution.</td>
+    </tr>
+    <tr>
+      <td><code>used_data_type_families</code></td>
+      <td>Canonical names of <code>data type families</code>, which were used during query execution.</td>
+    </tr>
+    <tr>
+      <td><code>used_dictionaries</code></td>
+      <td>Canonical names of <code>dictionaries</code>, which were used during query execution. For dictionaries configured using an XML file this is the name of the dictionary, and for dictionaries created by an SQL statement, the canonical name is the fully qualified object name.</td>
+    </tr>
+    <tr>
+      <td><code>used_formats</code></td>
+      <td>Canonical names of <code>formats</code>, which were used during query execution.</td>
+    </tr>
+    <tr>
+      <td><code>used_functions</code></td>
+      <td>Canonical names of <code>functions</code>, which were used during query execution.</td>
+    </tr>
+    <tr>
+      <td><code>used_storages</code></td>
+      <td>Canonical names of <code>storages</code>, which were used during query execution.</td>
+    </tr>
+    <tr>
+      <td><code>used_table_functions</code></td>
+      <td>Canonical names of <code>table functions</code>, which were used during query execution.</td>
+    </tr>
+    <tr>
+      <td><code>used_privileges</code></td>
+      <td>Privileges which were successfully checked during query execution.</td>
+    </tr>
+    <tr>
+      <td><code>missing_privileges</code></td>
+      <td>Privileges that are missing during query execution.</td>
+    </tr>
+    <tr>
+      <td><code>query_cache_usage</code></td>
+      <td>
+        Usage of the query cache during query execution. Values:
+        <ul>
+          <li><code>'Unknown'</code> = Status unknown.</li>
+          <li><code>'None'</code> = The query result was neither written into nor read from the query cache.</li>
+          <li><code>'Write'</code> = The query result was written into the query cache.</li>
+          <li><code>'Read'</code> = The query result was read from the query cache.</li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
-**Example**
+## Example {#example}
 
 ```sql
 SELECT * FROM system.query_log WHERE type = 'QueryFinish' ORDER BY query_start_time DESC LIMIT 1 FORMAT Vertical;
@@ -212,6 +463,6 @@ missing_privileges:                    []
 query_cache_usage:                     None
 ```
 
-**See Also**
+## Related content {#related-content}
 
-- [system.query_thread_log](/operations/system-tables/query_thread_log) — This table contains information about each query execution thread.
+- [`system.query_thread_log`](/operations/system-tables/query_thread_log) — This table contains information about each query execution thread.
