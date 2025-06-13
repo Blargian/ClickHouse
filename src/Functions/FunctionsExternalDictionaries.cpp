@@ -7,11 +7,10 @@ namespace DB
 /// Type information for dictionary function variants
 struct TypeInfo 
 {
-    String name;        /// Display name of the type
-    String doc_link;    /// Docs site link for the type
+    String name;        /// Display name of the type e.g. Tuple
+    String doc_link;    /// Docs site link for the type e.g. /sql-reference/data-types/tuple
 };
 
-/// Type tags for template specialization
 namespace TypeTags {
     // Unsigned integer types
     struct UInt8 { static constexpr const char* name = "UInt8"; };
@@ -40,7 +39,7 @@ constexpr TypeInfo makeTypeInfo(const char* name, const char* link)
     return TypeInfo{name, link};
 }
 
-/// Helper to add multiple types with the same documentation link
+/// Helper to add multiple types with the same documentation link (Int and UInt, Float32 and Float64)
 template <typename... Types>
 void addTypesWithLink(std::map<String, TypeInfo>& map, const char* link) 
 {
