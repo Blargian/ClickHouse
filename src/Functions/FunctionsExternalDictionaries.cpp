@@ -79,7 +79,8 @@ std::map<String, TypeInfo> initializeTypeInfos()
         {"IPv6",      {"IPv6",      "/sql-reference/data-types/ipv6"}},
         {"String",    {"String",    "/sql-reference/data-types/string"}},
         {"FixedString", {"FixedString", "/sql-reference/data-types/fixedstring"}},
-        {"Expression", {"Expression", "/sql-reference/syntax#expressions"}}
+        {"Expression", {"Expression", "/sql-reference/syntax#expressions"}},
+        {"Tuple", {"Expression", "/sql-reference/data-types/tuple"}}
     };
     
     for (const auto & type : other_types) {
@@ -135,7 +136,7 @@ FunctionDocumentation::Arguments getDictGetArguments()
                 {"id_expr", fmt::format(
             "Key value. [Expression]({}) returning dictionary key-type value or [`Tuple(T)`]({}) value (dictionary configuration dependent).",
             getTypeDocLink("Expression"),
-            getTypeDocLink("tuple")
+            getTypeDocLink("Tuple")
         )}
     };
 }
@@ -149,7 +150,7 @@ FunctionDocumentation::Arguments getDictGetOrDefaultArguments()
         {"id_expr", fmt::format(
             "Key value. [Expression]({}) returning dictionary key-type value or [`Tuple(T)`]({}) value (dictionary configuration dependent).",
             getTypeDocLink("Expression"),
-            getTypeDocLink("tuple")
+            getTypeDocLink("Tuple")
         )},
         {"default_value_expr", fmt::format("Value(s) returned if the dictionary does not contain a row with the `id_expr` key. [`Expression`]({})/[`Tuple(T)`]({}) of `attr_names` type(s).", getTypeDocLink("Expression"), getTypeDocLink("tuple"))},
     };

@@ -151,7 +151,7 @@ dictGetDate(dict_name, attr_name, id_expr)
 
 - `dict_name` — Name of the dictionary. [`String`](/sql-reference/data-types/string).
 - `attr_name` — Name of the column of the dictionary. [`String`](/sql-reference/data-types/string)/[`Tuple(String)`](/sql-reference/data-types/string).
-- `id_expr` — Key value. [Expression](/sql-reference/syntax#expressions) returning dictionary key-type value or [`Tuple(T)`]() value (dictionary configuration dependent).
+- `id_expr` — Key value. [Expression](/sql-reference/syntax#expressions) returning dictionary key-type value or [`Tuple(T)`](/sql-reference/data-types/tuple) value (dictionary configuration dependent).
 
 **Returned value**
 
@@ -192,7 +192,7 @@ dictGetDateOrDefault(dict_name, attr_name, id_expr, default_value_expr)
 
 - `dict_name` — Name of the dictionary. [`String`](/sql-reference/data-types/string).
 - `attr_name` — Name of the column of the dictionary. [`String`](/sql-reference/data-types/string)/[`Tuple(String)`](/sql-reference/data-types/string).
-- `id_expr` — Key value. [Expression](/sql-reference/syntax#expressions) returning dictionary key-type value or [`Tuple(T)`]() value (dictionary configuration dependent).
+- `id_expr` — Key value. [Expression](/sql-reference/syntax#expressions) returning dictionary key-type value or [`Tuple(T)`](/sql-reference/data-types/tuple) value (dictionary configuration dependent).
 - `default_value_expr` — Value(s) returned if the dictionary does not contain a row with the `id_expr` key. [`Expression`](/sql-reference/syntax#expressions)/[`Tuple(T)`]() of `attr_names` type(s).
 
 **Returned value**
@@ -241,7 +241,7 @@ dictGetDateTime(dict_name, attr_name, id_expr)
 
 - `dict_name` — Name of the dictionary. [`String`](/sql-reference/data-types/string).
 - `attr_name` — Name of the column of the dictionary. [`String`](/sql-reference/data-types/string)/[`Tuple(String)`](/sql-reference/data-types/string).
-- `id_expr` — Key value. [Expression](/sql-reference/syntax#expressions) returning dictionary key-type value or [`Tuple(T)`]() value (dictionary configuration dependent).
+- `id_expr` — Key value. [Expression](/sql-reference/syntax#expressions) returning dictionary key-type value or [`Tuple(T)`](/sql-reference/data-types/tuple) value (dictionary configuration dependent).
 
 **Returned value**
 
@@ -282,7 +282,7 @@ dictGetDateTimeOrDefault(dict_name, attr_name, id_expr, default_value_expr)
 
 - `dict_name` — Name of the dictionary. [`String`](/sql-reference/data-types/string).
 - `attr_name` — Name of the column of the dictionary. [`String`](/sql-reference/data-types/string)/[`Tuple(String)`](/sql-reference/data-types/string).
-- `id_expr` — Key value. [Expression](/sql-reference/syntax#expressions) returning dictionary key-type value or [`Tuple(T)`]() value (dictionary configuration dependent).
+- `id_expr` — Key value. [Expression](/sql-reference/syntax#expressions) returning dictionary key-type value or [`Tuple(T)`](/sql-reference/data-types/tuple) value (dictionary configuration dependent).
 - `default_value_expr` — Value(s) returned if the dictionary does not contain a row with the `id_expr` key. [`Expression`](/sql-reference/syntax#expressions)/[`Tuple(T)`]() of `attr_names` type(s).
 
 **Returned value**
@@ -376,7 +376,7 @@ dictGetFloat32(dict_name, attr_name, id_expr)
 
 - `dict_name` — Name of the dictionary. [`String`](/sql-reference/data-types/string).
 - `attr_name` — Name of the column of the dictionary. [`String`](/sql-reference/data-types/string)/[`Tuple(String)`](/sql-reference/data-types/string).
-- `id_expr` — Key value. [Expression](/sql-reference/syntax#expressions) returning dictionary key-type value or [`Tuple(T)`]() value (dictionary configuration dependent).
+- `id_expr` — Key value. [Expression](/sql-reference/syntax#expressions) returning dictionary key-type value or [`Tuple(T)`](/sql-reference/data-types/tuple) value (dictionary configuration dependent).
 
 **Returned value**
 
@@ -417,7 +417,7 @@ dictGetFloat32OrDefault(dict_name, attr_name, id_expr, default_value_expr)
 
 - `dict_name` — Name of the dictionary. [`String`](/sql-reference/data-types/string).
 - `attr_name` — Name of the column of the dictionary. [`String`](/sql-reference/data-types/string)/[`Tuple(String)`](/sql-reference/data-types/string).
-- `id_expr` — Key value. [Expression](/sql-reference/syntax#expressions) returning dictionary key-type value or [`Tuple(T)`]() value (dictionary configuration dependent).
+- `id_expr` — Key value. [Expression](/sql-reference/syntax#expressions) returning dictionary key-type value or [`Tuple(T)`](/sql-reference/data-types/tuple) value (dictionary configuration dependent).
 - `default_value_expr` — Value(s) returned if the dictionary does not contain a row with the `id_expr` key. [`Expression`](/sql-reference/syntax#expressions)/[`Tuple(T)`]() of `attr_names` type(s).
 
 **Returned value**
@@ -466,7 +466,7 @@ dictGetFloat64(dict_name, attr_name, id_expr)
 
 - `dict_name` — Name of the dictionary. [`String`](/sql-reference/data-types/string).
 - `attr_name` — Name of the column of the dictionary. [`String`](/sql-reference/data-types/string)/[`Tuple(String)`](/sql-reference/data-types/string).
-- `id_expr` — Key value. [Expression](/sql-reference/syntax#expressions) returning dictionary key-type value or [`Tuple(T)`]() value (dictionary configuration dependent).
+- `id_expr` — Key value. [Expression](/sql-reference/syntax#expressions) returning dictionary key-type value or [`Tuple(T)`](/sql-reference/data-types/tuple) value (dictionary configuration dependent).
 
 **Returned value**
 
@@ -507,7 +507,7 @@ dictGetFloat64OrDefault(dict_name, attr_name, id_expr, default_value_expr)
 
 - `dict_name` — Name of the dictionary. [`String`](/sql-reference/data-types/string).
 - `attr_name` — Name of the column of the dictionary. [`String`](/sql-reference/data-types/string)/[`Tuple(String)`](/sql-reference/data-types/string).
-- `id_expr` — Key value. [Expression](/sql-reference/syntax#expressions) returning dictionary key-type value or [`Tuple(T)`]() value (dictionary configuration dependent).
+- `id_expr` — Key value. [Expression](/sql-reference/syntax#expressions) returning dictionary key-type value or [`Tuple(T)`](/sql-reference/data-types/tuple) value (dictionary configuration dependent).
 - `default_value_expr` — Value(s) returned if the dictionary does not contain a row with the `id_expr` key. [`Expression`](/sql-reference/syntax#expressions)/[`Tuple(T)`]() of `attr_names` type(s).
 
 **Returned value**
@@ -591,7 +591,7 @@ dictGetIPv4(dict_name, attr_name, id_expr)
 
 - `dict_name` — Name of the dictionary. [`String`](/sql-reference/data-types/string).
 - `attr_name` — Name of the column of the dictionary. [`String`](/sql-reference/data-types/string)/[`Tuple(String)`](/sql-reference/data-types/string).
-- `id_expr` — Key value. [Expression](/sql-reference/syntax#expressions) returning dictionary key-type value or [`Tuple(T)`]() value (dictionary configuration dependent).
+- `id_expr` — Key value. [Expression](/sql-reference/syntax#expressions) returning dictionary key-type value or [`Tuple(T)`](/sql-reference/data-types/tuple) value (dictionary configuration dependent).
 
 **Returned value**
 
@@ -632,7 +632,7 @@ dictGetIPv4OrDefault(dict_name, attr_name, id_expr, default_value_expr)
 
 - `dict_name` — Name of the dictionary. [`String`](/sql-reference/data-types/string).
 - `attr_name` — Name of the column of the dictionary. [`String`](/sql-reference/data-types/string)/[`Tuple(String)`](/sql-reference/data-types/string).
-- `id_expr` — Key value. [Expression](/sql-reference/syntax#expressions) returning dictionary key-type value or [`Tuple(T)`]() value (dictionary configuration dependent).
+- `id_expr` — Key value. [Expression](/sql-reference/syntax#expressions) returning dictionary key-type value or [`Tuple(T)`](/sql-reference/data-types/tuple) value (dictionary configuration dependent).
 - `default_value_expr` — Value(s) returned if the dictionary does not contain a row with the `id_expr` key. [`Expression`](/sql-reference/syntax#expressions)/[`Tuple(T)`]() of `attr_names` type(s).
 
 **Returned value**
@@ -681,7 +681,7 @@ dictGetIPv6(dict_name, attr_name, id_expr)
 
 - `dict_name` — Name of the dictionary. [`String`](/sql-reference/data-types/string).
 - `attr_name` — Name of the column of the dictionary. [`String`](/sql-reference/data-types/string)/[`Tuple(String)`](/sql-reference/data-types/string).
-- `id_expr` — Key value. [Expression](/sql-reference/syntax#expressions) returning dictionary key-type value or [`Tuple(T)`]() value (dictionary configuration dependent).
+- `id_expr` — Key value. [Expression](/sql-reference/syntax#expressions) returning dictionary key-type value or [`Tuple(T)`](/sql-reference/data-types/tuple) value (dictionary configuration dependent).
 
 **Returned value**
 
@@ -722,7 +722,7 @@ dictGetIPv6OrDefault(dict_name, attr_name, id_expr, default_value_expr)
 
 - `dict_name` — Name of the dictionary. [`String`](/sql-reference/data-types/string).
 - `attr_name` — Name of the column of the dictionary. [`String`](/sql-reference/data-types/string)/[`Tuple(String)`](/sql-reference/data-types/string).
-- `id_expr` — Key value. [Expression](/sql-reference/syntax#expressions) returning dictionary key-type value or [`Tuple(T)`]() value (dictionary configuration dependent).
+- `id_expr` — Key value. [Expression](/sql-reference/syntax#expressions) returning dictionary key-type value or [`Tuple(T)`](/sql-reference/data-types/tuple) value (dictionary configuration dependent).
 - `default_value_expr` — Value(s) returned if the dictionary does not contain a row with the `id_expr` key. [`Expression`](/sql-reference/syntax#expressions)/[`Tuple(T)`]() of `attr_names` type(s).
 
 **Returned value**
@@ -771,7 +771,7 @@ dictGetInt16(dict_name, attr_name, id_expr)
 
 - `dict_name` — Name of the dictionary. [`String`](/sql-reference/data-types/string).
 - `attr_name` — Name of the column of the dictionary. [`String`](/sql-reference/data-types/string)/[`Tuple(String)`](/sql-reference/data-types/string).
-- `id_expr` — Key value. [Expression](/sql-reference/syntax#expressions) returning dictionary key-type value or [`Tuple(T)`]() value (dictionary configuration dependent).
+- `id_expr` — Key value. [Expression](/sql-reference/syntax#expressions) returning dictionary key-type value or [`Tuple(T)`](/sql-reference/data-types/tuple) value (dictionary configuration dependent).
 
 **Returned value**
 
@@ -812,7 +812,7 @@ dictGetInt16OrDefault(dict_name, attr_name, id_expr, default_value_expr)
 
 - `dict_name` — Name of the dictionary. [`String`](/sql-reference/data-types/string).
 - `attr_name` — Name of the column of the dictionary. [`String`](/sql-reference/data-types/string)/[`Tuple(String)`](/sql-reference/data-types/string).
-- `id_expr` — Key value. [Expression](/sql-reference/syntax#expressions) returning dictionary key-type value or [`Tuple(T)`]() value (dictionary configuration dependent).
+- `id_expr` — Key value. [Expression](/sql-reference/syntax#expressions) returning dictionary key-type value or [`Tuple(T)`](/sql-reference/data-types/tuple) value (dictionary configuration dependent).
 - `default_value_expr` — Value(s) returned if the dictionary does not contain a row with the `id_expr` key. [`Expression`](/sql-reference/syntax#expressions)/[`Tuple(T)`]() of `attr_names` type(s).
 
 **Returned value**
@@ -861,7 +861,7 @@ dictGetInt32(dict_name, attr_name, id_expr)
 
 - `dict_name` — Name of the dictionary. [`String`](/sql-reference/data-types/string).
 - `attr_name` — Name of the column of the dictionary. [`String`](/sql-reference/data-types/string)/[`Tuple(String)`](/sql-reference/data-types/string).
-- `id_expr` — Key value. [Expression](/sql-reference/syntax#expressions) returning dictionary key-type value or [`Tuple(T)`]() value (dictionary configuration dependent).
+- `id_expr` — Key value. [Expression](/sql-reference/syntax#expressions) returning dictionary key-type value or [`Tuple(T)`](/sql-reference/data-types/tuple) value (dictionary configuration dependent).
 
 **Returned value**
 
@@ -902,7 +902,7 @@ dictGetInt32OrDefault(dict_name, attr_name, id_expr, default_value_expr)
 
 - `dict_name` — Name of the dictionary. [`String`](/sql-reference/data-types/string).
 - `attr_name` — Name of the column of the dictionary. [`String`](/sql-reference/data-types/string)/[`Tuple(String)`](/sql-reference/data-types/string).
-- `id_expr` — Key value. [Expression](/sql-reference/syntax#expressions) returning dictionary key-type value or [`Tuple(T)`]() value (dictionary configuration dependent).
+- `id_expr` — Key value. [Expression](/sql-reference/syntax#expressions) returning dictionary key-type value or [`Tuple(T)`](/sql-reference/data-types/tuple) value (dictionary configuration dependent).
 - `default_value_expr` — Value(s) returned if the dictionary does not contain a row with the `id_expr` key. [`Expression`](/sql-reference/syntax#expressions)/[`Tuple(T)`]() of `attr_names` type(s).
 
 **Returned value**
@@ -951,7 +951,7 @@ dictGetInt64(dict_name, attr_name, id_expr)
 
 - `dict_name` — Name of the dictionary. [`String`](/sql-reference/data-types/string).
 - `attr_name` — Name of the column of the dictionary. [`String`](/sql-reference/data-types/string)/[`Tuple(String)`](/sql-reference/data-types/string).
-- `id_expr` — Key value. [Expression](/sql-reference/syntax#expressions) returning dictionary key-type value or [`Tuple(T)`]() value (dictionary configuration dependent).
+- `id_expr` — Key value. [Expression](/sql-reference/syntax#expressions) returning dictionary key-type value or [`Tuple(T)`](/sql-reference/data-types/tuple) value (dictionary configuration dependent).
 
 **Returned value**
 
@@ -992,7 +992,7 @@ dictGetInt64OrDefault(dict_name, attr_name, id_expr, default_value_expr)
 
 - `dict_name` — Name of the dictionary. [`String`](/sql-reference/data-types/string).
 - `attr_name` — Name of the column of the dictionary. [`String`](/sql-reference/data-types/string)/[`Tuple(String)`](/sql-reference/data-types/string).
-- `id_expr` — Key value. [Expression](/sql-reference/syntax#expressions) returning dictionary key-type value or [`Tuple(T)`]() value (dictionary configuration dependent).
+- `id_expr` — Key value. [Expression](/sql-reference/syntax#expressions) returning dictionary key-type value or [`Tuple(T)`](/sql-reference/data-types/tuple) value (dictionary configuration dependent).
 - `default_value_expr` — Value(s) returned if the dictionary does not contain a row with the `id_expr` key. [`Expression`](/sql-reference/syntax#expressions)/[`Tuple(T)`]() of `attr_names` type(s).
 
 **Returned value**
@@ -1041,7 +1041,7 @@ dictGetInt8(dict_name, attr_name, id_expr)
 
 - `dict_name` — Name of the dictionary. [`String`](/sql-reference/data-types/string).
 - `attr_name` — Name of the column of the dictionary. [`String`](/sql-reference/data-types/string)/[`Tuple(String)`](/sql-reference/data-types/string).
-- `id_expr` — Key value. [Expression](/sql-reference/syntax#expressions) returning dictionary key-type value or [`Tuple(T)`]() value (dictionary configuration dependent).
+- `id_expr` — Key value. [Expression](/sql-reference/syntax#expressions) returning dictionary key-type value or [`Tuple(T)`](/sql-reference/data-types/tuple) value (dictionary configuration dependent).
 
 **Returned value**
 
@@ -1082,7 +1082,7 @@ dictGetInt8OrDefault(dict_name, attr_name, id_expr, default_value_expr)
 
 - `dict_name` — Name of the dictionary. [`String`](/sql-reference/data-types/string).
 - `attr_name` — Name of the column of the dictionary. [`String`](/sql-reference/data-types/string)/[`Tuple(String)`](/sql-reference/data-types/string).
-- `id_expr` — Key value. [Expression](/sql-reference/syntax#expressions) returning dictionary key-type value or [`Tuple(T)`]() value (dictionary configuration dependent).
+- `id_expr` — Key value. [Expression](/sql-reference/syntax#expressions) returning dictionary key-type value or [`Tuple(T)`](/sql-reference/data-types/tuple) value (dictionary configuration dependent).
 - `default_value_expr` — Value(s) returned if the dictionary does not contain a row with the `id_expr` key. [`Expression`](/sql-reference/syntax#expressions)/[`Tuple(T)`]() of `attr_names` type(s).
 
 **Returned value**
@@ -1209,7 +1209,7 @@ dictGetUInt16(dict_name, attr_name, id_expr)
 
 - `dict_name` — Name of the dictionary. [`String`](/sql-reference/data-types/string).
 - `attr_name` — Name of the column of the dictionary. [`String`](/sql-reference/data-types/string)/[`Tuple(String)`](/sql-reference/data-types/string).
-- `id_expr` — Key value. [Expression](/sql-reference/syntax#expressions) returning dictionary key-type value or [`Tuple(T)`]() value (dictionary configuration dependent).
+- `id_expr` — Key value. [Expression](/sql-reference/syntax#expressions) returning dictionary key-type value or [`Tuple(T)`](/sql-reference/data-types/tuple) value (dictionary configuration dependent).
 
 **Returned value**
 
@@ -1250,7 +1250,7 @@ dictGetUInt16OrDefault(dict_name, attr_name, id_expr, default_value_expr)
 
 - `dict_name` — Name of the dictionary. [`String`](/sql-reference/data-types/string).
 - `attr_name` — Name of the column of the dictionary. [`String`](/sql-reference/data-types/string)/[`Tuple(String)`](/sql-reference/data-types/string).
-- `id_expr` — Key value. [Expression](/sql-reference/syntax#expressions) returning dictionary key-type value or [`Tuple(T)`]() value (dictionary configuration dependent).
+- `id_expr` — Key value. [Expression](/sql-reference/syntax#expressions) returning dictionary key-type value or [`Tuple(T)`](/sql-reference/data-types/tuple) value (dictionary configuration dependent).
 - `default_value_expr` — Value(s) returned if the dictionary does not contain a row with the `id_expr` key. [`Expression`](/sql-reference/syntax#expressions)/[`Tuple(T)`]() of `attr_names` type(s).
 
 **Returned value**
@@ -1299,7 +1299,7 @@ dictGetUInt32(dict_name, attr_name, id_expr)
 
 - `dict_name` — Name of the dictionary. [`String`](/sql-reference/data-types/string).
 - `attr_name` — Name of the column of the dictionary. [`String`](/sql-reference/data-types/string)/[`Tuple(String)`](/sql-reference/data-types/string).
-- `id_expr` — Key value. [Expression](/sql-reference/syntax#expressions) returning dictionary key-type value or [`Tuple(T)`]() value (dictionary configuration dependent).
+- `id_expr` — Key value. [Expression](/sql-reference/syntax#expressions) returning dictionary key-type value or [`Tuple(T)`](/sql-reference/data-types/tuple) value (dictionary configuration dependent).
 
 **Returned value**
 
@@ -1340,7 +1340,7 @@ dictGetUInt32OrDefault(dict_name, attr_name, id_expr, default_value_expr)
 
 - `dict_name` — Name of the dictionary. [`String`](/sql-reference/data-types/string).
 - `attr_name` — Name of the column of the dictionary. [`String`](/sql-reference/data-types/string)/[`Tuple(String)`](/sql-reference/data-types/string).
-- `id_expr` — Key value. [Expression](/sql-reference/syntax#expressions) returning dictionary key-type value or [`Tuple(T)`]() value (dictionary configuration dependent).
+- `id_expr` — Key value. [Expression](/sql-reference/syntax#expressions) returning dictionary key-type value or [`Tuple(T)`](/sql-reference/data-types/tuple) value (dictionary configuration dependent).
 - `default_value_expr` — Value(s) returned if the dictionary does not contain a row with the `id_expr` key. [`Expression`](/sql-reference/syntax#expressions)/[`Tuple(T)`]() of `attr_names` type(s).
 
 **Returned value**
@@ -1389,7 +1389,7 @@ dictGetUInt64(dict_name, attr_name, id_expr)
 
 - `dict_name` — Name of the dictionary. [`String`](/sql-reference/data-types/string).
 - `attr_name` — Name of the column of the dictionary. [`String`](/sql-reference/data-types/string)/[`Tuple(String)`](/sql-reference/data-types/string).
-- `id_expr` — Key value. [Expression](/sql-reference/syntax#expressions) returning dictionary key-type value or [`Tuple(T)`]() value (dictionary configuration dependent).
+- `id_expr` — Key value. [Expression](/sql-reference/syntax#expressions) returning dictionary key-type value or [`Tuple(T)`](/sql-reference/data-types/tuple) value (dictionary configuration dependent).
 
 **Returned value**
 
@@ -1430,7 +1430,7 @@ dictGetUInt64OrDefault(dict_name, attr_name, id_expr, default_value_expr)
 
 - `dict_name` — Name of the dictionary. [`String`](/sql-reference/data-types/string).
 - `attr_name` — Name of the column of the dictionary. [`String`](/sql-reference/data-types/string)/[`Tuple(String)`](/sql-reference/data-types/string).
-- `id_expr` — Key value. [Expression](/sql-reference/syntax#expressions) returning dictionary key-type value or [`Tuple(T)`]() value (dictionary configuration dependent).
+- `id_expr` — Key value. [Expression](/sql-reference/syntax#expressions) returning dictionary key-type value or [`Tuple(T)`](/sql-reference/data-types/tuple) value (dictionary configuration dependent).
 - `default_value_expr` — Value(s) returned if the dictionary does not contain a row with the `id_expr` key. [`Expression`](/sql-reference/syntax#expressions)/[`Tuple(T)`]() of `attr_names` type(s).
 
 **Returned value**
@@ -1479,7 +1479,7 @@ dictGetUInt8(dict_name, attr_name, id_expr)
 
 - `dict_name` — Name of the dictionary. [`String`](/sql-reference/data-types/string).
 - `attr_name` — Name of the column of the dictionary. [`String`](/sql-reference/data-types/string)/[`Tuple(String)`](/sql-reference/data-types/string).
-- `id_expr` — Key value. [Expression](/sql-reference/syntax#expressions) returning dictionary key-type value or [`Tuple(T)`]() value (dictionary configuration dependent).
+- `id_expr` — Key value. [Expression](/sql-reference/syntax#expressions) returning dictionary key-type value or [`Tuple(T)`](/sql-reference/data-types/tuple) value (dictionary configuration dependent).
 
 **Returned value**
 
@@ -1520,7 +1520,7 @@ dictGetUInt8OrDefault(dict_name, attr_name, id_expr, default_value_expr)
 
 - `dict_name` — Name of the dictionary. [`String`](/sql-reference/data-types/string).
 - `attr_name` — Name of the column of the dictionary. [`String`](/sql-reference/data-types/string)/[`Tuple(String)`](/sql-reference/data-types/string).
-- `id_expr` — Key value. [Expression](/sql-reference/syntax#expressions) returning dictionary key-type value or [`Tuple(T)`]() value (dictionary configuration dependent).
+- `id_expr` — Key value. [Expression](/sql-reference/syntax#expressions) returning dictionary key-type value or [`Tuple(T)`](/sql-reference/data-types/tuple) value (dictionary configuration dependent).
 - `default_value_expr` — Value(s) returned if the dictionary does not contain a row with the `id_expr` key. [`Expression`](/sql-reference/syntax#expressions)/[`Tuple(T)`]() of `attr_names` type(s).
 
 **Returned value**
@@ -1569,7 +1569,7 @@ dictGetUUID(dict_name, attr_name, id_expr)
 
 - `dict_name` — Name of the dictionary. [`String`](/sql-reference/data-types/string).
 - `attr_name` — Name of the column of the dictionary. [`String`](/sql-reference/data-types/string)/[`Tuple(String)`](/sql-reference/data-types/string).
-- `id_expr` — Key value. [Expression](/sql-reference/syntax#expressions) returning dictionary key-type value or [`Tuple(T)`]() value (dictionary configuration dependent).
+- `id_expr` — Key value. [Expression](/sql-reference/syntax#expressions) returning dictionary key-type value or [`Tuple(T)`](/sql-reference/data-types/tuple) value (dictionary configuration dependent).
 
 **Returned value**
 
@@ -1610,7 +1610,7 @@ dictGetUUIDOrDefault(dict_name, attr_name, id_expr, default_value_expr)
 
 - `dict_name` — Name of the dictionary. [`String`](/sql-reference/data-types/string).
 - `attr_name` — Name of the column of the dictionary. [`String`](/sql-reference/data-types/string)/[`Tuple(String)`](/sql-reference/data-types/string).
-- `id_expr` — Key value. [Expression](/sql-reference/syntax#expressions) returning dictionary key-type value or [`Tuple(T)`]() value (dictionary configuration dependent).
+- `id_expr` — Key value. [Expression](/sql-reference/syntax#expressions) returning dictionary key-type value or [`Tuple(T)`](/sql-reference/data-types/tuple) value (dictionary configuration dependent).
 - `default_value_expr` — Value(s) returned if the dictionary does not contain a row with the `id_expr` key. [`Expression`](/sql-reference/syntax#expressions)/[`Tuple(T)`]() of `attr_names` type(s).
 
 **Returned value**
