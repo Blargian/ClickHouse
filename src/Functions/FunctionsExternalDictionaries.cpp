@@ -202,10 +202,10 @@ REGISTER_FUNCTION(ExternalDictionaries)
             {"id_expr", fmt::format("Key value. [Expression]({}) returning a [`UInt64`]({})/[`Tuple(T)`]({}).", getTypeDocLink("Expression"), getTypeDocLink("UInt64"), getTypeDocLink("tuple")) }
         };
         FunctionDocumentation::ReturnedValue returned_value_dictGet =
-        R"(
+R"(
 Returns the value of the dictionary attribute that corresponds to id_expr if the key is found.
 If the key is not found, returns the content of the <null_value> element specified for the attribute in the dictionary configuration.
-        )";
+)";
         FunctionDocumentation::Examples examples_dictGet =
         {
             {
@@ -215,14 +215,14 @@ If the key is not found, returns the content of the <null_value> element specifi
             },
             {
                 "Multiple attributes",
-                R"(
+R"(
 SELECT
     dictGet('ext_dict_mult', ('c1','c2'), number + 1) AS val,
     toTypeName(val) AS type
 FROM system.numbers
 LIMIT 3;
-				)",
-                R"(
+)",
+R"(
 ┌─val─────┬─type───────────┐
 │ (1,'1') │ Tuple(        ↴│
 │         │↳    c1 UInt32,↴│
@@ -234,7 +234,7 @@ LIMIT 3;
 │         │↳    c1 UInt32,↴│
 │         │↳    c2 String) │
 └─────────┴────────────────┘
-				)"
+)"
             }
         };
         FunctionDocumentation::IntroducedIn introduced_in_dictGet = {18, 16};
@@ -265,10 +265,10 @@ LIMIT 3;
             {"default_value", "Default value to return if the key is not found. Type must match the attribute's data type."}
         };
         FunctionDocumentation::ReturnedValue returned_value_dictGetOrDefault =
-        R"(
+R"(
 Returns the value of the dictionary attribute that corresponds to id_expr if the key is found.
 If the key is not found, returns the default_value provided.
-        )";
+)";
         FunctionDocumentation::Examples examples_dictGetOrDefault =
         {
             {
@@ -303,27 +303,27 @@ If the key is not found, returns the default_value provided.
             {"id_expr", "Key value. Expression returning dictionary key-type value."}
         };
         FunctionDocumentation::ReturnedValue returned_value_dictGetOrNull =
-        R"(
+R"(
 Returns the value of the dictionary attribute that corresponds to `id_expr` if the key is found.
 If the key is not found, returns `NULL`.
-        )";
+)";
         FunctionDocumentation::Examples examples_dictGetOrNull =
         {
             {
                 "Example using the range key dictionary",
-                R"(
+R"(
 SELECT
     (number, toDate('2019-05-20')),
     dictGetOrNull('range_key_dictionary', 'value', number, toDate('2019-05-20')),
 FROM system.numbers LIMIT 5 FORMAT TabSeparated;
-				)",
-                R"(
+)",
+R"(
 (0,'2019-05-20')  \N
 (1,'2019-05-20')  First
 (2,'2019-05-20')  Second
 (3,'2019-05-20')  Third
 (4,'2019-05-20')  \N
-			   )"
+)"
             }
         };
         FunctionDocumentation::IntroducedIn introduced_in_dictGetOrNull = {21, 4};
@@ -355,11 +355,11 @@ FROM system.numbers LIMIT 5 FORMAT TabSeparated;
             	{
                     "Usage example",
                     "SELECT dictGetUInt8('all_types_dict', 'UInt8_value', 1)",
-                    R"(
+R"(
 ┌─dictGetUInt8⋯_value', 1)─┐
 │                      100 │
 └──────────────────────────┘
-                    )"
+)"
                 }
             },
             {1, 1},  /// Version introduced
@@ -381,21 +381,21 @@ FROM system.numbers LIMIT 5 FORMAT TabSeparated;
             getDictGetOrDefaultReturnedValue(),
             {
                 {"Usage example",
-                    R"(
+R"(
 -- for key which exists
 SELECT dictGetUInt8('all_types_dict', 'UInt8_value', 1);
 
 -- for key which does not exist, returns the provided default value (0)
 SELECT dictGetUInt8OrDefault('all_types_dict', 'UInt8_value', 999, 0);
-					)",
-                    R"(
+)",
+R"(
 ┌─dictGetUInt8⋯_value', 1)─┐
 │                      100 │
 └──────────────────────────┘
 ┌─dictGetUInt8⋯e', 999, 0)─┐
 │                        0 │
 └──────────────────────────┘
-                    )"},
+)"},
             },
             {1, 1},  /// Version introduced
             category_dictionary
@@ -416,11 +416,11 @@ SELECT dictGetUInt8OrDefault('all_types_dict', 'UInt8_value', 999, 0);
             getDictGetReturnedValue(),
             {
                 {"Usage example", "SELECT dictGetUInt16('all_types_dict', 'UInt16_value', 1)",
-                 R"(
+R"(
 ┌─dictGetUInt1⋯_value', 1)─┐
 │                     5000 │
 └──────────────────────────┘
-                )"},
+)"},
             },
             {1, 1},  /// Version introduced
             category_dictionary
@@ -442,21 +442,21 @@ SELECT dictGetUInt8OrDefault('all_types_dict', 'UInt8_value', 999, 0);
             getDictGetOrDefaultReturnedValue(),
             {
                 {"Usage example",
-                    R"(
+R"(
 -- for key which exists
 SELECT dictGetUInt16('all_types_dict', 'UInt16_value', 1);
 
 -- for key which does not exist, returns the provided default value (0)
 SELECT dictGetUInt16OrDefault('all_types_dict', 'UInt16_value', 999, 0);
-					)",
-                    R"(
+)",
+R"(
 ┌─dictGetUInt1⋯_value', 1)─┐
 │                     5000 │
 └──────────────────────────┘
 ┌─dictGetUInt1⋯e', 999, 0)─┐
 │                        0 │
 └──────────────────────────┘
-                    )"},
+)"},
             },
             {1, 1},  /// Version introduced
             category_dictionary
@@ -477,11 +477,11 @@ SELECT dictGetUInt16OrDefault('all_types_dict', 'UInt16_value', 999, 0);
             getDictGetReturnedValue(),
             {
                 {"Usage example", "SELECT dictGetUInt32('all_types_dict', 'UInt32_value', 1)",
-                 R"(
+R"(
 ┌─dictGetUInt3⋯_value', 1)─┐
 │                  1000000 │
 └──────────────────────────┘
-                )"},
+)"},
             },
             {1, 1},  /// Version introduced
             category_dictionary
@@ -502,21 +502,21 @@ SELECT dictGetUInt16OrDefault('all_types_dict', 'UInt16_value', 999, 0);
             getDictGetOrDefaultReturnedValue(),
             {
                 {"Usage example",
-                    R"(
+R"(
 -- for key which exists
 SELECT dictGetUInt32('all_types_dict', 'UInt32_value', 1);
 
 -- for key which does not exist, returns the provided default value (0)
 SELECT dictGetUInt32OrDefault('all_types_dict', 'UInt32_value', 999, 0);
-					)",
-                    R"(
+)",
+R"(
 ┌─dictGetUInt3⋯_value', 1)─┐
 │                  1000000 │
 └──────────────────────────┘
 ┌─dictGetUInt3⋯e', 999, 0)─┐
 │                        0 │
 └──────────────────────────┘
-                    )"},
+)"},
             },
             {1, 1},  /// Version introduced
             category_dictionary
@@ -537,11 +537,11 @@ SELECT dictGetUInt32OrDefault('all_types_dict', 'UInt32_value', 999, 0);
             getDictGetReturnedValue(),
             {
                 {"Usage example", "SELECT dictGetUInt64('all_types_dict', 'UInt64_value', 1)",
-                 R"(
+R"(
 ┌─dictGetUInt6⋯_value', 1)─┐
 │      9223372036854775807 │
 └──────────────────────────┘
-                )"},
+)"},
             },
             {1, 1},  /// Version introduced
             category_dictionary
@@ -562,21 +562,21 @@ SELECT dictGetUInt32OrDefault('all_types_dict', 'UInt32_value', 999, 0);
             getDictGetOrDefaultReturnedValue(),
             {
                 {"Usage example",
-                    R"(
+R"(
 -- for key which exists
 SELECT dictGetUInt64('all_types_dict', 'UInt64_value', 1);
 
 -- for key which does not exist, returns the provideddefault value (0)
 SELECT dictGetUInt64OrDefault('all_types_dict', 'UInt64_value', 999, 0);
-					)",
-                    R"(
+)",
+R"(
 ┌─dictGetUInt6⋯_value', 1)─┐
 │      9223372036854775807 │
 └──────────────────────────┘
 ┌─dictGetUInt6⋯e', 999, 0)─┐
 │                        0 │
 └──────────────────────────┘
-                    )"},
+)"},
             },
             {1, 1},  /// Version introduced
             category_dictionary
@@ -597,11 +597,11 @@ SELECT dictGetUInt64OrDefault('all_types_dict', 'UInt64_value', 999, 0);
             getDictGetReturnedValue(),
             {
                 {"Usage example", "SELECT dictGetInt8('all_types_dict', 'Int8_value', 1)",
-                 R"(
+R"(
 ┌─dictGetInt8(⋯_value', 1)─┐
 │                     -100 │
 └──────────────────────────┘
-                )"},
+)"},
             },
             {1, 1},  /// Version introduced
             category_dictionary
@@ -622,21 +622,21 @@ SELECT dictGetUInt64OrDefault('all_types_dict', 'UInt64_value', 999, 0);
             getDictGetOrDefaultReturnedValue(),
             {
                 {"Usage example",
-                    R"(
+R"(
 -- for key which exists
 SELECT dictGetInt8('all_types_dict', 'Int8_value', 1);
 
 -- for key which does not exist, returns the provided default value (-1)
 SELECT dictGetInt8OrDefault('all_types_dict', 'Int8_value', 999, -1);
-					)",
-                    R"(
+)",
+R"(
 ┌─dictGetInt8(⋯_value', 1)─┐
 │                     -100 │
 └──────────────────────────┘
 ┌─dictGetInt8O⋯', 999, -1)─┐
 │                       -1 │
 └──────────────────────────┘
-                    )"},
+)"},
             },
             {1, 1},  /// Version introduced
             category_dictionary
@@ -656,11 +656,11 @@ SELECT dictGetInt8OrDefault('all_types_dict', 'Int8_value', 999, -1);
             getDictGetReturnedValue(),
             {
                 {"Usage example", "SELECT dictGetInt16('all_types_dict', 'Int16_value', 1)",
-                 R"(
+R"(
 ┌─dictGetInt16⋯_value', 1)─┐
 │                    -5000 │
 └──────────────────────────┘
-                )"},
+)"},
             },
             {1, 1},  /// Version introduced
             category_dictionary
@@ -681,21 +681,21 @@ SELECT dictGetInt8OrDefault('all_types_dict', 'Int8_value', 999, -1);
             getDictGetOrDefaultReturnedValue(),
             {
                 {"Usage example",
-                    R"(
+R"(
 -- for key which exists
 SELECT dictGetInt16('all_types_dict', 'Int16_value', 1);
 
 -- for key which does not exist, returns the provided default value (-1)
 SELECT dictGetInt16OrDefault('all_types_dict', 'Int16_value', 999, -1);
-					)",
-                    R"(
+)",
+R"(
 ┌─dictGetInt16⋯_value', 1)─┐
 │                    -5000 │
 └──────────────────────────┘
 ┌─dictGetInt16⋯', 999, -1)─┐
 │                       -1 │
 └──────────────────────────┘
-                    )"},
+)"},
             },
             {1, 1},  /// Version introduced
             category_dictionary
@@ -715,11 +715,11 @@ SELECT dictGetInt16OrDefault('all_types_dict', 'Int16_value', 999, -1);
             getDictGetReturnedValue(),
             {
                 {"Usage example", "SELECT dictGetInt32('all_types_dict', 'Int32_value', 1)",
-                 R"(
+R"(
 ┌─dictGetInt32⋯_value', 1)─┐
 │                 -1000000 │
 └──────────────────────────┘
-                )"},
+)"},
             },
             {1, 1},  /// Version introduced
             category_dictionary
@@ -740,21 +740,21 @@ SELECT dictGetInt16OrDefault('all_types_dict', 'Int16_value', 999, -1);
             getDictGetOrDefaultReturnedValue(),
             {
                 {"Usage example",
-                    R"(
+R"(
 -- for key which exists
 SELECT dictGetInt32('all_types_dict', 'Int32_value', 1);
 
 -- for key which does not exist, returns the provided default value (-1)
 SELECT dictGetInt32OrDefault('all_types_dict', 'Int32_value', 999, -1);
-					)",
-                    R"(
+)",
+R"(
 ┌─dictGetInt32⋯_value', 1)─┐
 │                 -1000000 │
 └──────────────────────────┘
 ┌─dictGetInt32⋯', 999, -1)─┐
 │                       -1 │
 └──────────────────────────┘
-                    )"},
+)"},
             },
             {1, 1},  /// Version introduced
             category_dictionary
@@ -775,11 +775,11 @@ SELECT dictGetInt32OrDefault('all_types_dict', 'Int32_value', 999, -1);
             getDictGetReturnedValue(),
             {
                 {"Usage example", "SELECT dictGetInt64('all_types_dict', 'Int64_value', 1)",
-                 R"(
+R"(
 ┌─dictGetInt64⋯_value', 1)─┐
 │     -9223372036854775808 │
 └──────────────────────────┘
-                )"},
+)"},
             },
             {1, 1},  /// Version introduced
             category_dictionary
@@ -800,21 +800,21 @@ SELECT dictGetInt32OrDefault('all_types_dict', 'Int32_value', 999, -1);
             getDictGetOrDefaultReturnedValue(),
             {
                 {"Usage example",
-                    R"(
+R"(
 -- for key which exists
 SELECT dictGetInt64('all_types_dict', 'Int64_value', 1);
 
 -- for key which does not exist, returns the provided default value (-1)
 SELECT dictGetInt64OrDefault('all_types_dict', 'Int64_value', 999, -1);
-					)",
-                    R"(
+)",
+R"(
 ┌─dictGetInt64⋯_value', 1)─┐
 │     -9223372036854775808 │
 └──────────────────────────┘
 ┌─dictGetInt64⋯', 999, -1)─┐
 │                       -1 │
 └──────────────────────────┘
-                    )"},
+)"},
             },
             {1, 1},  /// Version introduced
             category_dictionary
@@ -834,11 +834,11 @@ SELECT dictGetInt64OrDefault('all_types_dict', 'Int64_value', 999, -1);
             getDictGetReturnedValue(),
             {
                 {"Usage example", "SELECT dictGetFloat32('all_types_dict', 'Float32_value', 1)",
-                 R"(
+R"(
 ┌─dictGetFloat⋯_value', 1)─┐
 │                   123.45 │
 └──────────────────────────┘
-                )"},
+)"},
             },
             {1, 1},  /// Version introduced
             category_dictionary
@@ -859,21 +859,21 @@ SELECT dictGetInt64OrDefault('all_types_dict', 'Int64_value', 999, -1);
             getDictGetOrDefaultReturnedValue(),
             {
                 {"Usage example",
-                    R"(
+R"(
 -- for key which exists
 SELECT dictGetFloat32('all_types_dict', 'Float32_value', 1);
 
 -- for key which does not exist, returns the provided default value (nan)
 SELECT dictGetFloat32OrDefault('all_types_dict', 'Float32_value', 999, nan);
-					)",
-                    R"(
+)",
+R"(
 ┌─dictGetFloat⋯_value', 1)─┐
 │                   123.45 │
 └──────────────────────────┘
 ┌─dictGetFloat⋯, 999, nan)─┐
 │                      nan │
 └──────────────────────────┘
-                    )"},
+ )"},
             },
             {1, 1},  /// Version introduced
             category_dictionary
@@ -893,11 +893,11 @@ SELECT dictGetFloat32OrDefault('all_types_dict', 'Float32_value', 999, nan);
             getDictGetReturnedValue(),
             {
                 {"Usage example", "SELECT dictGetFloat64('all_types_dict', 'Float64_value', 1)",
-                 R"(
+R"(
 ┌─dictGetFloat⋯_value', 1)─┐
 │            987654.123456 │
 └──────────────────────────┘
-                )"},
+)"},
             },
             {1, 1},  /// Version introduced
             category_dictionary
@@ -918,21 +918,21 @@ SELECT dictGetFloat32OrDefault('all_types_dict', 'Float32_value', 999, nan);
             getDictGetOrDefaultReturnedValue(),
             {
                 {"Usage example",
-                    R"(
+R"(
 -- for key which exists
 SELECT dictGetFloat64('all_types_dict', 'Float64_value', 1);
 
 -- for key which does not exist, returns the provided default value (nan)
 SELECT dictGetFloat64OrDefault('all_types_dict', 'Float64_value', 999, nan);
-					)",
-                    R"(
+)",
+R"(
 ┌─dictGetFloat⋯_value', 1)─┐
 │            987654.123456 │
 └──────────────────────────┘
 ┌─dictGetFloat⋯, 999, nan)─┐
 │                      nan │
 └──────────────────────────┘
-                    )"},
+)"},
             },
             {1, 1},  /// Version introduced
             category_dictionary
@@ -953,11 +953,11 @@ SELECT dictGetFloat64OrDefault('all_types_dict', 'Float64_value', 999, nan);
             getDictGetReturnedValue(),
             {
                 {"Usage example", "SELECT dictGetDate('all_types_dict', 'Date_value', 1)",
-                 R"(
+R"(
 ┌─dictGetDate(⋯_value', 1)─┐
 │               2024-01-15 │
 └──────────────────────────┘
-                )"},
+)"},
             },
             {1, 1},  /// Version introduced
             category_dictionary
@@ -978,21 +978,21 @@ SELECT dictGetFloat64OrDefault('all_types_dict', 'Float64_value', 999, nan);
             getDictGetOrDefaultReturnedValue(),
             {
                 {"Usage example",
-                    R"(
+R"(
 -- for key which exists
 SELECT dictGetDate('all_types_dict', 'Date_value', 1);
 
 -- for key which does not exist, returns the provided default value
 SELECT dictGetDateOrDefault('all_types_dict', 'Date_value', 999, toDate('1970-01-01'));
-					)",
-                    R"(
+)",
+R"(
 ┌─dictGetDate(⋯_value', 1)─┐
 │               2024-01-15 │
 └──────────────────────────┘
 ┌─dictGetDateO⋯70-01-01'))─┐
 │               1970-01-01 │
 └──────────────────────────┘
-                    )"},
+)"},
             },
             {1, 1},  /// Version introduced
             category_dictionary
@@ -1013,11 +1013,11 @@ SELECT dictGetDateOrDefault('all_types_dict', 'Date_value', 999, toDate('1970-01
             getDictGetReturnedValue(),
             {
                 {"Usage example", "SELECT dictGetDateTime('all_types_dict', 'DateTime_value', 1)",
-                 R"(
+R"(
 ┌─dictGetDateT⋯_value', 1)─┐
 │      2024-01-15 10:30:00 │
 └──────────────────────────┘
-                )"},
+)"},
             },
             {1, 1},  /// Version introduced
             category_dictionary
@@ -1038,21 +1038,21 @@ SELECT dictGetDateOrDefault('all_types_dict', 'Date_value', 999, toDate('1970-01
             getDictGetOrDefaultReturnedValue(),
             {
                 {"Usage example",
-                    R"(
+R"(
 -- for key which exists
 SELECT dictGetDateTime('all_types_dict', 'DateTime_value', 1);
 
 -- for key which does not exist, returns the provided default value
 SELECT dictGetDateTimeOrDefault('all_types_dict', 'DateTime_value', 999, toDateTime('1970-01-01 00:00:00'));
-					)",
-                    R"(
+)",
+R"(
 ┌─dictGetDateT⋯_value', 1)─┐
 │      2024-01-15 10:30:00 │
 └──────────────────────────┘
 ┌─dictGetDateT⋯00:00:00'))─┐
 │      1970-01-01 01:00:00 │
 └──────────────────────────┘
-                    )"},
+)"},
             },
             {1, 1},  /// Version introduced
             category_dictionary
@@ -1073,11 +1073,11 @@ SELECT dictGetDateTimeOrDefault('all_types_dict', 'DateTime_value', 999, toDateT
             getDictGetReturnedValue(),
             {
                 {"Usage example", "SELECT dictGetUUID('all_types_dict', 'UUID_value', 1)",
-                 R"(
+R"(
 ┌─dictGetUUID('all_t⋯ 'UUID_value', 1)─┐
 │ 550e8400-e29b-41d4-a716-446655440000 │
 └──────────────────────────────────────┘
-                )"},
+)"},
             },
             {1, 1},  /// Version introduced
             category_dictionary
@@ -1098,21 +1098,21 @@ SELECT dictGetDateTimeOrDefault('all_types_dict', 'DateTime_value', 999, toDateT
             getDictGetOrDefaultReturnedValue(),
             {
                 {"Usage example",
-                    R"(
+R"(
 -- for key which exists
 SELECT dictGetUUID('all_types_dict', 'UUID_value', 1);
 
 -- for key which does not exist, returns the provided default value
 SELECT dictGetUUIDOrDefault('all_types_dict', 'UUID_value', 999, '00000000-0000-0000-0000-000000000000'::UUID);
-					)",
-                    R"(
+)",
+R"(
 ┌─dictGetUUID('all_t⋯ 'UUID_value', 1)─┐
 │ 550e8400-e29b-41d4-a716-446655440000 │
 └──────────────────────────────────────┘
 ┌─dictGetUUIDOrDefau⋯000000', 'UUID'))─┐
 │ 00000000-0000-0000-0000-000000000000 │
 └──────────────────────────────────────┘
-                    )"},
+)"},
             },
             {1, 1},  /// Version introduced
             category_dictionary
@@ -1133,11 +1133,11 @@ SELECT dictGetUUIDOrDefault('all_types_dict', 'UUID_value', 999, '00000000-0000-
             getDictGetReturnedValue(),
             {
                 {"Usage example", "SELECT dictGetIPv4('all_types_dict', 'IPv4_value', 1)",
-                 R"(
+R"(
 ┌─dictGetIPv4(⋯_value', 1)─┐
 │ 192.168.1.1              │
 └──────────────────────────┘
-                )"},
+)"},
             },
             {23, 1},  /// Version introduced
             category_dictionary
@@ -1158,21 +1158,21 @@ SELECT dictGetUUIDOrDefault('all_types_dict', 'UUID_value', 999, '00000000-0000-
             getDictGetOrDefaultReturnedValue(),
             {
                 {"Usage example",
-                    R"(
+R"(
 -- for key which exists
 SELECT dictGetIPv4('all_types_dict', 'IPv4_value', 1);
 
 -- for key which does not exist, returns the provided default value
 SELECT dictGetIPv4OrDefault('all_types_dict', 'IPv4_value', 999, '0.0.0.0'::IPv4);
-					)",
-                    R"(
+)",
+R"(
 ┌─dictGetIPv4(⋯_value', 1)─┐
 │ 192.168.1.1              │
 └──────────────────────────┘
 ┌─dictGetIPv4O⋯', 'IPv4'))─┐
 │ 0.0.0.0                  │
 └──────────────────────────┘
-                    )"},
+)"},
             },
             {23, 1},  /// Version introduced
             category_dictionary
@@ -1193,11 +1193,11 @@ SELECT dictGetIPv4OrDefault('all_types_dict', 'IPv4_value', 999, '0.0.0.0'::IPv4
             getDictGetReturnedValue(),
             {
                 {"Usage example", "SELECT dictGetIPv6('all_types_dict', 'IPv6_value', 1)",
-                 R"(
+R"(
 ┌─dictGetIPv6(⋯_value', 1)─┐
 │ 2001:db8::1              │
 └──────────────────────────┘
-                )"},
+)"},
             },
             {1, 1},  /// Version introduced
             category_dictionary
@@ -1218,21 +1218,21 @@ SELECT dictGetIPv4OrDefault('all_types_dict', 'IPv4_value', 999, '0.0.0.0'::IPv4
             getDictGetOrDefaultReturnedValue(),
             {
                 {"Usage example",
-                    R"(
+R"(
 -- for key which exists
 SELECT dictGetIPv6('all_types_dict', 'IPv6_value', 1);
 
 -- for key which does not exist, returns the provided default value
 SELECT dictGetIPv6OrDefault('all_types_dict', 'IPv6_value', 999, '::'::IPv6);
-					)",
-                    R"(
+)",
+R"(
 ┌─dictGetIPv6(⋯_value', 1)─┐
 │ 2001:db8::1              │
 └──────────────────────────┘
 ┌─dictGetIPv6O⋯', 'IPv6'))─┐
 │ ::                       │
 └──────────────────────────┘
-                    )"},
+)"},
             },
             {23, 1},  /// Version introduced
             category_dictionary
@@ -1243,7 +1243,8 @@ SELECT dictGetIPv6OrDefault('all_types_dict', 'IPv6_value', 999, '::'::IPv6);
 
     /// dictGetAll
     {
-        FunctionDocumentation::Description description_dictGetAll = R"(
+        FunctionDocumentation::Description description_dictGetAll =
+R"(
 Retrieves the attribute values of all nodes that matched each key in a [regular expression tree dictionary](../../sql-reference/dictionaries/index.md#regexp-tree-dictionary).
 
 Apart from returning values of type `Array(T)` instead of `T`, this function behaves similarly to [`dictGet`](#dictGet).
@@ -1258,15 +1259,15 @@ Apart from returning values of type `Array(T)` instead of `T`, this function beh
             {"limit", "Optional. The maximum length for each value array returned. When truncating, child nodes are given precedence over parent nodes, otherwise the defined list order for the regexp tree dictionary is respected. If unspecified, array length is unlimited."}
         };
         FunctionDocumentation::ReturnedValue returned_value_dictGetAll =
-        R"(
+R"(
 Returns an array of all values from the dictionary that match the given key.
 If no matches are found, returns an empty array.
-        )";
+)";
         FunctionDocumentation::Examples examples_dictGetAll =
         {
             {
                 "User agent parsing with dictGetAll",
-                R"(
+R"(
 SELECT
     'Mozilla/5.0 (Linux; Android 12; SM-G998B) Mobile Safari/537.36' AS user_agent,
 
@@ -1275,12 +1276,12 @@ SELECT
 
     -- This returns only the first match
     dictGet('regexp_tree', 'os_replacement', 'Mozilla/5.0 (Linux; Android 12; SM-G998B) Mobile Safari/537.36') AS first_match;
-                )",
-                R"(
+)",
+R"(
 ┌─user_agent─────────────────────────────────────────────────────┬─all_matches─────────────────────────────┬─first_match─┐
 │ Mozilla/5.0 (Linux; Android 12; SM-G998B) Mobile Safari/537.36 │ ['Android','Android','Android','Linux'] │ Android     │
 └────────────────────────────────────────────────────────────────┴─────────────────────────────────────────┴─────────────┘
-				)"
+)"
             }
         };
         FunctionDocumentation::IntroducedIn introduced_in_dictGetAll = {23, 5};
@@ -1301,9 +1302,9 @@ SELECT
     /// dictGetHierarchy
     {
         FunctionDocumentation::Description description_dictGetHierarchy =
-        R"(
+R"(
 Creates an array, containing all the parents of a key in the [hierarchical dictionary](../../sql-reference/dictionaries/index.md#hierarchical-dictionaries).
-        )";
+)";
         FunctionDocumentation::Syntax syntax_dictGetHierarchy = "dictGetHierarchy(dict_name, key)";
         FunctionDocumentation::Arguments arguments_dictGetHierarchy =
         {
@@ -1313,14 +1314,15 @@ Creates an array, containing all the parents of a key in the [hierarchical dicti
         FunctionDocumentation::ReturnedValue returned_value_dictGetHierarchy = fmt::format("Returns parents for the key. [`Array(UInt64)`]({}).", getTypeDocLink("array"));
         FunctionDocumentation::Examples examples_dictGetHierarchy =
         {
-            {"Get hierarchy for a key", R"(
+            {"Get hierarchy for a key",
+R"(
 SELECT dictGetHierarchy('hierarchical_dictionary', 5)
-            )",
-            R"(
+)",
+R"(
 ┌─dictGetHiera⋯ionary', 5)─┐
 │ [5,2,1]                  │
 └──────────────────────────┘
-            )"}
+)"}
         };
         FunctionDocumentation::IntroducedIn introduced_in_dictGetHierarchy = {1, 1};
         FunctionDocumentation::Category category_dictGetHierarchy = FunctionDocumentation::Category::Dictionary;
@@ -1341,9 +1343,9 @@ SELECT dictGetHierarchy('hierarchical_dictionary', 5)
     /// dictIsIn
     {
         FunctionDocumentation::Description description_dictIsIn =
-        R"(
+R"(
 Checks the ancestor of a key through the whole hierarchical chain in the dictionary.
-        )";
+)";
         FunctionDocumentation::Syntax syntax_dictIsIn = "dictIsIn(dict_name, child_id_expr, ancestor_id_expr)";
         FunctionDocumentation::Arguments arguments_dictIsIn =
         {
@@ -1354,21 +1356,22 @@ Checks the ancestor of a key through the whole hierarchical chain in the diction
         FunctionDocumentation::ReturnedValue returned_value_dictIsIn = fmt::format("Returns `0` if `child_id_expr` is not a child of `ancestor_id_expr`, `1` if `child_id_expr` is a child of `ancestor_id_expr` or if `child_id_expr` is an `ancestor_id_expr`. [`UInt8`]({}).", getTypeDocLink("UInt8"));
         FunctionDocumentation::Examples examples_dictIsIn =
         {
-            {"Check hierarchical relationship", R"(
+            {"Check hierarchical relationship",
+R"(
 -- valid hierarchy
 SELECT dictIsIn('hierarchical_dictionary', 6, 3)
 
 -- invalid hierarchy
 SELECT dictIsIn('hierarchical_dictionary', 3, 5)
-            )",
-            R"(
+)",
+R"(
 ┌─dictIsIn('hi⋯ary', 6, 3)─┐
 │                        1 │
 └──────────────────────────┘
 ┌─dictIsIn('hi⋯ary', 3, 5)─┐
 │                        0 │
 └──────────────────────────┘
-            )"}
+)"}
         };
         FunctionDocumentation::IntroducedIn introduced_in_dictIsIn = {1, 1};
         FunctionDocumentation::Category category_dictIsIn = FunctionDocumentation::Category::Dictionary;
@@ -1389,9 +1392,9 @@ SELECT dictIsIn('hierarchical_dictionary', 3, 5)
     /// dictGetChildren
     {
         FunctionDocumentation::Description description_dictGetChildren =
-        R"(
+R"(
 Returns first-level children as an array of indexes. It is the inverse transformation for [dictGetHierarchy](#dictgethierarchy).
-        )";
+)";
         FunctionDocumentation::Syntax syntax_dictGetChildren = "dictGetChildren(dict_name, key)";
         FunctionDocumentation::Arguments arguments_dictGetChildren =
         {
@@ -1401,14 +1404,15 @@ Returns first-level children as an array of indexes. It is the inverse transform
         FunctionDocumentation::ReturnedValue returned_value_dictGetChildren = fmt::format("Returns the first-level descendants for the key. [`Array(UInt64)`]({})", getTypeDocLink("array"));
         FunctionDocumentation::Examples examples_dictGetChildren =
         {
-            {"Get the first-level children of a dictionary", R"(
+            {"Get the first-level children of a dictionary",
+R"(
 SELECT dictGetChildren('hierarchical_dictionary', 2);
-            )",
-            R"(
+)",
+R"(
 ┌─dictGetChild⋯ionary', 2)─┐
 │ [4,5]                    │
 └──────────────────────────┘
-            )"}
+)"}
         };
         FunctionDocumentation::IntroducedIn introduced_in_dictGetChildren = {21, 4};
         FunctionDocumentation::Category category_dictGetChildren = FunctionDocumentation::Category::Dictionary;
@@ -1428,9 +1432,9 @@ SELECT dictGetChildren('hierarchical_dictionary', 2);
     /// dictGetDescendants
     {
         FunctionDocumentation::Description description_dictGetDescendants =
-        R"(
+R"(
 Returns all descendants as if the [`dictGetChildren`](#dictGetChildren) function were applied `level` times recursively.
-        )";
+)";
         FunctionDocumentation::Syntax syntax_dictGetDescendants = "dictGetDescendants(dict_name, key, level)";
         FunctionDocumentation::Arguments arguments_dictGetDescendants =
         {
@@ -1443,7 +1447,7 @@ Returns all descendants as if the [`dictGetChildren`](#dictGetChildren) function
         {
             {
                 "Get the first-level children of a dictionary",
-                R"(
+R"(
 -- consider the following hierarchical dictionary:
 -- 0 (Root)
 -- └── 1 (Level 1 - Node 1)
@@ -1454,12 +1458,12 @@ Returns all descendants as if the [`dictGetChildren`](#dictGetChildren) function
 --         └── 6 (Level 3 - Node 6)
 
 SELECT dictGetDescendants('hierarchical_dictionary', 0, 2)
-            	)",
-            	R"(
+)",
+R"(
 ┌─dictGetDesce⋯ary', 0, 2)─┐
 │ [3,2]                    │
 └──────────────────────────┘
-            	)"
+)"
            	}
         };
         FunctionDocumentation::IntroducedIn introduced_in_dictGetDescendants = {21, 4};
@@ -1492,7 +1496,7 @@ SELECT dictGetDescendants('hierarchical_dictionary', 0, 2)
         {
             {
                 "Check for the existence of a key in a dictionary",
-                R"(
+R"(
 -- consider the following hierarchical dictionary:
 -- 0 (Root)
 -- └── 1 (Level 1 - Node 1)
@@ -1504,15 +1508,15 @@ SELECT dictGetDescendants('hierarchical_dictionary', 0, 2)
 
 SELECT dictHas('hierarchical_dictionary', 2);
 SELECT dictHas('hierarchical_dictionary', 7);
-            	)",
-            	R"(
+)",
+R"(
 ┌─dictHas('hie⋯ionary', 2)─┐
 │                        1 │
 └──────────────────────────┘
 ┌─dictHas('hie⋯ionary', 7)─┐
 │                        0 │
 └──────────────────────────┘
-            	)"
+)"
            	}
         };
         FunctionDocumentation::IntroducedIn introduced_in_dictHas = {1, 1};
