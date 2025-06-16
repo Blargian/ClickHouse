@@ -12,7 +12,8 @@ struct TypeInfo
 };
 
 /// Type tags for template specialization
-namespace TypeTags {
+namespace TypeTags
+{
     // Unsigned integer types
     struct UInt8 { static constexpr const char* name = "UInt8"; };
     struct UInt16 { static constexpr const char* name = "UInt16"; };
@@ -66,7 +67,8 @@ std::map<String, TypeInfo> initializeTypeInfos()
     );
     
     /// Add other types for which the documentation links differ for each type
-    const std::initializer_list<std::pair<String, TypeInfo>> other_types = {
+    const std::initializer_list<std::pair<String, TypeInfo>> other_types =
+    {
         /// Date/Time
         {"Date",      {"Date",      "/sql-reference/data-types/date"}},
         {"Date32",    {"Date32",    "/sql-reference/data-types/date32"}},
@@ -83,7 +85,8 @@ std::map<String, TypeInfo> initializeTypeInfos()
         {"Tuple", {"Expression", "/sql-reference/data-types/tuple"}}
     };
     
-    for (const auto & type : other_types) {
+    for (const auto & type : other_types)
+    {
         type_infos.insert(type);
     }
     return type_infos;
@@ -144,7 +147,8 @@ FunctionDocumentation::Arguments getDictGetArguments()
 /// Helper to get the arguments for dictGet<type>OrDefault functions
 FunctionDocumentation::Arguments getDictGetOrDefaultArguments()
 {
-    return {
+    return
+    {
         {"dict_name", fmt::format("Name of the dictionary. [`String`]({}).", getTypeDocLink("String"))},
         {"attr_name", fmt::format("Name of the column of the dictionary. [`String`]({})/[`Tuple(String)`]({}).", getTypeDocLink("String"), getTypeDocLink("String"))},
         {"id_expr", fmt::format(
@@ -203,7 +207,8 @@ REGISTER_FUNCTION(ExternalDictionaries)
 Returns the value of the dictionary attribute that corresponds to id_expr if the key is found.
 If the key is not found, returns the content of the <null_value> element specified for the attribute in the dictionary configuration.
         )";
-        FunctionDocumentation::Examples examples_dictGet = {
+        FunctionDocumentation::Examples examples_dictGet =
+        {
             {
                 "Retrieve a single attribute",
                 "SELECT dictGet('ext_dict_test', 'c1', toUInt64(1)) AS val",
@@ -235,7 +240,8 @@ LIMIT 3;
         };
         FunctionDocumentation::IntroducedIn introduced_in_dictGet = {18, 16};
         
-        FunctionDocumentation documentation_dictGet = {
+        FunctionDocumentation documentation_dictGet =
+        {
             description_dictGet,
             syntax_dictGet,
             arguments_dictGet,
@@ -264,7 +270,8 @@ LIMIT 3;
 Returns the value of the dictionary attribute that corresponds to id_expr if the key is found.
 If the key is not found, returns the default_value provided.
         )";
-        FunctionDocumentation::Examples examples_dictGetOrDefault = {
+        FunctionDocumentation::Examples examples_dictGetOrDefault =
+        {
             {
                 "Get value with default",
                 "SELECT dictGetOrDefault('ext_dict_mult', 'c1', toUInt64(999), 0) AS val",
@@ -272,7 +279,8 @@ If the key is not found, returns the default_value provided.
             }
         };
         FunctionDocumentation::IntroducedIn introduced_in_dictGetOrDefault = {18, 16};
-        FunctionDocumentation documentation_dictGetOrDefault = {
+        FunctionDocumentation documentation_dictGetOrDefault =
+        {
             description_dictGetOrDefault,
             syntax_dictGetOrDefault,
             arguments_dictGetOrDefault,
@@ -300,7 +308,8 @@ If the key is not found, returns the default_value provided.
 Returns the value of the dictionary attribute that corresponds to `id_expr` if the key is found.
 If the key is not found, returns `NULL`.
         )";
-        FunctionDocumentation::Examples examples_dictGetOrNull = {
+        FunctionDocumentation::Examples examples_dictGetOrNull =
+        {
             {
                 "Example using the range key dictionary",
                 R"(
@@ -319,7 +328,8 @@ FROM system.numbers LIMIT 5 FORMAT TabSeparated;
             }
         };
         FunctionDocumentation::IntroducedIn introduced_in_dictGetOrNull = {21, 4};
-        FunctionDocumentation documentation_dictGetOrNull = {
+        FunctionDocumentation documentation_dictGetOrNull =
+        {
             description_dictGetOrNull,
             syntax_dictGetOrNull,
             arguments_dictGetOrNull,
@@ -336,7 +346,8 @@ FROM system.numbers LIMIT 5 FORMAT TabSeparated;
     {
         const String type_name = "UInt8";
 
-        FunctionDocumentation documentation_dictGetUInt8 = {
+        FunctionDocumentation documentation_dictGetUInt8 =
+        {
             getDictGetDescription(type_name),
             getDictGetSyntax(type_name),
             getDictGetArguments(),
@@ -360,7 +371,8 @@ FROM system.numbers LIMIT 5 FORMAT TabSeparated;
     {
         const String type_name = "UInt8";
 
-        FunctionDocumentation documentation_dictGetUInt8OrDefault = {
+        FunctionDocumentation documentation_dictGetUInt8OrDefault =
+        {
             getDictGetOrDefaultDescription(type_name),
             getDictGetOrDefaultSyntax(type_name),
             getDictGetOrDefaultArguments(),
@@ -394,7 +406,8 @@ SELECT dictGetUInt8OrDefault('all_types_dict', 'UInt8_value', 999, 0);
     {
         const String type_name = "UInt16";
 
-        FunctionDocumentation documentation_dictGetUInt16 = {
+        FunctionDocumentation documentation_dictGetUInt16 =
+        {
             getDictGetDescription(type_name),
             getDictGetSyntax(type_name),
             getDictGetArguments(),
@@ -419,7 +432,8 @@ SELECT dictGetUInt8OrDefault('all_types_dict', 'UInt8_value', 999, 0);
     {
         const String type_name = "UInt16";
 
-        FunctionDocumentation documentation_dictGetUInt16OrDefault = {
+        FunctionDocumentation documentation_dictGetUInt16OrDefault =
+        {
             getDictGetOrDefaultDescription(type_name),
             getDictGetOrDefaultSyntax(type_name),
             getDictGetOrDefaultArguments(),
@@ -453,7 +467,8 @@ SELECT dictGetUInt16OrDefault('all_types_dict', 'UInt16_value', 999, 0);
     {
         const String type_name = "UInt32";
 
-        FunctionDocumentation documentation_dictGetUInt32 = {
+        FunctionDocumentation documentation_dictGetUInt32 =
+        {
             getDictGetDescription(type_name),
             getDictGetSyntax(type_name),
             getDictGetArguments(),
@@ -477,7 +492,8 @@ SELECT dictGetUInt16OrDefault('all_types_dict', 'UInt16_value', 999, 0);
     {
         const String type_name = "UInt32";
 
-        FunctionDocumentation documentation_dictGetUInt32OrDefault = {
+        FunctionDocumentation documentation_dictGetUInt32OrDefault =
+        {
             getDictGetOrDefaultDescription(type_name),
             getDictGetOrDefaultSyntax(type_name),
             getDictGetOrDefaultArguments(),
@@ -511,7 +527,8 @@ SELECT dictGetUInt32OrDefault('all_types_dict', 'UInt32_value', 999, 0);
     {
         const String type_name = "UInt64";
 
-        FunctionDocumentation documentation_dictGetUInt64 = {
+        FunctionDocumentation documentation_dictGetUInt64 =
+        {
             getDictGetDescription(type_name),
             getDictGetSyntax(type_name),
             getDictGetArguments(),
@@ -535,7 +552,8 @@ SELECT dictGetUInt32OrDefault('all_types_dict', 'UInt32_value', 999, 0);
     {
         const String type_name = "UInt64";
 
-        FunctionDocumentation documentation_dictGetUInt64OrDefault = {
+        FunctionDocumentation documentation_dictGetUInt64OrDefault =
+        {
             getDictGetOrDefaultDescription(type_name),
             getDictGetOrDefaultSyntax(type_name),
             getDictGetOrDefaultArguments(),
@@ -569,7 +587,8 @@ SELECT dictGetUInt64OrDefault('all_types_dict', 'UInt64_value', 999, 0);
     {
         const String type_name = "Int8";
 
-        FunctionDocumentation documentation_dictGetInt8 = {
+        FunctionDocumentation documentation_dictGetInt8 =
+        {
             getDictGetDescription(type_name),
             getDictGetSyntax(type_name),
             getDictGetArguments(),
@@ -593,7 +612,8 @@ SELECT dictGetUInt64OrDefault('all_types_dict', 'UInt64_value', 999, 0);
     {
         const String type_name = "Int8";
 
-        FunctionDocumentation documentation_dictGetInt8OrDefault = {
+        FunctionDocumentation documentation_dictGetInt8OrDefault =
+        {
             getDictGetOrDefaultDescription(type_name),
             getDictGetOrDefaultSyntax(type_name),
             getDictGetOrDefaultArguments(),
@@ -626,7 +646,8 @@ SELECT dictGetInt8OrDefault('all_types_dict', 'Int8_value', 999, -1);
     {
         const String type_name = "Int16";
 
-        FunctionDocumentation documentation_dictGetInt16 = {
+        FunctionDocumentation documentation_dictGetInt16 =
+        {
             getDictGetDescription(type_name),
             getDictGetSyntax(type_name),
             getDictGetArguments(),
@@ -650,7 +671,8 @@ SELECT dictGetInt8OrDefault('all_types_dict', 'Int8_value', 999, -1);
     {
         const String type_name = "Int16";
 
-        FunctionDocumentation documentation_dictGetInt16OrDefault = {
+        FunctionDocumentation documentation_dictGetInt16OrDefault =
+        {
             getDictGetOrDefaultDescription(type_name),
             getDictGetOrDefaultSyntax(type_name),
             getDictGetOrDefaultArguments(),
@@ -683,7 +705,8 @@ SELECT dictGetInt16OrDefault('all_types_dict', 'Int16_value', 999, -1);
     {
         const String type_name = "Int32";
 
-        FunctionDocumentation documentation_dictGetInt32 = {
+        FunctionDocumentation documentation_dictGetInt32 =
+        {
             getDictGetDescription(type_name),
             getDictGetSyntax(type_name),
             getDictGetArguments(),
@@ -707,7 +730,8 @@ SELECT dictGetInt16OrDefault('all_types_dict', 'Int16_value', 999, -1);
     {
         const String type_name = "Int32";
 
-        FunctionDocumentation documentation_dictGetInt32OrDefault = {
+        FunctionDocumentation documentation_dictGetInt32OrDefault =
+        {
             getDictGetOrDefaultDescription(type_name),
             getDictGetOrDefaultSyntax(type_name),
             getDictGetOrDefaultArguments(),
@@ -741,7 +765,8 @@ SELECT dictGetInt32OrDefault('all_types_dict', 'Int32_value', 999, -1);
     {
         const String type_name = "Int64";
 
-        FunctionDocumentation documentation_dictGetInt64 = {
+        FunctionDocumentation documentation_dictGetInt64 =
+        {
             getDictGetDescription(type_name),
             getDictGetSyntax(type_name),
             getDictGetArguments(),
@@ -765,7 +790,8 @@ SELECT dictGetInt32OrDefault('all_types_dict', 'Int32_value', 999, -1);
     {
         const String type_name = "Int64";
 
-        FunctionDocumentation documentation_dictGetInt64OrDefault = {
+        FunctionDocumentation documentation_dictGetInt64OrDefault =
+        {
             getDictGetOrDefaultDescription(type_name),
             getDictGetOrDefaultSyntax(type_name),
             getDictGetOrDefaultArguments(),
@@ -798,7 +824,8 @@ SELECT dictGetInt64OrDefault('all_types_dict', 'Int64_value', 999, -1);
     {
         const String type_name = "Float32";
 
-        FunctionDocumentation documentation_dictGetFloat32 = {
+        FunctionDocumentation documentation_dictGetFloat32 =
+        {
             getDictGetDescription(type_name),
             getDictGetSyntax(type_name),
             getDictGetArguments(),
@@ -822,7 +849,8 @@ SELECT dictGetInt64OrDefault('all_types_dict', 'Int64_value', 999, -1);
     {
         const String type_name = "Float32";
 
-        FunctionDocumentation documentation_dictGetFloat32OrDefault = {
+        FunctionDocumentation documentation_dictGetFloat32OrDefault =
+        {
             getDictGetOrDefaultDescription(type_name),
             getDictGetOrDefaultSyntax(type_name),
             getDictGetOrDefaultArguments(),
@@ -855,7 +883,8 @@ SELECT dictGetFloat32OrDefault('all_types_dict', 'Float32_value', 999, nan);
     {
         const String type_name = "Float64";
 
-        FunctionDocumentation documentation_dictGetFloat64 = {
+        FunctionDocumentation documentation_dictGetFloat64 =
+        {
             getDictGetDescription(type_name),
             getDictGetSyntax(type_name),
             getDictGetArguments(),
@@ -879,7 +908,8 @@ SELECT dictGetFloat32OrDefault('all_types_dict', 'Float32_value', 999, nan);
     {
         const String type_name = "Float64";
 
-        FunctionDocumentation documentation_dictGetFloat64OrDefault = {
+        FunctionDocumentation documentation_dictGetFloat64OrDefault =
+        {
             getDictGetOrDefaultDescription(type_name),
             getDictGetOrDefaultSyntax(type_name),
             getDictGetOrDefaultArguments(),
@@ -913,7 +943,8 @@ SELECT dictGetFloat64OrDefault('all_types_dict', 'Float64_value', 999, nan);
     {
         const String type_name = "Date";
 
-        FunctionDocumentation documentation_dictGetDate = {
+        FunctionDocumentation documentation_dictGetDate =
+        {
             getDictGetDescription(type_name),
             getDictGetSyntax(type_name),
             getDictGetArguments(),
@@ -937,7 +968,8 @@ SELECT dictGetFloat64OrDefault('all_types_dict', 'Float64_value', 999, nan);
     {
         const String type_name = "Date";
 
-        FunctionDocumentation documentation_dictGetDateOrDefault = {
+        FunctionDocumentation documentation_dictGetDateOrDefault =
+        {
             getDictGetOrDefaultDescription(type_name),
             getDictGetOrDefaultSyntax(type_name),
             getDictGetOrDefaultArguments(),
@@ -971,7 +1003,8 @@ SELECT dictGetDateOrDefault('all_types_dict', 'Date_value', 999, toDate('1970-01
     {
         const String type_name = "DateTime";
 
-        FunctionDocumentation documentation_dictGetDateTime = {
+        FunctionDocumentation documentation_dictGetDateTime =
+        {
             getDictGetDescription(type_name),
             getDictGetSyntax(type_name),
             getDictGetArguments(),
@@ -995,7 +1028,8 @@ SELECT dictGetDateOrDefault('all_types_dict', 'Date_value', 999, toDate('1970-01
     {
         const String type_name = "DateTime";
 
-        FunctionDocumentation documentation_dictGetDateTimeOrDefault = {
+        FunctionDocumentation documentation_dictGetDateTimeOrDefault =
+        {
             getDictGetOrDefaultDescription(type_name),
             getDictGetOrDefaultSyntax(type_name),
             getDictGetOrDefaultArguments(),
@@ -1029,7 +1063,8 @@ SELECT dictGetDateTimeOrDefault('all_types_dict', 'DateTime_value', 999, toDateT
     {
         const String type_name = "UUID";
 
-        FunctionDocumentation documentation_dictGetUUID = {
+        FunctionDocumentation documentation_dictGetUUID =
+        {
             getDictGetDescription(type_name),
             getDictGetSyntax(type_name),
             getDictGetArguments(),
@@ -1053,7 +1088,8 @@ SELECT dictGetDateTimeOrDefault('all_types_dict', 'DateTime_value', 999, toDateT
     {
         const String type_name = "UUID";
 
-        FunctionDocumentation documentation_dictGetUUIDOrDefault = {
+        FunctionDocumentation documentation_dictGetUUIDOrDefault =
+        {
             getDictGetOrDefaultDescription(type_name),
             getDictGetOrDefaultSyntax(type_name),
             getDictGetOrDefaultArguments(),
@@ -1087,7 +1123,8 @@ SELECT dictGetUUIDOrDefault('all_types_dict', 'UUID_value', 999, '00000000-0000-
     {
         const String type_name = "IPv4";
 
-        FunctionDocumentation documentation_dictGetIPv4 = {
+        FunctionDocumentation documentation_dictGetIPv4 =
+        {
             getDictGetDescription(type_name),
             getDictGetSyntax(type_name),
             getDictGetArguments(),
@@ -1111,7 +1148,8 @@ SELECT dictGetUUIDOrDefault('all_types_dict', 'UUID_value', 999, '00000000-0000-
     {
         const String type_name = "IPv4";
 
-        FunctionDocumentation documentation_dictGetIPv4OrDefault = {
+        FunctionDocumentation documentation_dictGetIPv4OrDefault =
+        {
             getDictGetOrDefaultDescription(type_name),
             getDictGetOrDefaultSyntax(type_name),
             getDictGetOrDefaultArguments(),
@@ -1145,7 +1183,8 @@ SELECT dictGetIPv4OrDefault('all_types_dict', 'IPv4_value', 999, '0.0.0.0'::IPv4
     {
         const String type_name = "IPv6";
 
-        FunctionDocumentation documentation_dictGetIPv6 = {
+        FunctionDocumentation documentation_dictGetIPv6 =
+        {
             getDictGetDescription(type_name),
             getDictGetSyntax(type_name),
             getDictGetArguments(),
@@ -1169,7 +1208,8 @@ SELECT dictGetIPv4OrDefault('all_types_dict', 'IPv4_value', 999, '0.0.0.0'::IPv4
     {
         const String type_name = "IPv6";
 
-        FunctionDocumentation documentation_dictGetIPv6OrDefault = {
+        FunctionDocumentation documentation_dictGetIPv6OrDefault =
+        {
             getDictGetOrDefaultDescription(type_name),
             getDictGetOrDefaultSyntax(type_name),
             getDictGetOrDefaultArguments(),
@@ -1208,7 +1248,8 @@ Apart from returning values of type `Array(T)` instead of `T`, this function beh
 )";
 
         FunctionDocumentation::Syntax syntax_dictGetAll = "dictGetAll('dict_name', attr_names, id_expr[, limit])";
-        FunctionDocumentation::Arguments arguments_dictGetAll = {
+        FunctionDocumentation::Arguments arguments_dictGetAll =
+        {
             {"dict_name", fmt::format("Name of the regexp treedictionary.[`String`]({})", getTypeDocLink("String"))},
             {"attr_name", fmt::format("Name of the column to retrieve.[`String`]({})", getTypeDocLink("String"))},
             {"id_expr", fmt::format("Key value. [Expression]({}) returning an [Array(T)]({}) or [`Tuple(T)`]({}).", getTypeDocLink("Expression"), getTypeDocLink("array"), getTypeDocLink("tuple"))},
@@ -1219,7 +1260,8 @@ Apart from returning values of type `Array(T)` instead of `T`, this function beh
 Returns an array of all values from the dictionary that match the given key.
 If no matches are found, returns an empty array.
         )";
-        FunctionDocumentation::Examples examples_dictGetAll = {
+        FunctionDocumentation::Examples examples_dictGetAll =
+        {
             {
                 "User agent parsing with dictGetAll",
                 R"(
@@ -1279,7 +1321,8 @@ SELECT dictGetHierarchy('hierarchical_dictionary', 5)
         };
         FunctionDocumentation::IntroducedIn introduced_in_dictGetHierarchy = {1, 1};
         FunctionDocumentation::Category category_dictGetHierarchy = FunctionDocumentation::Category::Dictionary;
-        FunctionDocumentation documentation_dictGetHierarchy = {
+        FunctionDocumentation documentation_dictGetHierarchy =
+        {
             description_dictGetHierarchy,
             syntax_dictGetHierarchy,
             arguments_dictGetHierarchy,
@@ -1326,7 +1369,8 @@ SELECT dictIsIn('hierarchical_dictionary', 3, 5)
         };
         FunctionDocumentation::IntroducedIn introduced_in_dictIsIn = {1, 1};
         FunctionDocumentation::Category category_dictIsIn = FunctionDocumentation::Category::Dictionary;
-        FunctionDocumentation documentation_dictIsIn = {
+        FunctionDocumentation documentation_dictIsIn =
+        {
             description_dictIsIn,
             syntax_dictIsIn,
             arguments_dictIsIn,
@@ -1365,7 +1409,8 @@ SELECT dictGetChildren('hierarchical_dictionary', 2);
         };
         FunctionDocumentation::IntroducedIn introduced_in_dictGetChildren = {21, 4};
         FunctionDocumentation::Category category_dictGetChildren = FunctionDocumentation::Category::Dictionary;
-        FunctionDocumentation documentation_dictGetChildren = {
+        FunctionDocumentation documentation_dictGetChildren =
+        {
             description_dictGetChildren,
             syntax_dictGetChildren,
             arguments_dictGetChildren,
@@ -1416,7 +1461,8 @@ SELECT dictGetDescendants('hierarchical_dictionary', 0, 2)
         };
         FunctionDocumentation::IntroducedIn introduced_in_dictGetDescendants = {21, 4};
         FunctionDocumentation::Category category_dictGetDescendants = FunctionDocumentation::Category::Dictionary;
-        FunctionDocumentation documentation_dictGetDescendants = {
+        FunctionDocumentation documentation_dictGetDescendants =
+        {
             description_dictGetDescendants,
             syntax_dictGetDescendants,
             arguments_dictGetDescendants,
@@ -1429,5 +1475,56 @@ SELECT dictGetDescendants('hierarchical_dictionary', 0, 2)
         factory.registerFunction<FunctionDictGetDescendantsOverloadResolver>(documentation_dictGetDescendants);
     }
 
+    /// dictHas
+    {
+        FunctionDocumentation::Description description_dictHas = "Checks whether a key is present in a dictionary.";
+        FunctionDocumentation::Syntax syntax_dictHas = "dictHas('dict_name', id_expr)";
+        FunctionDocumentation::Arguments arguments_dictHas =
+        {
+            {"dict_name", fmt::format("Name of the dictionary. [`String`]({}).", getTypeDocLink("String"))},
+            {"id_expr", fmt::format("Key value. [Expression]({}) returning an [Array(T)]({}) or [`Tuple(T)`]({}).", getTypeDocLink("Expression"), getTypeDocLink("array"), getTypeDocLink("tuple"))}
+        };
+        FunctionDocumentation::ReturnedValue returned_value_dictHas = fmt::format("Returns `1` if the key exists, otherwise `0`. [`UInt8`]({})", getTypeDocLink("UInt8"));
+        FunctionDocumentation::Examples examples_dictHas =
+        {
+            {
+                "Check for the existence of a key in a dictionary",
+                R"(
+-- consider the following hierarchical dictionary:
+-- 0 (Root)
+-- └── 1 (Level 1 - Node 1)
+--     ├── 2 (Level 2 - Node 2)
+--     │   ├── 4 (Level 3 - Node 4)
+--     │   └── 5 (Level 3 - Node 5)
+--     └── 3 (Level 2 - Node 3)
+--         └── 6 (Level 3 - Node 6)
+
+SELECT dictHas('hierarchical_dictionary', 2);
+SELECT dictHas('hierarchical_dictionary', 7);
+            	)",
+            	R"(
+┌─dictHas('hie⋯ionary', 2)─┐
+│                        1 │
+└──────────────────────────┘
+┌─dictHas('hie⋯ionary', 7)─┐
+│                        0 │
+└──────────────────────────┘
+            	)"
+           	}
+        };
+        FunctionDocumentation::IntroducedIn introduced_in_dictHas = {1, 1};
+        FunctionDocumentation::Category category_dictHas = FunctionDocumentation::Category::Dictionary;
+        FunctionDocumentation documentation_dictHas =
+        {
+            description_dictHas,
+            syntax_dictHas,
+            arguments_dictHas,
+            returned_value_dictHas,
+            examples_dictHas,
+            introduced_in_dictHas,
+            category_dictHas
+        };
+
+        factory.registerFunction<FunctionDictHas>(documentation_dictHas);
     }
 }
