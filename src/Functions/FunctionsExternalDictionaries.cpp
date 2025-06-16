@@ -5,15 +5,13 @@ namespace DB
 {
 
 /// Type information for dictionary function variants
-struct TypeInfo 
+struct TypeInfo
 {
-    String name;        /// Display name of the type
-    String doc_link;    /// Docs site link for the type
+    String name;        /// Display name of the type e.g. Tuple
+    String doc_link;    /// Docs site link for the type e.g. /sql-reference/data-types/tuple
 };
 
-/// Type tags for template specialization
-namespace TypeTags
-{
+namespace TypeTags {
     // Unsigned integer types
     struct UInt8 { static constexpr const char* name = "UInt8"; };
     struct UInt16 { static constexpr const char* name = "UInt16"; };
@@ -36,20 +34,20 @@ namespace TypeTags
 }
 
 /// Helper to create a TypeInfo entry
-constexpr TypeInfo makeTypeInfo(const char* name, const char* link) 
+constexpr TypeInfo makeTypeInfo(const char* name, const char* link)
 {
     return TypeInfo{name, link};
 }
 
-/// Helper to add multiple types with the same documentation link
+/// Helper to add multiple types with the same documentation link (Int and UInt, Float32 and Float64)
 template <typename... Types>
-void addTypesWithLink(std::map<String, TypeInfo>& map, const char* link) 
+void addTypesWithLink(std::map<String, TypeInfo>& map, const char* link)
 {
     (map.try_emplace(Types::name, makeTypeInfo(Types::name, link)), ...);
 }
 
 /// Initialize type information map
-std::map<String, TypeInfo> initializeTypeInfos() 
+std::map<String, TypeInfo> initializeTypeInfos()
 {
     std::map<String, TypeInfo> type_infos;
     
@@ -186,7 +184,7 @@ ClickHouse throws an exception if it cannot parse the value of the attribute or 
     )";
 }
 
-} // namespace
+}
 
 REGISTER_FUNCTION(ExternalDictionaries)
 {
@@ -1282,7 +1280,8 @@ SELECT
             }
         };
         FunctionDocumentation::IntroducedIn introduced_in_dictGetAll = {23, 5};
-        FunctionDocumentation documentation_dictGetAll = {
+        FunctionDocumentation documentation_dictGetAll =
+        {
             description_dictGetAll,
             syntax_dictGetAll,
             arguments_dictGetAll,
