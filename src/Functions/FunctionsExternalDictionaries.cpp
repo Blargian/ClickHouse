@@ -11,7 +11,8 @@ struct TypeInfo
     String doc_link;    /// Docs site link for the type e.g. /sql-reference/data-types/tuple
 };
 
-namespace TypeTags {
+namespace TypeTags
+{
     // Unsigned integer types
     struct UInt8 { static constexpr const char* name = "UInt8"; };
     struct UInt16 { static constexpr const char* name = "UInt16"; };
@@ -247,7 +248,7 @@ LIMIT 3;
             examples_dictGet,
             introduced_in_dictGet,
             category_dictionary
-        };
+		};
         
         factory.registerFunction<FunctionDictGetNoType<DictionaryGetFunctionType::get>>(documentation_dictGet);
     }
@@ -317,12 +318,12 @@ SELECT
 FROM system.numbers LIMIT 5 FORMAT TabSeparated;
 				)",
                 R"(
-(0,'2019-05-20')	\N
-(1,'2019-05-20')	First
-(2,'2019-05-20')	Second
-(3,'2019-05-20')	Third
-(4,'2019-05-20')	\N
-				)"
+(0,'2019-05-20')  \N
+(1,'2019-05-20')  First
+(2,'2019-05-20')  Second
+(3,'2019-05-20')  Third
+(4,'2019-05-20')  \N
+			   )"
             }
         };
         FunctionDocumentation::IntroducedIn introduced_in_dictGetOrNull = {21, 4};
@@ -351,12 +352,15 @@ FROM system.numbers LIMIT 5 FORMAT TabSeparated;
             getDictGetArguments(),
             getDictGetReturnedValue(),
             {
-            	{"Usage example", "SELECT dictGetUInt8('all_types_dict', 'UInt8_value', 1)",
-                 R"(
+            	{
+                    "Usage example",
+                    "SELECT dictGetUInt8('all_types_dict', 'UInt8_value', 1)",
+                    R"(
 ┌─dictGetUInt8⋯_value', 1)─┐
 │                      100 │
 └──────────────────────────┘
-                )"},
+                    )"
+                }
             },
             {1, 1},  /// Version introduced
             category_dictionary
@@ -1525,5 +1529,6 @@ SELECT dictHas('hierarchical_dictionary', 7);
         };
 
         factory.registerFunction<FunctionDictHas>(documentation_dictHas);
+    }
     }
 }
