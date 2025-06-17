@@ -1235,6 +1235,76 @@ R"(
         factory.registerFunction<FunctionDictGetIPv6OrDefault>(documentation_dictGetIPv6OrDefault);
     }
 
+    /// dictGetString
+    {
+        const String type_name = "String";
+
+        FunctionDocumentation documentation_dictGetString =
+        {
+            getDictGetDescription(type_name),
+            getDictGetSyntax(type_name),
+            getDictGetArguments(),
+            getDictGetReturnedValue(),
+            {
+                {"Usage example",
+R"(
+-- for key which exists
+SELECT dictGetString('all_types_dict', 'String_value', 1);
+
+-- for key which does not exist, returns empty string
+SELECT dictGetString('all_types_dict', 'String_value', 999);
+)",
+R"(
+┌─dictGetStrin⋯_value', 1)─┐
+│ ClickHouse               │
+└──────────────────────────┘
+┌─dictGetStrin⋯alue', 999)─┐
+│                          │
+└──────────────────────────┘
+)"},
+            },
+            {1, 1},  /// Version introduced
+            category_dictionary
+        };
+
+        factory.registerFunction<FunctionDictGetString>(documentation_dictGetString);
+    }
+
+    /// dictGetStringOrDefault
+    {
+        const String type_name = "String";
+
+        FunctionDocumentation documentation_dictGetStringOrDefault =
+        {
+            getDictGetOrDefaultDescription(type_name),
+            getDictGetOrDefaultSyntax(type_name),
+            getDictGetOrDefaultArguments(),
+            getDictGetOrDefaultReturnedValue(),
+            {
+                {"Usage example",
+R"(
+-- for key which exists
+SELECT dictGetString('all_types_dict', 'String_value', 1);
+
+-- for key which does not exist, returns the provided default value
+SELECT dictGetStringOrDefault('all_types_dict', 'String_value', 999, 'Not found');
+)",
+R"(
+┌─dictGetStrin⋯_value', 1)─┐
+│ ClickHouse               │
+└──────────────────────────┘
+┌─dictGetStrin⋯Not found')─┐
+│ Not found                │
+└──────────────────────────┘
+)"},
+            },
+            {1, 1},  /// Version introduced
+            category_dictionary
+        };
+
+        factory.registerFunction<FunctionDictGetStringOrDefault>(documentation_dictGetStringOrDefault);
+    }
+
     /// dictGetAll
     {
         FunctionDocumentation::Description description_dictGetAll =
