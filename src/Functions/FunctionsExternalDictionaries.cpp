@@ -13,23 +13,21 @@ struct TypeInfo
 
 namespace TypeTags
 {
-    // Unsigned integer types
+    /// Unsigned integer types
     struct UInt8 { static constexpr const char* name = "UInt8"; };
     struct UInt16 { static constexpr const char* name = "UInt16"; };
     struct UInt32 { static constexpr const char* name = "UInt32"; };
     struct UInt64 { static constexpr const char* name = "UInt64"; };
     struct UInt128 { static constexpr const char* name = "UInt128"; };
     struct UInt256 { static constexpr const char* name = "UInt256"; };
-    
-    // Signed integer types
+    /// Signed integer types
     struct Int8 { static constexpr const char* name = "Int8"; };
     struct Int16 { static constexpr const char* name = "Int16"; };
     struct Int32 { static constexpr const char* name = "Int32"; };
     struct Int64 { static constexpr const char* name = "Int64"; };
     struct Int128 { static constexpr const char* name = "Int128"; };
     struct Int256 { static constexpr const char* name = "Int256"; };
-    
-    // Floating-point types
+    /// Floating-point types
     struct Float32 { static constexpr const char* name = "Float32"; };
     struct Float64 { static constexpr const char* name = "Float64"; };
 }
@@ -51,20 +49,17 @@ void addTypesWithLink(std::map<String, TypeInfo>& map, const char* link)
 std::map<String, TypeInfo> initializeTypeInfos()
 {
     std::map<String, TypeInfo> type_infos;
-    
+
     /// Add integer types
     addTypesWithLink<
         TypeTags::UInt8, TypeTags::UInt16, TypeTags::UInt32, TypeTags::UInt64,
         TypeTags::UInt128, TypeTags::UInt256, TypeTags::Int8, TypeTags::Int16,
         TypeTags::Int32, TypeTags::Int64, TypeTags::Int128, TypeTags::Int256
     >(type_infos, "/sql-reference/data-types/int-uint");
-    
+
     /// Add floating point types
-    addTypesWithLink<TypeTags::Float32, TypeTags::Float64>(
-        type_infos, 
-        "/sql-reference/data-types/float"
-    );
-    
+    addTypesWithLink<TypeTags::Float32, TypeTags::Float64>(type_infos, "/sql-reference/data-types/float");
+
     /// Add other types for which the documentation links differ for each type
     const std::initializer_list<std::pair<String, TypeInfo>> other_types =
     {
@@ -73,7 +68,6 @@ std::map<String, TypeInfo> initializeTypeInfos()
         {"Date32",    {"Date32",    "/sql-reference/data-types/date32"}},
         {"DateTime",  {"DateTime",  "/sql-reference/data-types/datetime"}},
         {"DateTime64",{"DateTime64","/sql-reference/data-types/datetime64"}},
-        
         /// Special types
         {"UUID",      {"UUID",      "/sql-reference/data-types/uuid"}},
         {"IPv4",      {"IPv4",      "/sql-reference/data-types/ipv4"}},
@@ -83,7 +77,7 @@ std::map<String, TypeInfo> initializeTypeInfos()
         {"Expression", {"Expression", "/sql-reference/syntax#expressions"}},
         {"Tuple", {"Expression", "/sql-reference/data-types/tuple"}}
     };
-    
+
     for (const auto & type : other_types)
     {
         type_infos.insert(type);
@@ -238,7 +232,7 @@ R"(
             }
         };
         FunctionDocumentation::IntroducedIn introduced_in_dictGet = {18, 16};
-        
+
         FunctionDocumentation documentation_dictGet =
         {
             description_dictGet,
@@ -248,8 +242,8 @@ R"(
             examples_dictGet,
             introduced_in_dictGet,
             category_dictionary
-		};
-        
+        };
+
         factory.registerFunction<FunctionDictGetNoType<DictionaryGetFunctionType::get>>(documentation_dictGet);
     }
 
@@ -375,7 +369,7 @@ R"(
 
         FunctionDocumentation documentation_dictGetUInt8OrDefault =
         {
-            getDictGetOrDefaultDescription(type_name),
+			getDictGetOrDefaultDescription(type_name),
             getDictGetOrDefaultSyntax(type_name),
             getDictGetOrDefaultArguments(),
             getDictGetOrDefaultReturnedValue(),
@@ -556,7 +550,7 @@ R"(
 
         FunctionDocumentation documentation_dictGetUInt64OrDefault =
         {
-            getDictGetOrDefaultDescription(type_name),
+			getDictGetOrDefaultDescription(type_name),
             getDictGetOrDefaultSyntax(type_name),
             getDictGetOrDefaultArguments(),
             getDictGetOrDefaultReturnedValue(),
