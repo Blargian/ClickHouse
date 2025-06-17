@@ -282,7 +282,7 @@ If the key is not found, returns the default_value provided.
             introduced_in_dictGetOrDefault,
             category_dictionary
         };
-        
+
         factory.registerFunction<FunctionDictGetNoType<DictionaryGetFunctionType::getOrDefault>>(documentation_dictGetOrDefault);
     }
 
@@ -346,7 +346,7 @@ R"(
             getDictGetArguments(),
             getDictGetReturnedValue(),
             {
-            	{
+                {
                     "Usage example",
                     "SELECT dictGetUInt8('all_types_dict', 'UInt8_value', 1)",
 R"(
@@ -369,7 +369,7 @@ R"(
 
         FunctionDocumentation documentation_dictGetUInt8OrDefault =
         {
-			getDictGetOrDefaultDescription(type_name),
+            getDictGetOrDefaultDescription(type_name),
             getDictGetOrDefaultSyntax(type_name),
             getDictGetOrDefaultArguments(),
             getDictGetOrDefaultReturnedValue(),
@@ -550,7 +550,7 @@ R"(
 
         FunctionDocumentation documentation_dictGetUInt64OrDefault =
         {
-			getDictGetOrDefaultDescription(type_name),
+            getDictGetOrDefaultDescription(type_name),
             getDictGetOrDefaultSyntax(type_name),
             getDictGetOrDefaultArguments(),
             getDictGetOrDefaultReturnedValue(),
@@ -1458,7 +1458,7 @@ R"(
 │ [3,2]                    │
 └──────────────────────────┘
 )"
-           	}
+            }
         };
         FunctionDocumentation::IntroducedIn introduced_in_dictGetDescendants = {21, 4};
         FunctionDocumentation::Category category_dictGetDescendants = FunctionDocumentation::Category::Dictionary;
@@ -1511,7 +1511,7 @@ R"(
 │                        0 │
 └──────────────────────────┘
 )"
-           	}
+            }
         };
         FunctionDocumentation::IntroducedIn introduced_in_dictHas = {1, 1};
         FunctionDocumentation::Category category_dictHas = FunctionDocumentation::Category::Dictionary;
