@@ -1748,7 +1748,7 @@ SELECT L1Norm((1, 2))
 ┌─L1Norm((1, 2))─┐
 │              3 │
 └────────────────┘
-            )"}
+        )"}
     };
     FunctionDocumentation::IntroducedIn introduced_in_l1_norm = {21, 11};
     FunctionDocumentation::Category category_l1_norm = FunctionDocumentation::Category::Distance;
@@ -1775,7 +1775,7 @@ SELECT L2Norm((1, 2))
 ┌───L2Norm((1, 2))─┐
 │ 2.23606797749979 │
 └──────────────────┘
-            )"}
+        )"}
     };
     FunctionDocumentation::IntroducedIn introduced_in_l2_norm = {21, 11};
     FunctionDocumentation::Category category_l2_norm = FunctionDocumentation::Category::Distance;
@@ -1802,7 +1802,7 @@ SELECT L2SquaredNorm((1, 2))
 ┌─L2SquaredNorm((1, 2))─┐
 │                     5 │
 └───────────────────────┘
-            )"}
+        )"}
     };
     FunctionDocumentation::IntroducedIn introduced_in_l2_squared_norm = {22, 7};
     FunctionDocumentation::Category category_l2_squared_norm = FunctionDocumentation::Category::Distance;
@@ -1829,7 +1829,7 @@ SELECT LinfNorm((1, -2))
 ┌─LinfNorm((1, -2))─┐
 │                 2 │
 └───────────────────┘
-            )"}
+        )"}
     };
     FunctionDocumentation::IntroducedIn introduced_in_linf_norm = {21, 11};
     FunctionDocumentation::Category category_linf_norm = FunctionDocumentation::Category::Distance;
@@ -1862,7 +1862,7 @@ SELECT LpNorm((1, -2), 2)
 ┌─LpNorm((1, -2), 2)─┐
 │   2.23606797749979 │
 └────────────────────┘
-            )"}
+       )"}
     };
     FunctionDocumentation::IntroducedIn introduced_in_lp_norm = {21, 11};
     FunctionDocumentation::Category category_lp_norm = FunctionDocumentation::Category::Distance;
@@ -1897,7 +1897,7 @@ SELECT L1Distance((1, 2), (2, 3))
 ┌─L1Distance((1, 2), (2, 3))─┐
 │                          2 │
 └────────────────────────────┘
-            )"}
+        )"}
     };
     FunctionDocumentation::IntroducedIn introduced_in_l1_distance = {21, 11};
     FunctionDocumentation::Category category_l1_distance = FunctionDocumentation::Category::Distance;
@@ -1925,7 +1925,7 @@ SELECT L2Distance((1, 2), (2, 3))
 ┌─L2Distance((1, 2), (2, 3))─┐
 │         1.4142135623730951 │
 └────────────────────────────┘
-            )"}
+        )"}
     };
     FunctionDocumentation::IntroducedIn introduced_in_l2_distance = {21, 11};
     FunctionDocumentation::Category category_l2_distance = FunctionDocumentation::Category::Distance;
@@ -1953,7 +1953,7 @@ SELECT L2SquaredDistance([1, 2, 3], [0, 0, 0])
 ┌─L2SquaredDis⋯ [0, 0, 0])─┐
 │                       14 │
 └──────────────────────────┘
-            )"}
+        )"}
     };
     FunctionDocumentation::IntroducedIn introduced_in_l2_squared_distance = {22, 7};
     FunctionDocumentation::Category category_l2_squared_distance = FunctionDocumentation::Category::Distance;
@@ -1981,7 +1981,7 @@ SELECT LinfDistance((1, 2), (2, 3))
 ┌─LinfDistance((1, 2), (2, 3))─┐
 │                            1 │
 └──────────────────────────────┘
-            )"}
+        )"}
     };
     FunctionDocumentation::IntroducedIn introduced_in_linf_distance = {21, 11};
     FunctionDocumentation::Category category_linf_distance = FunctionDocumentation::Category::Distance;
@@ -2010,7 +2010,7 @@ SELECT LpDistance((1, 2), (2, 3), 3)
 ┌─LpDistance((1, 2), (2, 3), 3)─┐
 │            1.2599210498948732 │
 └───────────────────────────────┘
-            )"}
+        )"}
     };
     FunctionDocumentation::IntroducedIn introduced_in_lp_distance = {21, 11};
     FunctionDocumentation::Category category_lp_distance = FunctionDocumentation::Category::Distance;
@@ -2045,7 +2045,7 @@ SELECT cosineDistance((1, 2), (2, 3));
 ┌─cosineDistance((1, 2), (2, 3))─┐
 │           0.007722123286332261 │
 └────────────────────────────────┘
-            )"}
+        )"}
     };
     FunctionDocumentation::IntroducedIn introduced_in_cosine_distance = {1, 1};
     FunctionDocumentation::Category category_cosine_distance = FunctionDocumentation::Category::Distance;
@@ -2072,7 +2072,7 @@ SELECT L1Normalize((1, 2))
 ┌─L1Normalize((1, 2))─────────────────────┐
 │ (0.3333333333333333,0.6666666666666666) │
 └─────────────────────────────────────────┘
-            )"}
+        )"}
     };
     FunctionDocumentation::IntroducedIn introduced_in_l1_normalize = {21, 11};
     FunctionDocumentation::Category category_l1_normalize = FunctionDocumentation::Category::Distance;
@@ -2100,7 +2100,7 @@ SELECT L2Normalize((3, 4))
 ┌─L2Normalize((3, 4))─┐
 │ (0.6,0.8)           │
 └─────────────────────┘
-            )"}
+        )"}
     };
     FunctionDocumentation::IntroducedIn introduced_in_l2_normalize = {21, 11};
     FunctionDocumentation::Category category_l2_normalize = FunctionDocumentation::Category::Distance;
@@ -2128,7 +2128,7 @@ SELECT LinfNormalize((3, 4))
 ┌─LinfNormalize((3, 4))─┐
 │ (0.75,1)              │
 └───────────────────────┘
-            )"}
+        )"}
     };
     FunctionDocumentation::IntroducedIn introduced_in_linf_normalize = {21, 11};
     FunctionDocumentation::Category category_linf_normalize = FunctionDocumentation::Category::Distance;
@@ -2158,7 +2158,7 @@ SELECT LpNormalize((3, 4), 5)
 ┌─LpNormalize((3, 4), 5)──────────────────┐
 │ (0.7187302630182624,0.9583070173576831) │
 └─────────────────────────────────────────┘
-                )"}
+            )"}
         };
         FunctionDocumentation::IntroducedIn introduced_in_lp_normalize = {21, 11};
         FunctionDocumentation::Category category_lp_normalize = FunctionDocumentation::Category::Distance;
