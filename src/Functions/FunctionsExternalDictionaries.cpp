@@ -49,29 +49,29 @@ FunctionDocumentation::Arguments getDictGetOrDefaultArguments()
 }
 
 /// Helper to get the returned value documentation for dictGet<type> functions
-String getDictGetReturnedValue()
+FunctionDocumentation::ReturnedValue getDictGetReturnedValue()
 {
-    return R"(
+    return {R"(
 Returns the value of the dictionary attribute that corresponds to `id_expr`,
 otherwise returns the content of the `<null_value>` element specified for the attribute in the dictionary configuration.
 
 :::note
 ClickHouse throws an exception if it cannot parse the value of the attribute or the value does not match the attribute data type.
 :::
-    )";
+    )"};
 }
 
 /// Helper to get the returned value documentation for dictGet<type>OrDefault functions
-String getDictGetOrDefaultReturnedValue()
+FunctionDocumentation::ReturnedValue getDictGetOrDefaultReturnedValue()
 {
-    return R"(
+    return {R"(
 Returns the value of the dictionary attribute that corresponds to `id_expr`,
 otherwise returns the value passed as the `default_value_expr` parameter.
 
 :::note
 ClickHouse throws an exception if it cannot parse the value of the attribute or the value does not match the attribute data type.
 :::
-    )";
+    )"};
 }
 
 REGISTER_FUNCTION(ExternalDictionaries)
@@ -88,10 +88,10 @@ REGISTER_FUNCTION(ExternalDictionaries)
             {"id_expr", "Key value. An expression returning UInt64/Tuple(T).", {"UInt64", "Tuple(T)"}}
         };
         FunctionDocumentation::ReturnedValue returned_value =
-R"(
+{R"(
 Returns the value of the dictionary attribute that corresponds to id_expr if the key is found.
 If the key is not found, returns the content of the <null_value> element specified for the attribute in the dictionary configuration.
-)";
+)"};
         FunctionDocumentation::Examples examples = {
             {
                 "Retrieve a single attribute",
@@ -123,7 +123,7 @@ R"(
             }
         };
         FunctionDocumentation::IntroducedIn introduced_in = {18, 16};
-        FunctionDocumentation::FunctionDocumentation documentation = {description, syntax, arguments, returned_value, examples, introduced_in, category_dictionary};
+        FunctionDocumentation documentation = {description, syntax, arguments, returned_value, examples, introduced_in, category_dictionary};
 
         factory.registerFunction<FunctionDictGetNoType<DictionaryGetFunctionType::get>>(documentation);
     }
@@ -138,13 +138,13 @@ R"(
             {"id_expr", "Key value. An expression returning UInt64/Tuple(T).", {"UInt64", "Tuple(T)"}},
             {"default_value", "Default value to return if the key is not found. Type must match the attribute's data type.", {}}
         };
-        FunctionDocumentation::ReturnedValue returned_value = R"(
-Returns the value of the dictionary attribute that corresponds to id_expr if the key is found.
-If the key is not found, returns the default_value provided.
-)";
+        FunctionDocumentation::ReturnedValue returned_value = {R"(
+Returns the value of the dictionary attribute that corresponds to `id_expr` if the key is found.
+If the key is not found, returns the `default_value` provided.
+)"};
         FunctionDocumentation::Examples examples = {{"Get value with default", "SELECT dictGetOrDefault('ext_dict_mult', 'c1', toUInt64(999), 0) AS val", "0"}};
         FunctionDocumentation::IntroducedIn introduced_in = {18, 16};
-        FunctionDocumentation::FunctionDocumentation documentation = {description, syntax, arguments, returned_value, examples, introduced_in, category_dictionary};
+        FunctionDocumentation documentation = {description, syntax, arguments, returned_value, examples, introduced_in, category_dictionary};
 
         factory.registerFunction<FunctionDictGetNoType<DictionaryGetFunctionType::getOrDefault>>(documentation);
     }
@@ -158,10 +158,10 @@ If the key is not found, returns the default_value provided.
             {"attr_name", "Name of the column to retrieve. String literal."},
             {"id_expr", "Key value. Expression returning dictionary key-type value."}
         };
-        FunctionDocumentation::ReturnedValue returned_value = R"(
+        FunctionDocumentation::ReturnedValue returned_value = {R"(
 Returns the value of the dictionary attribute that corresponds to `id_expr` if the key is found.
 If the key is not found, returns `NULL`.
-)";
+)"};
         FunctionDocumentation::Examples examples = {{"Example using the range key dictionary", R"(
 SELECT
     (number, toDate('2019-05-20')),
@@ -175,7 +175,7 @@ FROM system.numbers LIMIT 5 FORMAT TabSeparated;
 (4,'2019-05-20')  \N
 )"}};
         FunctionDocumentation::IntroducedIn introduced_in = {21, 4};
-        FunctionDocumentation::FunctionDocumentation documentation = {description, syntax, arguments, returned_value, examples, introduced_in, category_dictionary};
+        FunctionDocumentation documentation = {description, syntax, arguments, returned_value, examples, introduced_in, category_dictionary};
 
         factory.registerFunction<FunctionDictGetOrNull>(documentation);
     }
@@ -199,8 +199,8 @@ R"(
 )"
             }
         };
-        FunctionDocumentation::IntroducedIn introduced_in = {1, 1},  /// Version introduced
-        FunctionDocumentation::FunctionDocumentation = {description, syntax, arguments, returned_value, examples, introduced_in, category_dictionary};
+        FunctionDocumentation::IntroducedIn introduced_in = {1, 1};  /// Version introduced
+        FunctionDocumentation documentation_dictGetUInt8 = {description, syntax, arguments, returned_value, examples, introduced_in, category_dictionary};
 
         factory.registerFunction<FunctionDictGetUInt8>(documentation_dictGetUInt8);
     }
@@ -1084,10 +1084,10 @@ Creates an array, containing all the parents of a key in the [hierarchical dicti
 )";
         FunctionDocumentation::Syntax syntax = "dictGetHierarchy(dict_name, key)";
         FunctionDocumentation::Arguments arguments = {
-            {"dict_name", fmt::format("Name of the dictionary. [`String`]({}).", getTypeDocLink("String"))},
-            {"key", fmt::format("Key value. [Expression]({}) returning a [`UInt64`]({})-type value.", getTypeDocLink("Expression"), getTypeDocLink("UInt64"))}
+            {"dict_name", "Name of the dictionary.", {"String"}},
+            {"key", "Key value.", {"const String"}}
         };
-        FunctionDocumentation::ReturnedValue returned_value = fmt::format("Returns parents for the key. [`Array(UInt64)`]({}).", getTypeDocLink("array"));
+        FunctionDocumentation::ReturnedValue returned_value = {"Returns parents for the key.", {"Array(UInt64)"}};
         FunctionDocumentation::Examples examples = {
             {"Get hierarchy for a key",
 R"(
@@ -1114,11 +1114,11 @@ Checks the ancestor of a key through the whole hierarchical chain in the diction
         FunctionDocumentation::Syntax syntax_dictIsIn = "dictIsIn(dict_name, child_id_expr, ancestor_id_expr)";
         FunctionDocumentation::Arguments arguments_dictIsIn =
         {
-            {"dict_name", fmt::format("Name of the dictionary. [`String`]({}).", getTypeDocLink("String"))},
-            {"child_id_expr", fmt::format("Key to be checked. [Expression]({}) returning a [`UInt64`]({})-type value.", getTypeDocLink("Expression"), getTypeDocLink("UInt64"))},
-            {"ancestor_id_expr", fmt::format("Alleged ancestor of the `child_id_expr` key. [Expression]({}) returning a [`UInt64`]({})-type value.", getTypeDocLink("Expression"), getTypeDocLink("UInt64"))}
+            {"dict_name", "Name of the dictionary.", {"String"}},
+            {"child_id_expr", "Key to be checked.", {"String"}},
+            {"ancestor_id_expr", "Alleged ancestor of the `child_id_expr` key.", {"const String"}}
         };
-        FunctionDocumentation::ReturnedValue returned_value_dictIsIn = fmt::format("Returns `0` if `child_id_expr` is not a child of `ancestor_id_expr`, `1` if `child_id_expr` is a child of `ancestor_id_expr` or if `child_id_expr` is an `ancestor_id_expr`. [`UInt8`]({}).", getTypeDocLink("UInt8"));
+        FunctionDocumentation::ReturnedValue returned_value_dictIsIn = {"Returns `0` if `child_id_expr` is not a child of `ancestor_id_expr`, `1` if `child_id_expr` is a child of `ancestor_id_expr` or if `child_id_expr` is an `ancestor_id_expr`.", {"UInt8"}};
         FunctionDocumentation::Examples examples_dictIsIn =
         {
             {"Check hierarchical relationship",
@@ -1163,10 +1163,10 @@ Returns first-level children as an array of indexes. It is the inverse transform
         FunctionDocumentation::Syntax syntax_dictGetChildren = "dictGetChildren(dict_name, key)";
         FunctionDocumentation::Arguments arguments_dictGetChildren =
         {
-            {"dict_name", fmt::format("Name of the dictionary. [`String`]({}).", getTypeDocLink("String"))},
-            {"key", fmt::format("Key to be checked. [Expression]({}) returning a [`UInt64`]({})-type value.", getTypeDocLink("Expression"), getTypeDocLink("UInt64"))}
+            {"dict_name", "Name of the dictionary.", {"String"}},
+            {"key", "Key to be checked.", {"const String"}}
         };
-        FunctionDocumentation::ReturnedValue returned_value_dictGetChildren = fmt::format("Returns the first-level descendants for the key. [`Array(UInt64)`]({})", getTypeDocLink("array"));
+        FunctionDocumentation::ReturnedValue returned_value_dictGetChildren = {"Returns the first-level descendants for the key.", {"Array(UInt64)"}};
         FunctionDocumentation::Examples examples_dictGetChildren =
         {
             {"Get the first-level children of a dictionary",
@@ -1203,11 +1203,11 @@ Returns all descendants as if the [`dictGetChildren`](#dictGetChildren) function
         FunctionDocumentation::Syntax syntax_dictGetDescendants = "dictGetDescendants(dict_name, key, level)";
         FunctionDocumentation::Arguments arguments_dictGetDescendants =
         {
-            {"dict_name", fmt::format("Name of the dictionary. [`String`]({}).", getTypeDocLink("String"))},
-            {"key", fmt::format("Key to be checked. [Expression]({}) returning a [`UInt64`]({})-type value.", getTypeDocLink("Expression"), getTypeDocLink("UInt64"))},
-            {"level", fmt::format("Key to be checked. Hierarchy level. If `level = 0` returns all descendants to the end. [`UInt8`]({}).", getTypeDocLink("UInt64"))}
+            {"dict_name", "Name of the dictionary.", {"String"}},
+            {"key", "Key to be checked.", {"const String"}},
+            {"level", "Key to be checked. Hierarchy level. If `level = 0` returns all descendants to the end.", {"UInt8"}}
         };
-        FunctionDocumentation::ReturnedValue returned_value_dictGetDescendants = fmt::format("Returns the descendants for the key. [`Array(UInt64)`]({})", getTypeDocLink("array"));
+        FunctionDocumentation::ReturnedValue returned_value_dictGetDescendants = {"Returns the descendants for the key.", {"Array(UInt64)"}};
         FunctionDocumentation::Examples examples_dictGetDescendants =
         {
             {
@@ -1253,10 +1253,10 @@ R"(
         FunctionDocumentation::Syntax syntax_dictHas = "dictHas('dict_name', id_expr)";
         FunctionDocumentation::Arguments arguments_dictHas =
         {
-            {"dict_name", fmt::format("Name of the dictionary. [`String`]({}).", getTypeDocLink("String"))},
-            {"id_expr", fmt::format("Key value. [Expression]({}) returning an [Array(T)]({}) or [`Tuple(T)`]({}).", getTypeDocLink("Expression"), getTypeDocLink("array"), getTypeDocLink("tuple"))}
+            {"dict_name", "Name of the dictionary.", {"String"}},
+            {"id_expr", "Key value", {"const String"}}
         };
-        FunctionDocumentation::ReturnedValue returned_value_dictHas = fmt::format("Returns `1` if the key exists, otherwise `0`. [`UInt8`]({})", getTypeDocLink("UInt8"));
+        FunctionDocumentation::ReturnedValue returned_value_dictHas = {"Returns `1` if the key exists, otherwise `0`.", {"UInt8"}};
         FunctionDocumentation::Examples examples_dictHas =
         {
             {
