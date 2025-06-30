@@ -521,7 +521,7 @@ The examples in this section make use of the following dictionaries. You can cre
 to run the examples for the functions described below.
 
 <details>
-<summary>Example dictionary for dictGet\<T\> and dictGet/<T\>OrDefault functions</summary>
+<summary>Example dictionary for dictGet\<T\> and dictGet\<T\>OrDefault functions</summary>
 
 ```sql
 -- Create table with all the required data types
