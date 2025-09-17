@@ -1022,7 +1022,7 @@ SELECT groupArraySample(3)(concat('light-', color)) as newcolors FROM default.co
     };
     FunctionDocumentation::IntroducedIn introduced_in_groupArraySample = {20, 3};
     FunctionDocumentation::Category category_groupArraySample = FunctionDocumentation::Category::AggregateFunction;
-    FunctionDocumentation documentation_groupArraySample = {description_groupArraySample, syntax_groupArrayArray, arguments_groupArrayArray, parameters_groupArraySample, returned_value_groupArraySample, examples_groupArraySample, introduced_in_groupArraySample, category_groupArraySample};
+    FunctionDocumentation documentation_groupArraySample = {description_groupArraySample, syntax_groupArraySample, arguments_groupArraySample, parameters_groupArraySample, returned_value_groupArraySample, examples_groupArraySample, introduced_in_groupArraySample, category_groupArraySample};
 
 factory.registerFunction("groupArraySample", { createAggregateFunctionGroupArraySample, properties, documentation_groupArraySample});
 
@@ -1073,7 +1073,7 @@ SELECT groupArray(2)(number+1) numbers FROM numbers(10);)",
     };
     FunctionDocumentation::IntroducedIn introduced_in_groupArrayLast = {23, 1};
     FunctionDocumentation::Category category_groupArrayLast = FunctionDocumentation::Category::AggregateFunction;
-    FunctionDocumentation documentation_groupArrayLast = {description_groupArray, syntax_groupArray, arguments_groupArray, parameters_groupArray, returned_value_groupArray, examples_groupArray, introduced_in_groupArray, category_groupArrayLast};
+    FunctionDocumentation documentation_groupArrayLast = {description_groupArrayLast, syntax_groupArrayLast, arguments_groupArrayLast, parameters_groupArrayLast, returned_value_groupArrayLast, examples_groupArrayLast, introduced_in_groupArrayLast, category_groupArrayLast};
     
     factory.registerFunction("groupArrayLast", createAggregateFunctionGroupArray<true>, properties, documentation_groupArrayLast);
 }
