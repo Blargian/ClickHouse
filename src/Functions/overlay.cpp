@@ -687,16 +687,16 @@ private:
 REGISTER_FUNCTION(Overlay)
 {
     FunctionDocumentation::Description description = R"(
-Replaces part of the string `input` with another string `replace`, starting at the 1-based index `offset`.
+Replace part of the string `input` with another string `replace`, starting at the 1-based index `offset`.
 )";
     FunctionDocumentation::Syntax syntax = "overlay(s, replace, offset[, length])";
     FunctionDocumentation::Arguments arguments = {
-        {"s", "The input string.", {"String"}},
-        {"replace", "The replacement string", {"const String"}},
-        {"offset", "An integer type `Int` (1-based). If `offset` is negative, it is counted from the end of the string `s`.", {"Int"}},
-        {"length", "Optional. An integer type `Int`. `length` specifies the length of the snippet within the input string `s` to be replaced. If `length` is not specified, the number of bytes removed from `s` equals the length of `replace`; otherwise `length` bytes are removed.", {"Int"}}
+        {"s", "A string type.", {"String"}},
+        {"replace", "A string type.", {"String"}},
+        {"offset", "An integer type (1-based). If `offset` is negative, it is counted from the end of the string `s`.", {"Int"}},
+        {"length", "Optional. An integer type. `length` specifies the length of the snippet within the input string `s` to be replaced. If `length` is not specified, the number of bytes removed from `s` equals the length of `replace`; otherwise `length` bytes are removed.", {"Int"}}
     };
-    FunctionDocumentation::ReturnedValue returned_value = {"Returns a string with replacement.", {"String"}};
+    FunctionDocumentation::ReturnedValue returned_value = {"A String data type value.", {"String"}};
     FunctionDocumentation::Examples examples = {
     {
         "Basic replacement",
@@ -724,18 +724,19 @@ Replaces part of the string `input` with another string `replace`, starting at t
     factory.registerFunction<FunctionOverlay<false>>(overlay_documentation, FunctionFactory::Case::Insensitive);
 
     FunctionDocumentation::Description utf8_description = R"(
-Replace part of the string `s` with another string `replace`, starting at the 1-based index `offset`.
+Replace part of the string `input` with another string `replace`, starting at the 1-based index `offset`.
+
 Assumes that the string contains valid UTF-8 encoded text.
 If this assumption is violated, no exception is thrown and the result is undefined.
 )";
     FunctionDocumentation::Syntax utf8_syntax = "overlayUTF8(s, replace, offset[, length])";
     FunctionDocumentation::Arguments utf8_arguments = {
-        {"s", "The input string.", {"String"}},
-        {"replace", "The replacement string.", {"const String"}},
-        {"offset", "An integer type `Int` (1-based). If `offset` is negative, it is counted from the end of the input string `s`.", {"(U)Int*"}},
-        {"length", "Optional. Specifies the length of the snippet within the input string `s` to be replaced. If `length` is not specified, the number of characters removed from `s` equals the length of `replace`, otherwise `length` characters are removed.", {"(U)Int*"}}
+        {"s", "A string type.", {"String"}},
+        {"replace", "A string type.", {"String"}},
+        {"offset", "An integer type (1-based). If `offset` is negative, it is counted from the end of the input string `s`.", {"Int"}},
+        {"length", "Optional. An integer type. `length` specifies the length of the snippet within the input string `s` to be replaced. If `length` is not specified, the number of characters removed from `s` equals the length of `replace`; otherwise `length` characters are removed.", {"Int"}}
     };
-    FunctionDocumentation::ReturnedValue utf8_returned_value = {"Returns a string with replacement.", {"String"}};
+    FunctionDocumentation::ReturnedValue utf8_returned_value = {"A String data type value.", {"String"}};
     FunctionDocumentation::Examples utf8_examples = {
     {
         "UTF-8 replacement",
@@ -747,7 +748,8 @@ If this assumption is violated, no exception is thrown and the result is undefin
         )"
     }
     };
-    FunctionDocumentation overlayutf8_documentation = {utf8_description, utf8_syntax, utf8_arguments, utf8_returned_value, utf8_examples, introduced_in, category};
+    FunctionDocumentation::IntroducedIn utf8_introduced_in = {24, 9};
+    FunctionDocumentation overlayutf8_documentation = {utf8_description, utf8_syntax, utf8_arguments, utf8_returned_value, utf8_examples, utf8_introduced_in, category};
 
     factory.registerFunction<FunctionOverlay<true>>(overlayutf8_documentation, FunctionFactory::Case::Sensitive);
 }

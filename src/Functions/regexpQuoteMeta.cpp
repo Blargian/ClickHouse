@@ -119,14 +119,15 @@ REGISTER_FUNCTION(RegexpQuoteMeta)
 {
     FunctionDocumentation::Description description = R"(
 Adds a backslash before these characters with special meaning in regular expressions: `\0`, `\\`, `|`, `(`, `)`, `^`, `$`, `.`, `[`, `]`, `?`, `*`, `+`, `{`, `:`, `-`.
-This implementation slightly differs from re2::RE2::QuoteMeta.
-It escapes zero byte as `\0` instead of `\x00` and it escapes only required characters.
+
+This implementation slightly differs from re2::RE2::QuoteMeta. It escapes zero byte as `\0` instead of `\x00` and it escapes only required characters.
+For more information, see [RE2](https://github.com/google/re2/blob/master/re2/re2.cc#L473)
 )";
     FunctionDocumentation::Syntax syntax = "regexpQuoteMeta(s)";
     FunctionDocumentation::Arguments arguments = {
-        {"s", "The input string containing characters to be escaped for regex.", {"String"}}
+        {"s", "Input string.", {"String"}}
     };
-    FunctionDocumentation::ReturnedValue returned_value = {"Returns a string with regex special characters escaped.", {"String"}};
+    FunctionDocumentation::ReturnedValue returned_value = {"A string with regex special characters escaped.", {"String"}};
     FunctionDocumentation::Examples examples = {
     {
         "Escape regex special characters",
