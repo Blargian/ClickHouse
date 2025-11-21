@@ -14,14 +14,14 @@ For dictionaries created with [DDL queries](../../sql-reference/statements/creat
 
 For information on connecting and configuring dictionaries, see [Dictionaries](../../sql-reference/dictionaries/index.md).
 
-## dictGet, dictGetOrDefault, dictGetOrNull {#dictget-dictgetordefault-dictgetornull}
+## dictGet
 
 Retrieves values from a dictionary.
 
+**Syntax**
+
 ```sql
 dictGet('dict_name', attr_names, id_expr)
-dictGetOrDefault('dict_name', attr_names, id_expr, default_value_expr)
-dictGetOrNull('dict_name', attr_name, id_expr)
 ```
 
 **Arguments**
@@ -29,17 +29,58 @@ dictGetOrNull('dict_name', attr_name, id_expr)
 - `dict_name` — Name of the dictionary. [String literal](/sql-reference/syntax#string).
 - `attr_names` — Name of the column of the dictionary, [String literal](/sql-reference/syntax#string), or tuple of column names, [Tuple](/sql-reference/data-types/tuple)([String literal](/sql-reference/syntax#string).
 - `id_expr` — Key value. [Expression](/sql-reference/syntax#expressions) returning dictionary key-type value or [Tuple](../data-types/tuple.md)-type value depending on the dictionary configuration.
-- `default_value_expr` — Values returned if the dictionary does not contain a row with the `id_expr` key. [Expression](/sql-reference/syntax#expressions) or [Tuple](../data-types/tuple.md)([Expression](/sql-reference/syntax#expressions)), returning the value (or values) in the data types configured for the `attr_names` attribute.
 
 **Returned value**
 
-- If ClickHouse parses the attribute successfully in the [attribute's data type](/sql-reference/dictionaries#dictionary-key-and-fields), functions return the value of the dictionary attribute that corresponds to `id_expr`.
+- If ClickHouse parses the attribute successfully in the [attribute's data type](/sql-reference/dictionaries#dictionary-key-and-fields), the function returns the value of the dictionary attribute that corresponds to `id_expr`.
+- If there is no key corresponding to `id_expr` in the dictionary, returns the content of the `<null_value>` element specified for the attribute in the dictionary configuration.
 
-- If there is no the key, corresponding to `id_expr`, in the dictionary, then:
+ClickHouse throws an exception if it cannot parse the value of the attribute or the value does not match the attribute data type.
 
-        - `dictGet` returns the content of the `<null_value>` element specified for the attribute in the dictionary configuration.
-        - `dictGetOrDefault` returns the value passed as the `default_value_expr` parameter.
-        - `dictGetOrNull` returns `NULL` in case key was not found in dictionary.
+## dictGetOrDefault
+
+Retrieves values from a dictionary, with a default value if the key is not found.
+
+**Syntax**
+
+```sql
+dictGetOrDefault('dict_name', attr_names, id_expr, default_value_expr)
+```
+
+**Arguments**
+
+- `dict_name` — Name of the dictionary. [String literal](/sql-reference/syntax#string).
+- `attr_names` — Name of the column of the dictionary, [String literal](/sql-reference/syntax#string), or tuple of column names, [Tuple](/sql-reference/data-types/tuple)([String literal](/sql-reference/syntax#string).
+- `id_expr` — Key value. [Expression](/sql-reference/syntax#expressions) returning dictionary key-type value or [Tuple](../data-types/tuple.md)-type value depending on the dictionary configuration.
+- `default_value_expr` — Value returned if the dictionary does not contain a row with the `id_expr` key. [Expression](/sql-reference/syntax#expressions) or [Tuple](../data-types/tuple.md)([Expression](/sql-reference/syntax#expressions)), returning the value (or values) in the data types configured for the `attr_names` attribute.
+
+**Returned value**
+
+- If ClickHouse parses the attribute successfully in the [attribute's data type](/sql-reference/dictionaries#dictionary-key-and-fields), the function returns the value of the dictionary attribute that corresponds to `id_expr`.
+- If there is no key corresponding to `id_expr` in the dictionary, returns the value passed as the `default_value_expr` parameter.
+
+ClickHouse throws an exception if it cannot parse the value of the attribute or the value does not match the attribute data type.
+
+## dictGetOrNull
+
+Retrieves values from a dictionary, returning NULL if the key is not found.
+
+**Syntax**
+
+```sql
+dictGetOrNull('dict_name', attr_name, id_expr)
+```
+
+**Arguments**
+
+- `dict_name` — Name of the dictionary. [String literal](/sql-reference/syntax#string).
+- `attr_name` — Name of the column of the dictionary. [String literal](/sql-reference/syntax#string).
+- `id_expr` — Key value. [Expression](/sql-reference/syntax#expressions) returning dictionary key-type value or [Tuple](../data-types/tuple.md)-type value depending on the dictionary configuration.
+
+**Returned value**
+
+- If ClickHouse parses the attribute successfully in the [attribute's data type](/sql-reference/dictionaries#dictionary-key-and-fields), the function returns the value of the dictionary attribute that corresponds to `id_expr`.
+- If there is no key corresponding to `id_expr` in the dictionary, returns `NULL`.
 
 ClickHouse throws an exception if it cannot parse the value of the attribute or the value does not match the attribute data type.
 
@@ -230,7 +271,7 @@ Result:
 
 - [Dictionaries](../../sql-reference/dictionaries/index.md)
 
-## dictHas {#dicthas}
+## dictHas
 
 Checks whether a key is present in a dictionary.
 
@@ -248,7 +289,7 @@ dictHas('dict_name', id_expr)
 - 0, if there is no key. [UInt8](../data-types/int-uint.md).
 - 1, if there is a key. [UInt8](../data-types/int-uint.md).
 
-## dictGetHierarchy {#dictgethierarchy}
+## dictGetHierarchy
 
 Creates an array, containing all the parents of a key in the [hierarchical dictionary](../../sql-reference/dictionaries/index.md#hierarchical-dictionaries).
 
@@ -267,7 +308,7 @@ dictGetHierarchy('dict_name', key)
 
 - Parents for the key. [Array(UInt64)](../data-types/array.md).
 
-## dictIsIn {#dictisin}
+## dictIsIn
 
 Checks the ancestor of a key through the whole hierarchical chain in the dictionary.
 
@@ -286,9 +327,9 @@ dictIsIn('dict_name', child_id_expr, ancestor_id_expr)
 - 0, if `child_id_expr` is not a child of `ancestor_id_expr`. [UInt8](../data-types/int-uint.md).
 - 1, if `child_id_expr` is a child of `ancestor_id_expr` or if `child_id_expr` is an `ancestor_id_expr`. [UInt8](../data-types/int-uint.md).
 
-## dictGetChildren {#dictgetchildren}
+## dictGetChildren
 
-Returns first-level children as an array of indexes. It is the inverse transformation for [dictGetHierarchy](#dictgethierarchy).
+Returns first-level children as an array of indexes. It is the inverse transformation for [dictGetHierarchy](#dictGetHierarchy).
 
 **Syntax**
 
@@ -333,9 +374,9 @@ SELECT dictGetChildren('hierarchy_flat_dictionary', number) FROM system.numbers 
 └──────────────────────────────────────────────────────┘
 ```
 
-## dictGetDescendant {#dictgetdescendant}
+## dictGetDescendant
 
-Returns all descendants as if [dictGetChildren](#dictgetchildren) function was applied `level` times recursively.
+Returns all descendants as if [dictGetChildren](#dictGetChildren) function was applied `level` times recursively.
 
 **Syntax**
 
@@ -396,11 +437,11 @@ SELECT dictGetDescendants('hierarchy_flat_dictionary', number, 1) FROM system.nu
 ```
 
 
-## dictGetAll {#dictgetall}
+## dictGetAll
 
 Retrieves the attribute values of all nodes that matched each key in a [regular expression tree dictionary](../../sql-reference/dictionaries/index.md#regexp-tree-dictionary).
 
-Besides returning values of type `Array(T)` instead of `T`, this function behaves similarly to [`dictGet`](#dictget-dictgetordefault-dictgetornull).
+Besides returning values of type `Array(T)` instead of `T`, this function behaves similarly to [`dictGet`](#dictget).
 
 **Syntax**
 
@@ -473,7 +514,7 @@ SELECT dictGetAll('regexp_dict', 'tag', 'foobarbaz', 2);
 └──────────────────────────────────────────────────┘
 ```
 
-## Other Functions {#other-functions}
+## Other Functions
 
 ClickHouse supports specialized functions that convert dictionary attribute values to a specific data type regardless of the dictionary configuration.
 

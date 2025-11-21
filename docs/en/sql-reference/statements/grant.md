@@ -644,7 +644,7 @@ Examples:
 
 - `dictGet`. Aliases: `dictHas`, `dictGetHierarchy`, `dictIsIn`
 
-Allows a user to execute [dictGet](/sql-reference/functions/ext-dict-functions#dictget-dictgetordefault-dictgetornull), [dictHas](../../sql-reference/functions/ext-dict-functions.md#dicthas), [dictGetHierarchy](../../sql-reference/functions/ext-dict-functions.md#dictgethierarchy), [dictIsIn](../../sql-reference/functions/ext-dict-functions.md#dictisin) functions.
+Allows a user to execute [dictGet](/sql-reference/functions/ext-dict-functions#dictget), [dictHas](../../sql-reference/functions/ext-dict-functions.md#dictHas), [dictGetHierarchy](../../sql-reference/functions/ext-dict-functions.md#dictGetHierarchy), [dictIsIn](../../sql-reference/functions/ext-dict-functions.md#dictIsIn) functions.
 
 Privilege level: `DICTIONARY`.
 
