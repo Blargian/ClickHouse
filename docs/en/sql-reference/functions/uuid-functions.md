@@ -935,7 +935,7 @@ Result:
 
 ## See also {#see-also}
 
-- [dictGetUUID](/sql-reference/functions/ext-dict-functions#other-functions)
+- [dictGetUUID](/sql-reference/functions/ext-dict-functions#dictGetUUID)
 
 <!-- 
 The inner content of the tags below are replaced at doc framework build time with 
