@@ -44,6 +44,11 @@ Writing to Delta Lake tables is an experimental feature. To enable it, set `allo
 
 **Example**
 
+:::note[Compatibility note for MacOS]
+If you're using a recent version but still getting an error `Received exception:
+Code: 46. DB::Exception: Unknown table function deltaLake. (UNKNOWN_FUNCTION)` this is because builds on Mac don't include DeltaLake due to the usage of Rust.
+:::
+
 ```sql
 INSERT INTO TABLE FUNCTION deltaLake('https://example.s3.amazonaws.com/my-delta-table/', 'access_key', 'secret_key')
 SELECT * FROM source_table;
