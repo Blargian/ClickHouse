@@ -1,6 +1,5 @@
 ---
-description: 'Provides a read-only table-like interface to the Delta Lake tables in
-  Amazon S3.'
+description: 'Provides a table-like interface to Delta Lake tables in Amazon S3, supporting both reads and writes.'
 sidebar_label: 'deltaLake'
 sidebar_position: 45
 slug: /sql-reference/table-functions/deltalake
@@ -10,7 +9,7 @@ doc_type: 'reference'
 
 # deltaLake Table Function
 
-Provides a read-only table-like interface to [Delta Lake](https://github.com/delta-io/delta) tables in Amazon S3, Azure Blob Storage, or a locally mounted file system.
+Provides a table-like interface to [Delta Lake](https://github.com/delta-io/delta) tables in Amazon S3, Azure Blob Storage, or a locally mounted file system, supporting both reads and writes.
 
 ## Syntax {#syntax}
 
@@ -33,7 +32,24 @@ Description of the arguments coincides with description of arguments in table fu
 
 ## Returned value {#returned_value}
 
-A table with the specified structure for reading data in the specified Delta Lake table.
+A table with the specified structure for reading or writing data in the specified Delta Lake table.
+
+## Writing data {#writing-data}
+
+The `deltaLake` table function supports `INSERT` queries to write data to Delta Lake tables.
+
+:::note
+Writing to Delta Lake tables is an experimental feature. To enable it, set `allow_experimental_delta_lake_writes = 1`.
+:::
+
+**Example**
+
+```sql
+INSERT INTO TABLE FUNCTION deltaLake('https://example.s3.amazonaws.com/my-delta-table/', 'access_key', 'secret_key')
+SELECT * FROM source_table;
+```
+
+For more details on write settings, see the [DeltaLake table engine documentation](../../../engines/table-engines/integrations/deltalake.md#write-settings).
 
 ## Examples {#examples}
 
