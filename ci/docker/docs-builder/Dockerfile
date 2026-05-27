@@ -21,6 +21,15 @@ RUN groupadd -r clickhouse && \
     useradd -r -g clickhouse -m -d /home/clickhouse -s /sbin/nologin -c "ClickHouse user" clickhouse
 
 RUN npm install -g npm@11 mint@latest
+
+# Install lychee (link checker) by compiling from source via cargo.
+RUN curl -sSf 'https://sh.rustup.rs' | sh -s -- -y && \
+    apt-get update && \
+    apt-get install -y gcc pkg-config libc6-dev libssl-dev && \
+    . "$HOME/.cargo/env" && \
+    cargo install lychee
+
+ENV PATH="/root/.cargo/bin:${PATH}"
 ENV HOME=/opt/clickhouse-docs
 
 # Create directory with specific ownership
