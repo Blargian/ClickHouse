@@ -613,9 +613,49 @@ html:not(.dark) .pagination-prev:hover {
     flex: 1 1 auto;
     min-height: 0;
     overflow-y: auto;
-    /* Small breathing room so the first nav item isn't flush against the
-       pinned search row, and so scrolled content doesn't butt the top edge. */
-    padding-top: 0.5rem;
+    /* Small gap so the scrollbar/first item isn't flush against the pinned
+       search + Ask AI row. This is a margin (not padding) so it sits ABOVE the
+       scroll box — the scrollbar track spans the box's padding box, so padding
+       here would still leave the scrollbar touching the buttons. */
+    margin-top: 1.25rem !important;
+    /* Thin scrollbar (Firefox / standards). */
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+}
+
+/* Thin scrollbar (WebKit / Blink). */
+#sidebar-content > #navigation-items::-webkit-scrollbar {
+    width: 6px;
+}
+#sidebar-content > #navigation-items::-webkit-scrollbar-track {
+    background: transparent;
+}
+#sidebar-content > #navigation-items::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+}
+#sidebar-content > #navigation-items::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(0, 0, 0, 0.35);
+}
+.dark #sidebar-content > #navigation-items {
+    scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+}
+.dark #sidebar-content > #navigation-items::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+.dark #sidebar-content > #navigation-items::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(255, 255, 255, 0.35);
+}
+
+/* Mintlify prepends an empty, aria-hidden `<ul class="list-none mt-8">` as the
+   first child of the scroll container. Its 2rem top margin opened an empty band
+   at the top of the scroll area: the first real nav group was pushed 2rem down
+   while the scrollbar still started at the top of the box, so the scrollbar ran
+   up alongside blank space and visually exceeded the first nav item. Collapse
+   the spacer so the first nav group sits at the top of the scroll box, aligned
+   with the top of the scrollbar. */
+#navigation-items > ul.list-none[aria-hidden="true"] {
+    display: none !important;
 }
 
 /* Hide the chat assistant textarea and its floating-input wrapper */
