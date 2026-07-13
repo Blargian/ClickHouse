@@ -27288,6 +27288,10 @@
     "destination": "/concepts/core-concepts/primary-indexes"
   },
   {
+    "source": "/products/cloud/api-reference/charts/query-chart-series-data",
+    "destination": "/clickstack/api-reference/charts/query-chart-series-data"
+  },
+  {
     "source": "/products/cloud/guides/security/cmek-migration",
     "destination": "/products/cloud/guides/security/cmek"
   },
