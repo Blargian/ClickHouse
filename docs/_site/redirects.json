@@ -1,5 +1,41 @@
 [
   {
+    "source": "/integrations/connectors/sql-clients/cli",
+    "destination": "/concepts/features/interfaces/client"
+  },
+  {
+    "source": "/ar/integrations/connectors/sql-clients/cli",
+    "destination": "/ar/concepts/features/interfaces/client"
+  },
+  {
+    "source": "/es/integrations/connectors/sql-clients/cli",
+    "destination": "/es/concepts/features/interfaces/client"
+  },
+  {
+    "source": "/fr/integrations/connectors/sql-clients/cli",
+    "destination": "/fr/concepts/features/interfaces/client"
+  },
+  {
+    "source": "/ja/integrations/connectors/sql-clients/cli",
+    "destination": "/ja/concepts/features/interfaces/client"
+  },
+  {
+    "source": "/ko/integrations/connectors/sql-clients/cli",
+    "destination": "/ko/concepts/features/interfaces/client"
+  },
+  {
+    "source": "/pt-BR/integrations/connectors/sql-clients/cli",
+    "destination": "/pt-BR/concepts/features/interfaces/client"
+  },
+  {
+    "source": "/ru/integrations/connectors/sql-clients/cli",
+    "destination": "/ru/concepts/features/interfaces/client"
+  },
+  {
+    "source": "/zh/integrations/connectors/sql-clients/cli",
+    "destination": "/zh/concepts/features/interfaces/client"
+  },
+  {
     "source": "/concepts/features/operations/delete/delete-mutations",
     "destination": "/reference/statements/alter/delete"
   },
@@ -5028,11 +5064,11 @@
     "source": "/integrations/sql-clients/"
   },
   {
-    "destination": "/concepts/features/interfaces/cli",
+    "destination": "/concepts/features/interfaces/client",
     "source": "/integrations/sql-clients/cli"
   },
   {
-    "destination": "/concepts/features/interfaces/cli",
+    "destination": "/concepts/features/interfaces/client",
     "source": "/integrations/sql-clients/clickhouse-client-local"
   },
   {
@@ -9868,11 +9904,11 @@
     "source": "/jp/integrations/sql-clients/"
   },
   {
-    "destination": "/ja/concepts/features/interfaces/cli",
+    "destination": "/ja/concepts/features/interfaces/client",
     "source": "/jp/integrations/sql-clients/cli"
   },
   {
-    "destination": "/ja/concepts/features/interfaces/cli",
+    "destination": "/ja/concepts/features/interfaces/client",
     "source": "/jp/integrations/sql-clients/clickhouse-client-local"
   },
   {
@@ -20620,11 +20656,11 @@
     "source": "/ko/integrations/sql-clients/"
   },
   {
-    "destination": "/ko/concepts/features/interfaces/cli",
+    "destination": "/ko/concepts/features/interfaces/client",
     "source": "/ko/integrations/sql-clients/cli"
   },
   {
-    "destination": "/ko/concepts/features/interfaces/cli",
+    "destination": "/ko/concepts/features/interfaces/client",
     "source": "/ko/integrations/sql-clients/clickhouse-client-local"
   },
   {
@@ -32728,11 +32764,11 @@
     "source": "/ru/integrations/sql-clients/"
   },
   {
-    "destination": "/ru/concepts/features/interfaces/cli",
+    "destination": "/ru/concepts/features/interfaces/client",
     "source": "/ru/integrations/sql-clients/cli"
   },
   {
-    "destination": "/ru/concepts/features/interfaces/cli",
+    "destination": "/ru/concepts/features/interfaces/client",
     "source": "/ru/integrations/sql-clients/clickhouse-client-local"
   },
   {
@@ -46284,11 +46320,11 @@
     "source": "/zh/integrations/sql-clients/"
   },
   {
-    "destination": "/zh/concepts/features/interfaces/cli",
+    "destination": "/zh/concepts/features/interfaces/client",
     "source": "/zh/integrations/sql-clients/cli"
   },
   {
-    "destination": "/zh/concepts/features/interfaces/cli",
+    "destination": "/zh/concepts/features/interfaces/client",
     "source": "/zh/integrations/sql-clients/clickhouse-client-local"
   },
   {

@@ -212,7 +212,7 @@
         "integrations/connectors/sql-clients/qstudio",
         "integrations/connectors/sql-clients/tablum",
         "integrations/connectors/sql-clients/marimo",
-        "integrations/connectors/sql-clients/cli"
+        "concepts/features/interfaces/client"
       ]
     },
     {

@@ -211,7 +211,7 @@
         "zh/integrations/connectors/sql-clients/qstudio",
         "zh/integrations/connectors/sql-clients/tablum",
         "zh/integrations/connectors/sql-clients/marimo",
-        "zh/integrations/connectors/sql-clients/cli"
+        "zh/concepts/features/interfaces/client"
       ],
       "root": "zh/integrations/connectors/sql-clients/index"
     },

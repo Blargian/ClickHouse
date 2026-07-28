@@ -40748,54 +40748,6 @@
       "staged": false
     },
     {
-      "fileId": "851ad2f9f1df36727431eb118751870f7ca7137b5e44ab37be6807984880aa55",
-      "versionId": "891af45d9821f61d32d7db585a8576666aaa31626fa13d4efa905b3711d8b796",
-      "translations": {
-        "es": {
-          "updatedAt": "2026-07-23T21:28:40.626Z",
-          "fileName": "es/integrations/connectors/sql-clients/cli.mdx",
-          "postProcessHash": "5219a0f6e223ddf4cb72ab6f2551ed8563999cdbf5464f54674ad80e14bfd44c"
-        },
-        "ja": {
-          "updatedAt": "2026-07-23T21:28:40.626Z",
-          "fileName": "ja/integrations/connectors/sql-clients/cli.mdx",
-          "postProcessHash": "0e040edea50a6c6016125bde2c47ba40a4fbb24e87cbd01185951cdb75ae86e8"
-        },
-        "ko": {
-          "updatedAt": "2026-07-23T21:28:40.626Z",
-          "fileName": "ko/integrations/connectors/sql-clients/cli.mdx",
-          "postProcessHash": "988b115a099b59af20985c8ed0ede7abdc4cca89f85d6aaf47728107bc3e07f8"
-        },
-        "pt-BR": {
-          "updatedAt": "2026-07-23T21:28:40.626Z",
-          "fileName": "pt-BR/integrations/connectors/sql-clients/cli.mdx",
-          "postProcessHash": "69c403cc149418d5b6c1e5e60ea75f662c60601ccf9b5e9c9799a2f21079a652"
-        },
-        "ru": {
-          "updatedAt": "2026-07-23T21:28:40.627Z",
-          "fileName": "ru/integrations/connectors/sql-clients/cli.mdx",
-          "postProcessHash": "1914d01ec0369d05204d7711e391ca70e9a0131a39d46bc6f912c08673abcdf0"
-        },
-        "zh": {
-          "updatedAt": "2026-07-23T21:28:40.627Z",
-          "fileName": "zh/integrations/connectors/sql-clients/cli.mdx",
-          "postProcessHash": "96219553868fa77e6705935ecef7b60418391db4689465f10c7f3b9bf49ffee6"
-        },
-        "ar": {
-          "updatedAt": "2026-07-23T21:28:40.627Z",
-          "fileName": "ar/integrations/connectors/sql-clients/cli.mdx",
-          "postProcessHash": "5e1aafdff45084689315327c6c59b4281f02d4d2d326b7e89e5a15d979dc464f"
-        },
-        "fr": {
-          "updatedAt": "2026-07-23T21:28:40.627Z",
-          "fileName": "fr/integrations/connectors/sql-clients/cli.mdx",
-          "postProcessHash": "d6ae7f7ae285b8ac4e336e06e9532a2a0e50ada75b7cada60645994bd9ca3ac6"
-        }
-      },
-      "fileName": "integrations/connectors/sql-clients/cli.mdx",
-      "staged": false
-    },
-    {
       "fileId": "f61078cf8ca2933795ddc8d9f8c022e2a22da48caea2cd24164b7958642e8557",
       "versionId": "2fb3febaca6367e39aee0f36bf95a16b269140337db8be7d8fa680f9aabc3a1f",
       "translations": {
