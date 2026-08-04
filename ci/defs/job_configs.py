@@ -195,9 +195,6 @@ class JobConfigs:
         command="python3 ./ci/jobs/copilot_review_job.py --codex",
         allow_failure=True,
         enable_gh_auth=True,
-        post_hooks=[
-            "python3 ./ci/jobs/scripts/job_hooks/set_sync_status_awaiting_hook.py"
-        ],
     )
     ci_tests = Job.Config(
         name=JobNames.CI_TESTS,
