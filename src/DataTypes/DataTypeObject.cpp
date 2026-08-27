@@ -1257,6 +1257,10 @@ and is controlled by the same settings:
 - [input_format_json_read_arrays_as_strings](/reference/settings/formats/input-format#input_format_json_read_arrays_as_strings)
 - [input_format_json_infer_array_of_dynamic_from_array_of_different_types](/reference/settings/formats/input-format#input_format_json_infer_array_of_dynamic_from_array_of_different_types)
 
+<Note>
+The `JSON` data type does not preserve the original textual representation of numbers. When a `JSON` value is serialized, a whole-valued `Float64` may be written without a decimal point or exponent. If that representation is parsed back into an untyped `JSON` path, type inference treats the token as an integer; values outside the `Int64` and `UInt64` ranges are inferred as `String`. As a result, a `JSON` to `String` to `JSON` round trip can change the dynamic type of a path. To keep the type stable, use a typed path in the destination `JSON` type, for example `JSON(foo Float64)`.
+</Note>
+
 Let's take a look at some examples:
 
 ```sql title="Query"
