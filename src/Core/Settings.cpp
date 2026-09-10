@@ -8843,7 +8843,7 @@ Minimum estimated ratio of join output rows to build-side rows to enable transfo
     DECLARE(Bool, query_plan_derive_not_null_filters_from_joins, true, R"(
 Derive `IS NOT NULL` filters for join inputs from null-rejecting join conditions.
 
-Only conditions of the form `expr1` <op> `expr2` are considered, where <op> is one of `=`, `<`, `<=`, `>`, `>=`. Each side can be a column or an expression that propagates NULLs, such as `col1` + 1, in which case a filter is derived for every column the expression propagates NULLs from.
+Only conditions of the form `expr1` `op` `expr2` are considered, where `op` is one of `=`, `<`, `<=`, `>`, `>=`. Each side can be a column or an expression that propagates NULLs, such as `col1` + 1, in which case a filter is derived for every column the expression propagates NULLs from.
 
 The derived filters allow converting `OUTER JOIN` to `INNER JOIN`. This setting is only applicable when `query_plan_convert_outer_join_to_inner_join` is enabled.
 
